@@ -451,6 +451,41 @@ nav {
     color: var(--primary-600);
 }
 
+/* Scientific Sources Section */
+.sources-section {
+    margin-top: var(--space-12);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--border-light);
+}
+
+.sources-section h2 {
+    margin-top: 0;
+    margin-bottom: var(--space-6);
+}
+
+.sources-section h3 {
+    font-size: var(--text-lg);
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-3);
+    color: var(--text-primary);
+}
+
+.sources-section ol {
+    margin-left: var(--space-8);
+    margin-bottom: var(--space-4);
+}
+
+.sources-section li {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-2);
+    line-height: var(--leading-relaxed);
+}
+
+.sources-section em {
+    font-style: italic;
+}
+
 /* ============================================
    Footer
    ============================================ */
