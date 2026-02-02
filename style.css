@@ -146,8 +146,8 @@ body {
    Navigation
    ============================================ */
 nav {
-    background: var(--bg-primary);
-    border-bottom: 1px solid var(--border-light);
+    background: var(--brand-gray);
+    border-bottom: none;
     padding: var(--space-4) var(--space-6);
     position: sticky;
     top: 0;
@@ -165,13 +165,13 @@ nav {
 .logo {
     font-weight: var(--font-semibold);
     font-size: var(--text-lg);
-    color: var(--text-primary);
+    color: var(--primary-500);
     text-decoration: none;
     letter-spacing: -0.025em;
 }
 
 .logo:hover {
-    color: var(--primary-600);
+    color: #ffffff;
 }
 
 .nav-links {
@@ -181,15 +181,18 @@ nav {
 
 .nav-links a {
     text-decoration: none;
-    color: var(--text-secondary);
+    color: var(--primary-500);
     font-size: var(--text-sm);
     font-weight: var(--font-medium);
     transition: color 0.2s ease;
 }
 
-.nav-links a:hover,
+.nav-links a:hover {
+    color: #ffffff;
+}
+
 .nav-links a.active {
-    color: var(--primary-600);
+    color: #ffffff;
 }
 
 /* ============================================
