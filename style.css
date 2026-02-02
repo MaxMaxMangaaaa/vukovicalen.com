@@ -10,18 +10,18 @@
    CSS Variables (from YAML configs)
    ============================================ */
 :root {
-    /* Brand Primary (Blue) */
-    --primary-50: #ecf7ff;
-    --primary-100: #daefff;
-    --primary-200: #bcdeff;
-    --primary-300: #94c4ff;
-    --primary-400: #6aa2ff;
-    --primary-500: #497cff;
-    --primary-600: #2c57ff;
-    --primary-700: #2444e5;
-    --primary-800: #2037b8;
-    --primary-900: #213490;
-    --primary-950: #151e55;
+    /* Brand Primary (Magenta) */
+    --primary-50: #fdeef3;
+    --primary-100: #fbdce7;
+    --primary-200: #f7b5cb;
+    --primary-300: #f28aaf;
+    --primary-400: #ec5691;
+    --primary-500: #e7227a;
+    --primary-600: #cf1e6d;
+    --primary-700: #b71a60;
+    --primary-800: #9f1653;
+    --primary-900: #871246;
+    --primary-950: #5a0c2f;
     
     /* Brand Secondary (Red) */
     --secondary-50: #fef3f2;
@@ -51,10 +51,13 @@
     --info-dark: #2563eb;
     
     /* System Colors */
-    --bg-primary: #ffffff;
-    --bg-secondary: #f9fafb;
-    --bg-tertiary: #f3f4f6;
-    --text-primary: #171717;
+    --bg-primary: #f7f8fc;
+    --bg-secondary: #f0f1f5;
+    --bg-tertiary: #e8e9ed;
+
+    /* Brand Gray (for buttons) */
+    --brand-gray: #414247;
+    --text-primary: #111112;
     --text-secondary: #525252;
     --text-tertiary: #737373;
     --text-disabled: #a3a3a3;
@@ -236,22 +239,24 @@ nav {
 }
 
 .btn-primary {
-    background: var(--primary-600);
-    color: #ffffff;
+    background: var(--brand-gray);
+    color: var(--primary-500);
 }
 
 .btn-primary:hover {
-    background: var(--primary-700);
+    background: var(--neutral-800);
+    color: var(--primary-400);
 }
 
 .btn-secondary {
     background: transparent;
-    color: var(--primary-600);
-    border: 1px solid var(--primary-600);
+    color: var(--brand-gray);
+    border: 1px solid var(--brand-gray);
 }
 
 .btn-secondary:hover {
-    background: var(--primary-50);
+    background: var(--brand-gray);
+    color: var(--primary-500);
 }
 
 /* ============================================
