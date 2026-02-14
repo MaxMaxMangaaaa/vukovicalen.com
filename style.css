@@ -882,24 +882,6 @@ footer span.sep {
    Research Article Styles (Scientific Papers)
    ============================================ */
 
-/* Content Page — main article container */
-.content-page {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: var(--space-16) var(--space-8);
-    background-color: var(--bg-secondary, #ffffff);
-    line-height: 1.8;
-}
-
-.content-page article {
-    max-width: 100%;
-}
-
-.content-page p {
-    margin-bottom: var(--space-4);
-    line-height: 1.8;
-}
-
 /* Article Hero (matching Atlantic Pulse style) */
 .article-hero {
     padding: var(--space-24) var(--space-6) var(--space-16);
@@ -968,28 +950,26 @@ footer span.sep {
 .content-page h2 {
     font-size: 24px;
     font-weight: var(--font-bold);
-    margin-top: var(--space-16);
-    margin-bottom: var(--space-8);
+    margin-top: var(--space-12);
+    margin-bottom: var(--space-6);
     color: var(--text-primary);
     border-left: 4px solid var(--primary-500);
-    padding-left: var(--space-5);
-    padding-top: var(--space-1);
-    padding-bottom: var(--space-1);
+    padding-left: var(--space-4);
 }
 
 .content-page h3 {
     font-size: 18px;
     font-weight: var(--font-semibold);
-    margin-top: var(--space-12);
-    margin-bottom: var(--space-5);
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-4);
     color: var(--text-primary);
 }
 
 .content-page h4 {
     font-size: 15px;
     font-weight: var(--font-semibold);
-    margin-top: var(--space-8);
-    margin-bottom: var(--space-4);
+    margin-top: var(--space-5);
+    margin-bottom: var(--space-3);
     color: var(--text-primary);
 }
 
@@ -997,8 +977,8 @@ footer span.sep {
 .abstract-box {
     background-color: var(--neutral-50, #f9fafb);
     border-left: 4px solid var(--primary-500);
-    padding: var(--space-8);
-    margin-bottom: var(--space-12);
+    padding: var(--space-6);
+    margin-bottom: var(--space-8);
     border-radius: 4px;
 }
 
@@ -1012,8 +992,8 @@ footer span.sep {
 .key-finding {
     background: linear-gradient(135deg, #fff5f9 0%, #f9f0fc 100%);
     border-left: 4px solid var(--primary-500);
-    padding: var(--space-8);
-    margin: var(--space-8) 0;
+    padding: var(--space-6);
+    margin: var(--space-6) 0;
     border-radius: 4px;
     border-right: 1px solid var(--neutral-200, #e5e7eb);
 }
@@ -1027,8 +1007,8 @@ footer span.sep {
 .content-page .example-box {
     background-color: var(--neutral-50, #f9fafb);
     border-left: 4px solid var(--primary-500);
-    padding: var(--space-6);
-    margin: var(--space-8) 0;
+    padding: var(--space-5);
+    margin: var(--space-6) 0;
     border-radius: 4px;
 }
 
@@ -1053,7 +1033,7 @@ footer span.sep {
 .content-page table {
     width: 100%;
     border-collapse: collapse;
-    margin: var(--space-8) 0;
+    margin: var(--space-6) 0;
     font-size: 14px;
     background-color: var(--bg-secondary, #ffffff);
 }
