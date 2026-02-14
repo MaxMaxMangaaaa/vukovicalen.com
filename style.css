@@ -877,3 +877,288 @@ footer span.sep {
         font-size: var(--text-2xl);
     }
 }
+
+/* ============================================
+   Research Article Styles (Scientific Papers)
+   ============================================ */
+
+/* Article Hero (matching Atlantic Pulse style) */
+.article-hero {
+    padding: var(--space-24) var(--space-6) var(--space-16);
+    text-align: center;
+    background: linear-gradient(180deg, var(--bg-primary) 0%, var(--neutral-100) 100%);
+}
+
+.article-hero h1 {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-3);
+    letter-spacing: -0.025em;
+    line-height: var(--leading-tight);
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.article-hero .subtitle {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: var(--leading-relaxed);
+}
+
+.article-hero .article-meta {
+    margin-top: var(--space-4);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    font-weight: var(--font-medium);
+}
+
+.article-hero .article-meta span {
+    margin: 0 var(--space-2);
+}
+
+/* Document Header (legacy style, fallback) */
+.document-header {
+    border-bottom: 3px solid var(--primary-500);
+    padding-bottom: var(--space-8);
+    margin-bottom: var(--space-12);
+}
+
+.document-header h1 {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+    line-height: var(--leading-tight);
+    margin-bottom: var(--space-4);
+    color: var(--text-primary);
+    max-width: 800px;
+}
+
+.document-meta {
+    display: flex;
+    gap: var(--space-6);
+    margin-top: var(--space-4);
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: var(--font-medium);
+}
+
+/* Section headings with Magenta accent */
+.content-page h2 {
+    font-size: 24px;
+    font-weight: var(--font-bold);
+    margin-top: var(--space-12);
+    margin-bottom: var(--space-6);
+    color: var(--text-primary);
+    border-left: 4px solid var(--primary-500);
+    padding-left: var(--space-4);
+}
+
+.content-page h3 {
+    font-size: 18px;
+    font-weight: var(--font-semibold);
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-4);
+    color: var(--text-primary);
+}
+
+.content-page h4 {
+    font-size: 15px;
+    font-weight: var(--font-semibold);
+    margin-top: var(--space-5);
+    margin-bottom: var(--space-3);
+    color: var(--text-primary);
+}
+
+/* Abstract box */
+.abstract-box {
+    background-color: var(--neutral-50, #f9fafb);
+    border-left: 4px solid var(--primary-500);
+    padding: var(--space-6);
+    margin-bottom: var(--space-8);
+    border-radius: 4px;
+}
+
+.abstract-box p {
+    margin-bottom: var(--space-3);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+/* Key finding highlight box */
+.key-finding {
+    background: linear-gradient(135deg, #fff5f9 0%, #f9f0fc 100%);
+    border-left: 4px solid var(--primary-500);
+    padding: var(--space-6);
+    margin: var(--space-6) 0;
+    border-radius: 4px;
+    border-right: 1px solid var(--neutral-200, #e5e7eb);
+}
+
+.key-finding h4 {
+    color: var(--primary-600);
+    margin-top: 0;
+}
+
+/* Example / callout boxes */
+.content-page .example-box {
+    background-color: var(--neutral-50, #f9fafb);
+    border-left: 4px solid var(--primary-500);
+    padding: var(--space-5);
+    margin: var(--space-6) 0;
+    border-radius: 4px;
+}
+
+.content-page .example-box strong {
+    color: var(--primary-600);
+}
+
+/* Limitation / warning callout */
+.limitation-callout {
+    background-color: #fef3c7;
+    border-left: 4px solid var(--warning-light, #f59e0b);
+    padding: var(--space-4);
+    margin: var(--space-4) 0;
+    border-radius: 4px;
+}
+
+.limitation-callout strong {
+    color: #d97706;
+}
+
+/* Tables in articles */
+.content-page table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--space-6) 0;
+    font-size: 14px;
+    background-color: var(--bg-secondary, #ffffff);
+}
+
+.content-page table thead {
+    background-color: var(--neutral-100, #f3f4f6);
+    border-bottom: 2px solid var(--primary-500);
+}
+
+.content-page table th {
+    padding: var(--space-3);
+    text-align: left;
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--primary-500);
+}
+
+.content-page table td {
+    padding: var(--space-3);
+    border-bottom: 1px solid var(--neutral-200, #e5e5e5);
+    color: var(--text-primary);
+}
+
+.content-page table tr:nth-child(even) {
+    background-color: var(--neutral-50, #f9fafb);
+}
+
+.content-page table tr:hover {
+    background-color: #fef5f9;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    margin: var(--space-6) 0;
+    border: 1px solid var(--neutral-200, #e5e5e5);
+    border-radius: 4px;
+}
+
+/* Code blocks */
+.content-page code {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    background-color: var(--neutral-100, #f3f4f6);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+    color: #d63384;
+}
+
+.content-page pre {
+    background-color: var(--neutral-100, #f3f4f6);
+    padding: var(--space-4);
+    border-radius: 4px;
+    overflow-x: auto;
+    margin: var(--space-4) 0;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.content-page pre code {
+    background: none;
+    padding: 0;
+    color: var(--text-primary);
+}
+
+/* Statistical notation */
+.stat-notation {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--primary-600);
+    font-weight: var(--font-medium);
+}
+
+/* References section */
+.references-section {
+    background-color: var(--neutral-50, #f9fafb);
+    padding: var(--space-6);
+    border-radius: 4px;
+    margin-top: var(--space-8);
+}
+
+.references-section ul {
+    list-style: none;
+    margin-left: 0;
+}
+
+.references-section li {
+    margin-bottom: var(--space-3);
+    padding-left: 24px;
+    text-indent: -24px;
+    line-height: 1.75;
+    font-size: 14px;
+}
+
+/* Document footer */
+.document-footer {
+    border-top: 2px solid var(--neutral-200, #e5e5e5);
+    padding-top: var(--space-8);
+    margin-top: var(--space-16);
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.footer-copyright {
+    margin-top: var(--space-2);
+    font-style: italic;
+}
+
+/* Section label (CONTEXT, EVIDENCE, etc.) */
+.section-header {
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    color: var(--primary-600);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--space-2);
+}
+
+/* Lists in articles */
+.content-page ul,
+.content-page ol {
+    margin-left: 24px;
+    margin-bottom: var(--space-4);
+}
+
+.content-page li {
+    margin-bottom: var(--space-2);
+    line-height: 1.75;
+}

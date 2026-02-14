@@ -180,6 +180,60 @@ def extract_article_content(html: str) -> str:
     return content.strip()
 
 
+def strip_first_h1(content: str) -> str:
+    """Remove the first <h1>...</h1> from content (it's now in the hero)."""
+    return re.sub(r"<h1[^>]*>.*?</h1>", "", content, count=1, flags=re.DOTALL).strip()
+
+
+def strip_document_header(content: str) -> str:
+    """Remove .document-header div (replaced by article-hero)."""
+    content = re.sub(r'<div\s+class="document-header">.*?</div>', "", content, count=1, flags=re.DOTALL)
+    # Also remove standalone meta lines like "Framegate Intelligence | Working Paper..."
+    content = re.sub(r'<p[^>]*>\s*<strong>Framegate Intelligence</strong>\s*\|.*?</p>', "", content, count=1, flags=re.DOTALL)
+    return content.strip()
+
+
+def format_date_display(iso_date: str) -> str:
+    """Convert 2026-02-13 to February 2026."""
+    try:
+        dt = datetime.strptime(iso_date, "%Y-%m-%d")
+        return dt.strftime("%B %Y")
+    except (ValueError, TypeError):
+        return iso_date or ""
+
+
+def fill_template(template: str, meta: dict, nav_html: str, footer_html: str,
+                  content: str, root_prefix: str) -> str:
+    """Fill article template with all placeholders."""
+    # Extract a display title from meta (shorter, reader-friendly)
+    display_title = meta.get("og_title", meta.get("title", ""))
+
+    new_html = template
+    new_html = new_html.replace("{NAV}", nav_html)
+    new_html = new_html.replace("{FOOTER}", footer_html)
+    new_html = new_html.replace("{CONTENT}", content)
+    new_html = new_html.replace("{ROOT}", root_prefix)
+    new_html = new_html.replace("{TITLE}", meta.get("title", ""))
+    new_html = new_html.replace("{DISPLAY_TITLE}", display_title)
+    new_html = new_html.replace("{SUBTITLE}", meta.get("subtitle", ""))
+    new_html = new_html.replace("{DESCRIPTION}", meta.get("description", ""))
+    new_html = new_html.replace("{AUTHOR}", meta.get("author", "Alen Vukovic"))
+    new_html = new_html.replace("{OG_TITLE}", meta.get("og_title", meta.get("title", "")))
+    new_html = new_html.replace("{OG_DESCRIPTION}", meta.get("og_description", meta.get("description", "")))
+    new_html = new_html.replace("{PATH}", meta.get("path", ""))
+    new_html = new_html.replace("{PUBLISHED}", meta.get("published", ""))
+    new_html = new_html.replace("{PUBLISHED_DISPLAY}", format_date_display(meta.get("published", "")))
+
+    # Set active state on Research nav link
+    new_html = re.sub(
+        r'href="([^"]*atlantic-pulse\.html)"',
+        r'href="\1" class="active"',
+        new_html,
+        count=1
+    )
+    return new_html
+
+
 def rebuild_article(article_path: Path, meta: dict, nav_html: str, footer_html: str):
     """Rebuild an existing research article: strip inline CSS, inject nav/footer."""
     html = article_path.read_text(encoding="utf-8")
@@ -190,33 +244,17 @@ def rebuild_article(article_path: Path, meta: dict, nav_html: str, footer_html: 
     # Extract just the article content
     content = extract_article_content(html_clean)
 
+    # Remove the H1 and document-header (now in the hero section)
+    content = strip_first_h1(content)
+    content = strip_document_header(content)
+
     # Build from template
     root_prefix = compute_root(article_path)
     template = load_template("article_template.html")
-
-    new_html = template
-    new_html = new_html.replace("{NAV}", nav_html)
-    new_html = new_html.replace("{FOOTER}", footer_html)
-    new_html = new_html.replace("{CONTENT}", content)
-    new_html = new_html.replace("{ROOT}", root_prefix)
-    new_html = new_html.replace("{TITLE}", meta.get("title", ""))
-    new_html = new_html.replace("{DESCRIPTION}", meta.get("description", ""))
-    new_html = new_html.replace("{AUTHOR}", meta.get("author", "Alen Vukovic"))
-    new_html = new_html.replace("{OG_TITLE}", meta.get("og_title", meta.get("title", "")))
-    new_html = new_html.replace("{OG_DESCRIPTION}", meta.get("og_description", meta.get("description", "")))
-    new_html = new_html.replace("{PATH}", meta.get("path", ""))
-    new_html = new_html.replace("{PUBLISHED}", meta.get("published", ""))
-
-    # Set active state on Research nav link
-    new_html = re.sub(
-        r'href="([^"]*atlantic-pulse\.html)"',
-        r'href="\1" class="active"',
-        new_html,
-        count=1
-    )
+    new_html = fill_template(template, meta, nav_html, footer_html, content, root_prefix)
 
     article_path.write_text(new_html, encoding="utf-8")
-    print(f"  ✓ {article_path.relative_to(ROOT)} (rebuilt, inline CSS stripped)")
+    print(f"  ✓ {article_path.relative_to(ROOT)} (rebuilt, hero + inline CSS stripped)")
 
 
 def publish_from_vault(vault_id: str, meta: dict, nav_html: str, footer_html: str):
@@ -249,6 +287,10 @@ def publish_from_vault(vault_id: str, meta: dict, nav_html: str, footer_html: st
     clean = strip_inline_styles(source_html)
     content = extract_article_content(clean)
 
+    # Remove the H1 and document-header (now in the hero section)
+    content = strip_first_h1(content)
+    content = strip_document_header(content)
+
     # Build from template
     output_path = ROOT / meta["path"]
     root_prefix = compute_root(output_path)
@@ -259,27 +301,7 @@ def publish_from_vault(vault_id: str, meta: dict, nav_html: str, footer_html: st
 
     template = load_template("article_template.html")
     footer = load_template("footer_template.html")
-
-    new_html = template
-    new_html = new_html.replace("{NAV}", nav)
-    new_html = new_html.replace("{FOOTER}", footer)
-    new_html = new_html.replace("{CONTENT}", content)
-    new_html = new_html.replace("{ROOT}", root_prefix)
-    new_html = new_html.replace("{TITLE}", meta.get("title", ""))
-    new_html = new_html.replace("{DESCRIPTION}", meta.get("description", ""))
-    new_html = new_html.replace("{AUTHOR}", meta.get("author", "Alen Vukovic"))
-    new_html = new_html.replace("{OG_TITLE}", meta.get("og_title", meta.get("title", "")))
-    new_html = new_html.replace("{OG_DESCRIPTION}", meta.get("og_description", meta.get("description", "")))
-    new_html = new_html.replace("{PATH}", meta.get("path", ""))
-    new_html = new_html.replace("{PUBLISHED}", meta.get("published", ""))
-
-    # Set active state on Research nav link
-    new_html = re.sub(
-        r'href="([^"]*atlantic-pulse\.html)"',
-        r'href="\1" class="active"',
-        new_html,
-        count=1
-    )
+    new_html = fill_template(template, meta, nav, footer, content, root_prefix)
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(new_html, encoding="utf-8")
