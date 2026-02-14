@@ -401,12 +401,12 @@ nav {
    ============================================ */
 .content-page {
     flex: 1;
-    padding: var(--space-12) var(--space-6);
+    padding: var(--space-16) var(--space-6);
     background: var(--bg-primary);
 }
 
 .content-page article {
-    max-width: 720px;
+    max-width: 800px;
     margin: 0 auto;
 }
 
@@ -950,11 +950,20 @@ footer span.sep {
 .content-page h2 {
     font-size: 24px;
     font-weight: var(--font-bold);
-    margin-top: var(--space-12);
+    margin-top: var(--space-16);
     margin-bottom: var(--space-6);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--border-light);
     color: var(--text-primary);
     border-left: 4px solid var(--primary-500);
     padding-left: var(--space-4);
+}
+
+/* First h2 after abstract shouldn't have top border */
+.abstract-box + h2 {
+    border-top: none;
+    padding-top: 0;
+    margin-top: var(--space-12);
 }
 
 .content-page h3 {
@@ -1149,6 +1158,69 @@ footer span.sep {
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: var(--space-2);
+}
+
+/* Three-Tier Epistemology Boxes (Know / Suspect / Cannot Prove) */
+.three-tier {
+    display: grid;
+    gap: var(--space-4);
+    margin: var(--space-6) 0;
+}
+
+.three-tier-item {
+    border-radius: 8px;
+    padding: var(--space-6);
+    border-left: 4px solid var(--border-default);
+}
+
+.three-tier-item h4 {
+    margin-top: 0;
+    margin-bottom: var(--space-2);
+    font-size: var(--text-lg);
+}
+
+.three-tier-item p {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-3);
+}
+
+.three-tier-item ul {
+    margin-left: var(--space-4);
+    margin-bottom: 0;
+}
+
+.three-tier-item li {
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-2);
+}
+
+.three-tier-item.know {
+    background: #f0fdf4;
+    border-left-color: var(--success);
+}
+
+.three-tier-item.know h4 {
+    color: #065f46;
+}
+
+.three-tier-item.suspect {
+    background: #fffbeb;
+    border-left-color: var(--warning);
+}
+
+.three-tier-item.suspect h4 {
+    color: #92400e;
+}
+
+.three-tier-item.cant-prove {
+    background: var(--neutral-50);
+    border-left-color: var(--neutral-400);
+}
+
+.three-tier-item.cant-prove h4 {
+    color: var(--neutral-700);
 }
 
 /* Lists in articles */

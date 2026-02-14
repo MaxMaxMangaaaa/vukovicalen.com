@@ -196,6 +196,16 @@ def strip_document_header(content: str) -> str:
     return content.strip()
 
 
+def strip_content_page_wrapper(content: str) -> str:
+    """Remove <div class='content-page'>...<!-- Header -->...</div> block.
+    The vault source has this empty wrapper div that causes double nesting."""
+    content = re.sub(
+        r'<div\s+class="content-page">\s*<!--\s*Header\s*-->\s*</div>',
+        '', content, count=1, flags=re.DOTALL
+    )
+    return content.strip()
+
+
 def format_date_display(iso_date: str) -> str:
     """Convert 2026-02-13 to February 2026."""
     try:
@@ -251,6 +261,7 @@ def rebuild_article(article_path: Path, meta: dict, nav_html: str, footer_html: 
     # Remove the H1 and document-header (now in the hero section)
     content = strip_first_h1(content)
     content = strip_document_header(content)
+    content = strip_content_page_wrapper(content)
 
     # Build from template
     root_prefix = compute_root(article_path)
@@ -294,6 +305,7 @@ def publish_from_vault(vault_id: str, meta: dict, nav_html: str, footer_html: st
     # Remove the H1 and document-header (now in the hero section)
     content = strip_first_h1(content)
     content = strip_document_header(content)
+    content = strip_content_page_wrapper(content)
 
     # Build from template
     output_path = ROOT / meta["path"]
