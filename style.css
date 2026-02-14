@@ -204,6 +204,8 @@ nav {
     display: flex;
     align-items: center;
     gap: 0.25rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: -0.5rem;
 }
 
 .nav-dropdown > a::after {
@@ -218,24 +220,35 @@ nav {
 
 .dropdown-menu {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 0.25rem);
     left: 50%;
     transform: translateX(-50%);
     background: var(--brand-gray);
     border: 1px solid rgba(255,255,255,0.1);
     border-radius: 6px;
     padding: var(--space-2) 0;
-    min-width: 200px;
+    min-width: 220px;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.2s ease, visibility 0.2s ease;
-    margin-top: var(--space-2);
     box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    pointer-events: none;
 }
 
 .nav-dropdown:hover .dropdown-menu {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
+}
+
+/* Invisible bridge to prevent hover gap */
+.nav-dropdown::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 0.5rem;
 }
 
 .dropdown-menu a {
@@ -283,6 +296,12 @@ nav {
     text-align: center;
     padding: var(--space-16) var(--space-6);
     background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+}
+
+.hero-content {
+    max-width: 700px;
+    margin: 0 auto;
+    width: 100%;
 }
 
 .hero-content h1 {
