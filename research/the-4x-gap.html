@@ -3,467 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="The 4× Gap: How Trump's Ideology Outpaced American Journalism After Inauguration. A quantitative analysis measuring ideological shifts across 93,500 articles and 16 ideology dimensions.">
+    <meta name="description" content="How Trump's Truth Social communications outpaced journalistic response by a factor of four, measured across 16 ideology dimensions.">
     <meta name="author" content="Alen Vukovic">
 
-    <!-- Open Graph for Social Sharing -->
+    <!-- Open Graph -->
     <meta property="og:type" content="article">
     <meta property="og:title" content="The 4× Gap: Trump's Ideology vs. American Journalism">
-    <meta property="og:description" content="How Trump's Truth Social communications outpaced journalistic response by a factor of four, measured across 16 ideology dimensions.">
-    <meta property="og:url" content="https://framegate.ai/atlantic-pulse-4x-gap">
-    <meta property="og:site_name" content="Framegate Intelligence">
+    <meta property="og:description" content="93,500 articles. 16 ideology dimensions. Trump shifted 4× faster than journalism.">
+    <meta property="og:url" content="https://vukovicalen.com/research/the-4x-gap.html">
+    <meta property="og:site_name" content="Alen Vukovic">
     <meta property="article:author" content="Alen Vukovic">
     <meta property="article:published_time" content="2026-02-13">
-    <meta property="article:section" content="Analysis">
+    <meta property="article:section" content="Research">
 
-    <title>The 4× Gap: Trump's Ideology vs. American Journalism | Framegate Atlantic Pulse</title>
-    <link rel="stylesheet" href="../../style.css">
-    <style>
-        /* ===== RESET & VARIABLES ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #e7227a;
-            --primary-dark: #c41d63;
-            --bg-primary: #f7f8fc;
-            --bg-secondary: #f0f1f5;
-            --text-primary: #111112;
-            --text-secondary: #525252;
-            --text-tertiary: #737373;
-            --border-light: #e5e5e5;
-            --border-default: #d4d4d4;
-            --success: #059669;
-            --warning: #f59e0b;
-            --info: #3b82f6;
-            --error: #ef4444;
-        }
-
-        /* ===== TYPOGRAPHY ===== */
-        body {
-            font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            font-size: 16px;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-weight: 600;
-            line-height: 1.3;
-            margin-top: 1.5em;
-            margin-bottom: 0.5em;
-            color: var(--text-primary);
-        }
-
-        h1 {
-            font-size: 2.2em;
-            margin-top: 0;
-        }
-
-        h2 {
-            font-size: 1.8em;
-            border-left: 4px solid var(--primary);
-            padding-left: 1em;
-            margin-left: -1em;
-            margin-top: 2em;
-        }
-
-        h3 {
-            font-size: 1.3em;
-            color: var(--text-primary);
-            margin-top: 1.5em;
-        }
-
-        p {
-            margin-bottom: 1em;
-            text-align: justify;
-        }
-
-        strong {
-            color: var(--primary);
-            font-weight: 600;
-        }
-
-        em {
-            font-style: italic;
-            color: var(--text-secondary);
-        }
-
-        /* ===== MAIN CONTAINER ===== */
-        .content-page {
-            max-width: 900px;
-            margin: 0 auto;
-            margin-top: 40px;
-            padding: 2rem;
-            background: white;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            border-radius: 8px;
-        }
-
-        /* ===== HEADER & METADATA ===== */
-        .article-header {
-            border-bottom: 2px solid var(--border-light);
-            padding-bottom: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .article-meta {
-            font-size: 0.9em;
-            color: var(--text-secondary);
-            font-style: italic;
-            margin-bottom: 1.5rem;
-        }
-
-        .article-meta span {
-            display: inline-block;
-            margin-right: 1.5rem;
-        }
-
-        /* ===== DIVIDERS ===== */
-        hr {
-            border: none;
-            height: 2px;
-            background: linear-gradient(to right, var(--border-light), transparent);
-            margin: 2rem 0;
-        }
-
-        /* ===== LISTS ===== */
-        ul, ol {
-            margin-left: 2em;
-            margin-bottom: 1em;
-        }
-
-        li {
-            margin-bottom: 0.5em;
-            color: var(--text-primary);
-        }
-
-        /* ===== TABLES ===== */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5em 0;
-            font-size: 0.95em;
-        }
-
-        th {
-            background-color: var(--bg-secondary);
-            color: var(--text-primary);
-            padding: 1em;
-            text-align: left;
-            font-weight: 600;
-            border-bottom: 2px solid var(--primary);
-        }
-
-        td {
-            padding: 0.75em 1em;
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        tbody tr:nth-child(odd) {
-            background-color: rgba(247, 248, 252, 0.8);
-        }
-
-        tbody tr:hover {
-            background-color: rgba(231, 34, 122, 0.05);
-        }
-
-        tbody tr:last-child td {
-            border-bottom: 2px solid var(--border-default);
-        }
-
-        /* ===== BLOCKQUOTES & CALLOUTS ===== */
-        .hook {
-            background: linear-gradient(135deg, rgba(231, 34, 122, 0.08) 0%, rgba(231, 34, 122, 0.02) 100%);
-            border-left: 4px solid var(--primary);
-            padding: 1.5em;
-            margin: 1.5em 0;
-            border-radius: 4px;
-            font-weight: 500;
-            color: var(--text-primary);
-        }
-
-        .example-box {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-light);
-            padding: 1.5em;
-            margin: 1.5em 0;
-            border-radius: 4px;
-        }
-
-        .thesis-statement {
-            background: linear-gradient(135deg, rgba(231, 34, 122, 0.12) 0%, rgba(231, 34, 122, 0.04) 100%);
-            border: 2px solid var(--primary);
-            padding: 1.5em;
-            margin: 2em 0;
-            border-radius: 4px;
-            font-size: 1.05em;
-            line-height: 1.7;
-        }
-
-        /* ===== FOOTNOTES & ANNOTATIONS ===== */
-        .footnote-section {
-            margin-top: 3em;
-            padding-top: 2em;
-            border-top: 2px solid var(--border-default);
-        }
-
-        .footnote {
-            font-size: 0.9em;
-            color: var(--text-secondary);
-            margin-bottom: 0.8em;
-            padding-left: 1em;
-            line-height: 1.5;
-        }
-
-        .footnote-marker {
-            font-size: 0.8em;
-            color: var(--primary);
-            font-weight: 600;
-        }
-
-        sup {
-            color: var(--primary);
-            font-weight: 600;
-            font-size: 0.8em;
-        }
-
-        a,
-        a:link,
-        a:visited {
-            color: var(--primary);
-            text-decoration: none !important;
-            border-bottom: 1px solid var(--border-light);
-            transition: color 0.2s ease;
-        }
-
-        a:hover {
-            color: var(--primary-dark);
-            border-bottom-color: var(--primary);
-        }
-
-        /* ===== CODE/MEASUREMENT ===== */
-        .metric {
-            background: var(--bg-secondary);
-            border-left: 3px solid var(--info);
-            padding: 0.25em 0.5em;
-            font-family: 'Courier New', monospace;
-            font-size: 0.95em;
-            color: var(--info);
-            border-radius: 2px;
-        }
-
-        .scientific {
-            font-size: 0.95em;
-            color: var(--text-secondary);
-            font-style: italic;
-        }
-
-        /* ===== SECTIONS & EMPHASIS ===== */
-        .section-intro {
-            font-size: 1.05em;
-            color: var(--text-primary);
-            margin-bottom: 1.5em;
-            line-height: 1.7;
-        }
-
-        .counter-argument {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(245, 158, 11, 0.02) 100%);
-            border-left: 4px solid var(--warning);
-            padding: 1.5em;
-            margin: 1.5em 0;
-            border-radius: 4px;
-        }
-
-        .limitation {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(239, 68, 68, 0.02) 100%);
-            border-left: 4px solid var(--error);
-            padding: 1.5em;
-            margin: 1.5em 0;
-            border-radius: 4px;
-        }
-
-        .key-insight {
-            background: linear-gradient(135deg, rgba(5, 150, 105, 0.08) 0%, rgba(5, 150, 105, 0.02) 100%);
-            border-left: 4px solid var(--success);
-            padding: 1.5em;
-            margin: 1.5em 0;
-            border-radius: 4px;
-        }
-
-        /* ===== SOURCES SECTION ===== */
-        .sources-section {
-            margin-top: 3em;
-            padding: 2em;
-            background: var(--bg-secondary);
-            border-radius: 8px;
-            border: 1px solid var(--border-light);
-        }
-
-        .sources-section h3 {
-            margin-top: 0;
-        }
-
-        .sources-section ol {
-            margin-left: 2em;
-        }
-
-        .sources-section li {
-            margin-bottom: 0.8em;
-            color: var(--text-secondary);
-            font-size: 0.95em;
-            line-height: 1.6;
-        }
-
-        /* ===== FOOTER ===== */
-        .article-footer {
-            margin-top: 3em;
-            padding-top: 2em;
-            border-top: 2px solid var(--border-default);
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.85em;
-        }
-
-        .footer-content {
-            margin-bottom: 1em;
-        }
-
-        .footer-provenance {
-            font-size: 0.8em;
-            color: var(--text-tertiary);
-            margin-top: 1.5em;
-            font-style: italic;
-        }
-
-        /* ===== RESPONSIVE DESIGN ===== */
-        @media (max-width: 768px) {
-            .content-page {
-                padding: 1.5rem;
-            }
-
-            h1 {
-                font-size: 1.6em;
-            }
-
-            h2 {
-                font-size: 1.3em;
-            }
-
-            h3 {
-                font-size: 1.1em;
-            }
-
-            table {
-                font-size: 0.85em;
-            }
-
-            th, td {
-                padding: 0.6em 0.75em;
-            }
-
-            .hook, .thesis-statement, .counter-argument, .limitation, .key-insight, .example-box {
-                padding: 1em;
-            }
-
-            h2 {
-                margin-left: 0;
-                padding-left: 0.75em;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .content-page {
-                padding: 1rem;
-            }
-
-            body {
-                font-size: 14px;
-            }
-
-            h1 {
-                font-size: 1.4em;
-            }
-
-            h2 {
-                font-size: 1.1em;
-                border-left-width: 3px;
-            }
-
-            h3 {
-                font-size: 1em;
-            }
-
-            p {
-                text-align: left;
-            }
-
-            table {
-                font-size: 0.8em;
-                overflow-x: auto;
-            }
-
-            .article-meta span {
-                display: block;
-                margin-right: 0;
-                margin-bottom: 0.5em;
-            }
-        }
-
-        /* ===== PRINT STYLES ===== */
-        @media print {
-            body {
-                background: white;
-            }
-
-            .content-page {
-                box-shadow: none;
-                padding: 0;
-            }
-
-            h2 {
-                page-break-after: avoid;
-            }
-
-            table {
-                page-break-inside: avoid;
-            }
-
-            a {
-                border: none;
-                color: var(--text-primary);
-            }
-        }
-    </style>
+    <title>The 4× Gap | Alen Vukovic</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <nav>
-        <div class="nav-container">
-            <a href="../../index.html" class="logo">Alen Vukovic</a>
-            <div class="nav-links">
-                <a href="../../about.html">About</a>
-                <div class="nav-dropdown">
-                    <a href="../atlantic-pulse.html" class="active">Research</a>
-                    <div class="dropdown-menu">
-                        <a href="../atlantic-pulse.html">Atlantic Pulse</a>
-                        <div class="dropdown-divider"></div>
-                        <div class="dropdown-section">U.S. Media Watch</div>
-                        <a href="the-4x-gap.html" class="active">The 4× Gap</a>
-                        <a href="truth-social-dashboard.html">Truth Social Dashboard</a>
-                        <a href="master-corpus-dashboard.html">Master Corpus Dashboard</a>
-                    </div>
+    <div class="nav-container">
+        <a href="../index.html" class="logo">Alen Vukovic</a>
+        <div class="nav-links">
+            <a href="../about.html">About</a>
+            <div class="nav-dropdown">
+                <a href="../research/atlantic-pulse.html" class="active">Research</a>
+                <div class="dropdown-menu">
+                    <a href="../research/atlantic-pulse.html">Atlantic Pulse</a>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-section">U.S. Media Watch</div>
+                    <a href="../research/the-4x-gap.html">The 4× Gap</a>
                 </div>
-                <a href="../../framegate.html">FRAMEGATE</a>
             </div>
+            <a href="../framegate.html">FRAMEGATE</a>
         </div>
-    </nav>
+    </div>
+</nav>
 
-    <article class="content-page">
-        <header class="article-header">
+
+    <main class="content-page">
+        <article>
+            <header class="article-header">
             <h1>The 4× Gap: How Trump's Ideology Outpaced American Journalism After Inauguration</h1>
             <div class="article-meta">
                 <span><strong>Atlantic Pulse</strong> | Framegate Intelligence</span>
@@ -735,16 +314,12 @@
         </section>
 
         <!-- FOOTER -->
-        <footer class="article-footer">
-            <div class="footer-content">
-                © 2026 Alen Vukovic · <a href="https://www.linkedin.com/in/vukovicalen" target="_blank">LinkedIn</a> · <a href="https://x.com/alenframegate" target="_blank">X</a> · <a href="https://substack.com/@alenvukovic" target="_blank">Substack</a> · <a href="https://tiktok.com/@alenframegate" target="_blank">TikTok</a>
-            </div>
-            <div class="footer-provenance">
-                Data: 93,500 articles | Dec 2022 – Feb 2026 | U.S. Discourse only<br>
-                Analysis: TV:0009 | Framegate Intelligence Engine<br>
-                Published: February 13, 2026
-            </div>
-        </footer>
-    </article>
+        </article>
+    </main>
+
+    <footer>
+    <p>&copy; 2026 Alen Vukovic<span class="sep">&middot;</span><a href="https://www.linkedin.com/in/vukovicalen" target="_blank">LinkedIn</a><span class="sep">&middot;</span><a href="https://x.com/alenframegate" target="_blank">X</a><span class="sep">&middot;</span><a href="https://substack.com/@alenvukovic" target="_blank">Substack</a><span class="sep">&middot;</span><a href="https://tiktok.com/@alenframegate" target="_blank">TikTok</a></p>
+</footer>
+
 </body>
 </html>

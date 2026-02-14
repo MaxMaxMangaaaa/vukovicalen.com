@@ -777,6 +777,50 @@ footer span.sep {
 }
 
 /* ============================================
+   Page Sections (Atlantic Pulse, multi-section layouts)
+   ============================================ */
+.page-section {
+    padding: var(--space-16) var(--space-6);
+}
+
+.section-light {
+    background: var(--bg-primary);
+}
+
+.section-gray {
+    background: var(--neutral-100);
+}
+
+.section-dark {
+    background: var(--neutral-800);
+    color: var(--neutral-100);
+}
+
+.section-dark h1, .section-dark h2, .section-dark h3 {
+    color: #ffffff;
+}
+
+.section-dark p {
+    color: var(--neutral-200);
+}
+
+.section-dark a,
+.section-dark a:link,
+.section-dark a:visited {
+    color: var(--primary-300) !important;
+}
+
+.section-dark a:hover {
+    color: var(--primary-200) !important;
+}
+
+/* Container for section content */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* ============================================
    Responsive Design
    ============================================ */
 @media (max-width: 768px) {

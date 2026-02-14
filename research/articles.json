@@ -1,0 +1,50 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "last_updated": "2026-02-14",
+    "description": "Research article registry for vukovicalen.com"
+  },
+  "featured": "atlantic-pulse",
+  "articles": {
+    "atlantic-pulse": {
+      "title": "Atlantic Pulse",
+      "subtitle": "The U.S. Political Idea Competition Forecast",
+      "path": "research/atlantic-pulse.html",
+      "category": "special",
+      "published": "2026-02-01",
+      "author": "Alen Vukovic",
+      "description": "A GIS-exclusive brief on the U.S. political idea competition with implications for transatlantic decision-making.",
+      "og_title": "Atlantic Pulse - FRAMEGATE",
+      "og_description": "The U.S. Political Idea Competition Forecast with implications for transatlantic decision-making.",
+      "vault_id": null,
+      "type": "special_landing",
+      "skip_rebuild": true
+    },
+    "the-4x-gap": {
+      "title": "The 4\u00d7 Gap",
+      "subtitle": "Trump's Ideology vs. American Journalism",
+      "path": "research/the-4x-gap.html",
+      "category": "us-media-watch",
+      "published": "2026-02-13",
+      "author": "Alen Vukovic",
+      "description": "How Trump's Truth Social communications outpaced journalistic response by a factor of four, measured across 16 ideology dimensions.",
+      "og_title": "The 4\u00d7 Gap: Trump's Ideology vs. American Journalism",
+      "og_description": "93,500 articles. 16 ideology dimensions. Trump shifted 4\u00d7 faster than journalism.",
+      "vault_id": null,
+      "type": "research_article",
+      "skip_rebuild": false
+    }
+  },
+  "categories": {
+    "special": {
+      "label": "Atlantic Pulse",
+      "order": 1,
+      "show_section_header": false
+    },
+    "us-media-watch": {
+      "label": "U.S. Media Watch",
+      "order": 2,
+      "show_section_header": true
+    }
+  }
+}
