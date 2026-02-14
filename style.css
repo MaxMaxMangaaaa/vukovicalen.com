@@ -174,7 +174,7 @@ nav {
 .logo:visited {
     font-weight: var(--font-semibold);
     font-size: var(--text-lg);
-    color: var(--primary-500);
+    color: var(--primary-500) !important;
     text-decoration: none !important;
     letter-spacing: -0.025em;
 }

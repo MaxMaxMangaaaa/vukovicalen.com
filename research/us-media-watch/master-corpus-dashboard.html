@@ -347,14 +347,16 @@
             align-items: center;
         }
 
-        .logo {
+        .logo,
+        .logo:link,
+        .logo:visited {
             font-weight: 600;
             font-size: 1.125rem;
-            color: var(--primary-500);
-            text-decoration: none;
+            color: var(--primary-500) !important;
+            text-decoration: none !important;
         }
 
-        .logo:hover { color: #ffffff; }
+        .logo:hover { color: #ffffff !important; }
 
         .nav-links {
             display: flex;
@@ -366,7 +368,7 @@
         .nav-links > a:link,
         .nav-links > a:visited {
             text-decoration: none !important;
-            color: var(--primary-500);
+            color: var(--primary-500) !important;
             font-size: 0.875rem;
             font-weight: 500;
         }
@@ -412,7 +414,7 @@
         .dropdown-menu a:visited {
             display: block;
             padding: 0.5rem 1rem;
-            color: #ec5691;
+            color: #ec5691 !important;
             font-size: 0.875rem;
             font-weight: 500;
             text-decoration: none !important;
