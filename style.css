@@ -195,7 +195,6 @@ nav {
     color: #ffffff;
 }
 
-<<<<<<< HEAD
 /* Dropdown Navigation */
 .nav-dropdown {
     position: relative;
@@ -273,8 +272,6 @@ nav {
     margin: var(--space-2) 0;
 }
 
-=======
->>>>>>> 050ec53122887e897f41725f91b1cf2c62a03df4
 /* ============================================
    Hero Section (Homepage)
    ============================================ */
@@ -601,7 +598,6 @@ footer span.sep {
 }
 
 /* ============================================
-<<<<<<< HEAD
    Framegate Discourse Intelligence — Artikel-Klassen
    Für HTML-Exports aus der Thesis Engine
    ============================================ */
@@ -713,11 +709,6 @@ footer span.sep {
 /* ============================================
    Responsive Design
    ============================================ */
-
-=======
-   Responsive Design
-   ============================================ */
->>>>>>> 050ec53122887e897f41725f91b1cf2c62a03df4
 @media (max-width: 768px) {
     .hero-content h1 {
         font-size: var(--text-4xl);
@@ -748,7 +739,6 @@ footer span.sep {
     .hero-content h1 {
         font-size: var(--text-3xl);
     }
-<<<<<<< HEAD
 
     .content-page h1 {
         font-size: var(--text-2xl);
@@ -758,22 +748,10 @@ footer span.sep {
         flex-direction: column;
     }
 
-=======
-    
-    .content-page h1 {
-        font-size: var(--text-2xl);
-    }
-    
-    .cta-buttons {
-        flex-direction: column;
-    }
-    
->>>>>>> 050ec53122887e897f41725f91b1cf2c62a03df4
     .btn {
         width: 100%;
         text-align: center;
     }
-<<<<<<< HEAD
 
     /* Framegate Metric Cards — Mobile */
     .metric-card {
@@ -784,6 +762,4 @@ footer span.sep {
     .metric-card .value {
         font-size: var(--text-2xl);
     }
-=======
->>>>>>> 050ec53122887e897f41725f91b1cf2c62a03df4
 }
