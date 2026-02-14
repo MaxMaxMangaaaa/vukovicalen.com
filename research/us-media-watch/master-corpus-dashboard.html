@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presidential Text Corpus — Master Dashboard | FRAMEGATE</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <style>
+        /* FRAMEGATE Design System */
+        :root {
+            --primary-500: #e7227a;
+            --primary-600: #cf1e6d;
+            --primary-400: #ec5691;
+            --secondary-500: #ef4444;
+            --success: #059669;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --bg-primary: #f7f8fc;
+            --bg-secondary: #f0f1f5;
+            --bg-tertiary: #e8e9ed;
+            --brand-gray: #414247;
+            --text-primary: #111112;
+            --text-secondary: #525252;
+            --text-tertiary: #737373;
+            --border-light: #e5e5e5;
+            --border-default: #d4d4d4;
+            --neutral-50: #fafafa;
+            --neutral-100: #f5f5f5;
+            --neutral-200: #e5e5e5;
+            --neutral-800: #262626;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            border-bottom: 2px solid var(--primary-500);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            color: var(--text-secondary);
+        }
+
+        .header .brand {
+            font-size: 0.85em;
+            color: var(--primary-500);
+            font-weight: 600;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* KPI Cards */
+        .kpi-section {
+            margin-bottom: 40px;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .kpi-card {
+            background-color: #ffffff;
+            border-left: 4px solid var(--info);
+            padding: 20px;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(231, 34, 122, 0.1);
+        }
+
+        .kpi-label {
+            font-size: 0.85em;
+            color: var(--text-tertiary);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        .kpi-value {
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        /* Chart Section */
+        .chart-section {
+            margin-bottom: 40px;
+        }
+
+        .chart-section-title {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-light);
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .chart-grid.full {
+            grid-template-columns: 1fr;
+        }
+
+        .chart-container {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-light);
+        }
+
+        .chart-container h3 {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+        }
+
+        .chart-wrapper.compact {
+            height: 300px;
+        }
+
+        /* Table Styles */
+        .table-container {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-light);
+        }
+
+        .table-container h3 {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+
+        th {
+            background-color: var(--bg-secondary);
+            color: var(--primary-600);
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid var(--primary-500);
+            white-space: nowrap;
+            text-transform: uppercase;
+            font-size: 0.8em;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border-light);
+            color: var(--text-secondary);
+        }
+
+        tr:hover {
+            background-color: var(--bg-secondary);
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--neutral-50);
+        }
+
+        /* Two Column Layout for Top Words */
+        .two-column-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 1200px) {
+            .two-column-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Color indicators */
+        .color-trump {
+            color: var(--secondary-500);
+        }
+
+        .color-biden {
+            color: var(--info);
+        }
+
+        .color-social {
+            color: var(--warning);
+        }
+
+        .color-govinfo {
+            color: var(--success);
+        }
+
+        .color-register {
+            color: #8b5cf6;
+        }
+
+        /* Responsive canvas fix */
+        canvas {
+            max-height: 400px;
+        }
+
+        .chart-wrapper.compact canvas {
+            max-height: 300px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 1px solid var(--border-light);
+            color: var(--text-tertiary);
+            font-size: 0.85em;
+        }
+
+        .footer a {
+            color: var(--primary-500);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-default);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-500);
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--brand-gray);
+            padding: 1rem 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            margin: -20px -20px 20px -20px;
+        }
+
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 600;
+            font-size: 1.125rem;
+            color: var(--primary-500);
+            text-decoration: none;
+        }
+
+        .logo:hover { color: #ffffff; }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links > a {
+            text-decoration: none;
+            color: var(--primary-500);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .nav-links > a:hover, .nav-links > a.active { color: #ffffff; }
+
+        .nav-dropdown { position: relative; }
+        .nav-dropdown > a { display: flex; align-items: center; gap: 0.25rem; }
+        .nav-dropdown > a::after { content: '▾'; font-size: 0.7em; }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--brand-gray);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 6px;
+            padding: 0.5rem 0;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s, visibility 0.2s;
+            margin-top: 0.5rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+
+        .nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #ec5691;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .dropdown-menu a:hover { background: rgba(231,34,122,0.15); color: #fff; }
+        .dropdown-menu a.active { color: #fff; }
+
+        .dropdown-section {
+            padding: 0.25rem 1rem;
+            font-size: 0.75rem;
+            color: #a3a3a3;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.5rem;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="../../index.html" class="logo">Alen Vukovic</a>
+            <div class="nav-links">
+                <a href="../../about.html">About</a>
+                <div class="nav-dropdown">
+                    <a href="../atlantic-pulse.html" class="active">Research</a>
+                    <div class="dropdown-menu">
+                        <a href="../atlantic-pulse.html">Atlantic Pulse</a>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-section">U.S. Media Watch</div>
+                        <a href="the-4x-gap.html">The 4× Gap</a>
+                        <a href="truth-social-dashboard.html">Truth Social Dashboard</a>
+                        <a href="master-corpus-dashboard.html" class="active">Master Corpus Dashboard</a>
+                    </div>
+                </div>
+                <a href="../../framegate.html">FRAMEGATE</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Presidential Text Corpus — Master Dashboard</h1>
+            <p>26.066 Dokumente | 3 Quellen | Biden + Trump | Dez 2022 – Feb 2026</p>
+            <p class="brand">FRAMEGATE.ai · Narrative Intelligence</p>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="kpi-section">
+            <div class="kpi-grid">
+                <div class="kpi-card" style="border-left-color: var(--info);">
+                    <div class="kpi-label">Gesamt Dokumente</div>
+                    <div class="kpi-value">26.066</div>
+                </div>
+                <div class="kpi-card" style="border-left-color: var(--success);">
+                    <div class="kpi-label">Gesamtworte</div>
+                    <div class="kpi-value">7.171.535</div>
+                </div>
+                <div class="kpi-card" style="border-left-color: var(--warning);">
+                    <div class="kpi-label">Aktive Tage</div>
+                    <div class="kpi-value">1.133</div>
+                </div>
+                <div class="kpi-card" style="border-left-color: #8b5cf6;">
+                    <div class="kpi-label">Ø Docs/Tag</div>
+                    <div class="kpi-value">23,0</div>
+                </div>
+                <div class="kpi-card" style="border-left-color: var(--secondary-500);">
+                    <div class="kpi-label">Trump Docs</div>
+                    <div class="kpi-value">23.072</div>
+                </div>
+                <div class="kpi-card" style="border-left-color: var(--info);">
+                    <div class="kpi-label">Biden Docs</div>
+                    <div class="kpi-value">2.994</div>
+                </div>
+                <div class="kpi-card" style="border-left-color: #06b6d4;">
+                    <div class="kpi-label">Offizielle Docs</div>
+                    <div class="kpi-value">4.501</div>
+                </div>
+                <div class="kpi-card" style="border-left-color: var(--warning);">
+                    <div class="kpi-label">Social Media</div>
+                    <div class="kpi-value">21.565</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart: Monthly Volume by Source -->
+        <div class="chart-section">
+            <h2 class="chart-section-title">Monatliche Datenquellen</h2>
+            <div class="chart-grid full">
+                <div class="chart-container">
+                    <h3>Monatliches Volumen nach Quelle</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="chartMonthlyBySource"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts: Monthly by Actor -->
+        <div class="chart-section">
+            <h2 class="chart-section-title">Monatliches Volumen Trump vs Biden</h2>
+            <div class="chart-grid full">
+                <div class="chart-container">
+                    <h3>Dokumente pro Monat</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="chartMonthlyByActor"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts: Words Analysis -->
+        <div class="chart-section">
+            <h2 class="chart-section-title">Wortanalyse nach Person</h2>
+            <div class="chart-grid">
+                <div class="chart-container">
+                    <h3>Ø Wörter/Dokument pro Monat</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="chartAvgWordsPerMonth"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h3>Monatliche Gesamtworte</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="chartTotalWordsPerMonth"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts: Distribution Analysis -->
+        <div class="chart-section">
+            <h2 class="chart-section-title">Verteilungsanalyse</h2>
+            <div class="chart-grid">
+                <div class="chart-container">
+                    <h3>Quellen-Verteilung</h3>
+                    <div class="chart-wrapper compact">
+                        <canvas id="chartSourceDistribution"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h3>Event-Typen</h3>
+                    <div class="chart-wrapper compact">
+                        <canvas id="chartEventTypes"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart: Top 20 Categories -->
+        <div class="chart-section">
+            <h2 class="chart-section-title">Kategorieanalyse</h2>
+            <div class="chart-grid full">
+                <div class="chart-container">
+                    <h3>Top 20 Kategorien</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="chartTopCategories"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart: Official Documents by Category -->
+        <div class="chart-section">
+            <h2 class="chart-section-title">Offizielle Dokumente</h2>
+            <div class="chart-grid">
+                <div class="chart-container">
+                    <h3>Offizielle Dokumente nach Kategorie</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="chartOfficialByCategory"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h3>Offizielle Dokumente — Trump vs Biden</h3>
+                    <div class="chart-wrapper compact">
+                        <canvas id="chartOfficialByActor"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart: Word Count Distribution -->
+        <div class="chart-section">
+            <h2 class="chart-section-title">Wortanzahl-Verteilung</h2>
+            <div class="chart-grid full">
+                <div class="chart-container">
+                    <h3>Dokumente nach Wortanzahl</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="chartWordCountDistribution"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table: Word Statistics by Source -->
+        <div class="table-container">
+            <h3>Wortstatistik nach Quelle</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Quelle</th>
+                        <th>Dokumente</th>
+                        <th>Ø Wörter</th>
+                        <th>Median</th>
+                        <th>P25</th>
+                        <th>P75</th>
+                        <th>P95</th>
+                        <th>Maximum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="color-social">Truth Social</span></td>
+                        <td>21.565</td>
+                        <td>33,7</td>
+                        <td>15</td>
+                        <td>2</td>
+                        <td>47</td>
+                        <td>125</td>
+                        <td>514</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-govinfo">GovInfo CPD</span></td>
+                        <td>3.434</td>
+                        <td>1.591,8</td>
+                        <td>699</td>
+                        <td>334</td>
+                        <td>1.802</td>
+                        <td>6.427</td>
+                        <td>31.004</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-register">Federal Register</span></td>
+                        <td>1.067</td>
+                        <td>916,8</td>
+                        <td>753</td>
+                        <td>502</td>
+                        <td>1.038</td>
+                        <td>2.196</td>
+                        <td>19.874</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Top Words Analysis -->
+        <div class="chart-section">
+            <h2 class="chart-section-title">Top 20 Wörter in offiziellen Dokumenten</h2>
+            <div class="two-column-layout">
+                <div class="chart-container">
+                    <h3>Trump Top Wörter</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="chartTopWordsTrump"></canvas>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h3>Biden Top Wörter</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="chartTopWordsBiden"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Longest Documents Table -->
+        <div class="table-container">
+            <h3>Längste Dokumente (Top 10)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Datum</th>
+                        <th>Akteur</th>
+                        <th>Quelle</th>
+                        <th>Typ</th>
+                        <th>Kategorie</th>
+                        <th>Titel</th>
+                        <th>Wörter</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2025-08-26</td>
+                        <td><span class="color-trump">Donald J. Trump</span></td>
+                        <td><span class="color-govinfo">GovInfo CPD</span></td>
+                        <td>other</td>
+                        <td>Budget and Presidential Materials</td>
+                        <td>Remarks During a Cabinet Meeting and an Exchange With Reporters</td>
+                        <td>31.004</td>
+                    </tr>
+                    <tr>
+                        <td>2024-06-14</td>
+                        <td><span class="color-biden">Joseph R. Biden, Jr.</span></td>
+                        <td><span class="color-govinfo">GovInfo CPD</span></td>
+                        <td>other</td>
+                        <td>Budget and Presidential Materials</td>
+                        <td>Joint Statement by Group of Seven (G-7) Nation Leaders-G7 Apulia Leaders' Commun...</td>
+                        <td>20.349</td>
+                    </tr>
+                    <tr>
+                        <td>2023-10-30</td>
+                        <td><span class="color-biden">Joseph R. Biden, Jr.</span></td>
+                        <td><span class="color-register">Federal Register</span></td>
+                        <td>executive_order</td>
+                        <td>Executive Order</td>
+                        <td>Safe, Secure, and Trustworthy Development and Use of Artificial Intelligence</td>
+                        <td>19.874</td>
+                    </tr>
+                    <tr>
+                        <td>2025-07-08</td>
+                        <td><span class="color-trump">Donald J. Trump</span></td>
+                        <td><span class="color-govinfo">GovInfo CPD</span></td>
+                        <td>other</td>
+                        <td>Budget and Presidential Materials</td>
+                        <td>Remarks Following a Cabinet Meeting and an Exchange With Reporters</td>
+                        <td>19.637</td>
+                    </tr>
+                    <tr>
+                        <td>2023-10-30</td>
+                        <td><span class="color-biden">Joseph R. Biden, Jr.</span></td>
+                        <td><span class="color-govinfo">GovInfo CPD</span></td>
+                        <td>other</td>
+                        <td>Budget and Presidential Materials</td>
+                        <td>Executive Order 14110-Safe, Secure, and Trustworthy Development and Use of Artif...</td>
+                        <td>19.504</td>
+                    </tr>
+                    <tr>
+                        <td>2023-05-20</td>
+                        <td><span class="color-biden">Joseph R. Biden, Jr.</span></td>
+                        <td><span class="color-govinfo">GovInfo CPD</span></td>
+                        <td>other</td>
+                        <td>Budget and Presidential Materials</td>
+                        <td>Joint Statement-Group of Seven (G-7) Nations Hiroshima Leaders' Communiqué</td>
+                        <td>19.368</td>
+                    </tr>
+                    <tr>
+                        <td>2025-09-05</td>
+                        <td><span class="color-trump">Donald J. Trump</span></td>
+                        <td><span class="color-govinfo">GovInfo CPD</span></td>
+                        <td>other</td>
+                        <td>Budget and Presidential Materials</td>
+                        <td>Remarks on Signing the Homebuyers Privacy Protection Act and Executive Orders an...</td>
+                        <td>18.391</td>
+                    </tr>
+                    <tr>
+                        <td>2025-12-02</td>
+                        <td><span class="color-trump">Donald J. Trump</span></td>
+                        <td><span class="color-govinfo">GovInfo CPD</span></td>
+                        <td>other</td>
+                        <td>Budget and Presidential Materials</td>
+                        <td>Remarks Prior to a Cabinet Meeting and an Exchange With Reporters</td>
+                        <td>17.254</td>
+                    </tr>
+                    <tr>
+                        <td>2025-02-14</td>
+                        <td><span class="color-trump">Donald J. Trump</span></td>
+                        <td><span class="color-govinfo">GovInfo CPD</span></td>
+                        <td>other</td>
+                        <td>Budget and Presidential Materials</td>
+                        <td>Interview With Sean Hannity of the Fox News Channel's "Sean Hannity Show"</td>
+                        <td>16.529</td>
+                    </tr>
+                    <tr>
+                        <td>2025-08-25</td>
+                        <td><span class="color-trump">Donald J. Trump</span></td>
+                        <td><span class="color-govinfo">GovInfo CPD</span></td>
+                        <td>other</td>
+                        <td>Budget and Presidential Materials</td>
+                        <td>Remarks on Signing Executive Orders To Reduce Crime and an Exchange With Reporte...</td>
+                        <td>15.945</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Chart: Documents by Year -->
+        <div class="chart-section">
+            <h2 class="chart-section-title">Zeitliche Verteilung</h2>
+            <div class="chart-grid full">
+                <div class="chart-container">
+                    <h3>Dokumente nach Jahr</h3>
+                    <div class="chart-wrapper compact">
+                        <canvas id="chartByYear"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>FRAMEGATE.ai · Narrative Intelligence | <a href="../index.html">vukovicalen.com</a></p>
+            <p>Datenquelle: GovInfo CPD, Federal Register, Truth Social | Zeitraum: 30. Dezember 2022 – 7. Februar 2026</p>
+        </div>
+    </div>
+
+    <script>
+        // Embedded Data
+        const DATA = {"kpis": {"total": 26066, "total_words": 7171535, "days": 1133, "avg_per_day": 23.0, "sources": 3, "actors": 2, "trump_count": 23072, "biden_count": 2994, "official_count": 4501, "social_count": 21565, "date_min": "2022-12-30", "date_max": "2026-02-07"}, "monthly_by_source": [{"month": "2022-12", "truth_social": 0, "govinfo_cpd": 0, "federal_register": 3}, {"month": "2023-01", "truth_social": 544, "govinfo_cpd": 74, "federal_register": 13}, {"month": "2023-02", "truth_social": 511, "govinfo_cpd": 78, "federal_register": 19}, {"month": "2023-03", "truth_social": 554, "govinfo_cpd": 117, "federal_register": 33}, {"month": "2023-04", "truth_social": 471, "govinfo_cpd": 97, "federal_register": 30}, {"month": "2023-05", "truth_social": 509, "govinfo_cpd": 125, "federal_register": 38}, {"month": "2023-06", "truth_social": 669, "govinfo_cpd": 102, "federal_register": 12}, {"month": "2023-07", "truth_social": 780, "govinfo_cpd": 79, "federal_register": 18}, {"month": "2023-08", "truth_social": 902, "govinfo_cpd": 68, "federal_register": 15}, {"month": "2023-09", "truth_social": 795, "govinfo_cpd": 129, "federal_register": 40}, {"month": "2023-10", "truth_social": 735, "govinfo_cpd": 97, "federal_register": 30}, {"month": "2023-11", "truth_social": 704, "govinfo_cpd": 105, "federal_register": 21}, {"month": "2023-12", "truth_social": 785, "govinfo_cpd": 92, "federal_register": 22}, {"month": "2024-01", "truth_social": 998, "govinfo_cpd": 63, "federal_register": 5}, {"month": "2024-02", "truth_social": 646, "govinfo_cpd": 87, "federal_register": 15}, {"month": "2024-03", "truth_social": 857, "govinfo_cpd": 105, "federal_register": 30}, {"month": "2024-04", "truth_social": 721, "govinfo_cpd": 102, "federal_register": 25}, {"month": "2024-05", "truth_social": 822, "govinfo_cpd": 122, "federal_register": 36}, {"month": "2024-06", "truth_social": 643, "govinfo_cpd": 78, "federal_register": 20}, {"month": "2024-07", "truth_social": 525, "govinfo_cpd": 105, "federal_register": 25}, {"month": "2024-08", "truth_social": 899, "govinfo_cpd": 75, "federal_register": 20}, {"month": "2024-09", "truth_social": 772, "govinfo_cpd": 125, "federal_register": 42}, {"month": "2024-10", "truth_social": 825, "govinfo_cpd": 107, "federal_register": 32}, {"month": "2024-11", "truth_social": 268, "govinfo_cpd": 70, "federal_register": 22}, {"month": "2024-12", "truth_social": 349, "govinfo_cpd": 73, "federal_register": 21}, {"month": "2025-01", "truth_social": 352, "govinfo_cpd": 208, "federal_register": 95}, {"month": "2025-02", "truth_social": 395, "govinfo_cpd": 104, "federal_register": 39}, {"month": "2025-03", "truth_social": 536, "govinfo_cpd": 108, "federal_register": 47}, {"month": "2025-04", "truth_social": 351, "govinfo_cpd": 121, "federal_register": 55}, {"month": "2025-05", "truth_social": 386, "govinfo_cpd": 108, "federal_register": 43}, {"month": "2025-06", "truth_social": 406, "govinfo_cpd": 78, "federal_register": 26}, {"month": "2025-07", "truth_social": 433, "govinfo_cpd": 86, "federal_register": 30}, {"month": "2025-08", "truth_social": 476, "govinfo_cpd": 68, "federal_register": 34}, {"month": "2025-09", "truth_social": 275, "govinfo_cpd": 92, "federal_register": 27}, {"month": "2025-10", "truth_social": 337, "govinfo_cpd": 106, "federal_register": 16}, {"month": "2025-11", "truth_social": 479, "govinfo_cpd": 70, "federal_register": 22}, {"month": "2025-12", "truth_social": 314, "govinfo_cpd": 10, "federal_register": 19}, {"month": "2026-01", "truth_social": 411, "govinfo_cpd": 0, "federal_register": 25}, {"month": "2026-02", "truth_social": 130, "govinfo_cpd": 0, "federal_register": 2}], "monthly_by_actor": [{"month": "2022-12", "trump": 0, "biden": 3}, {"month": "2023-01", "trump": 544, "biden": 87}, {"month": "2023-02", "trump": 511, "biden": 97}, {"month": "2023-03", "trump": 554, "biden": 150}, {"month": "2023-04", "trump": 471, "biden": 127}, {"month": "2023-05", "trump": 509, "biden": 163}, {"month": "2023-06", "trump": 669, "biden": 114}, {"month": "2023-07", "trump": 780, "biden": 97}, {"month": "2023-08", "trump": 902, "biden": 83}, {"month": "2023-09", "trump": 795, "biden": 169}, {"month": "2023-10", "trump": 735, "biden": 127}, {"month": "2023-11", "trump": 704, "biden": 126}, {"month": "2023-12", "trump": 785, "biden": 114}, {"month": "2024-01", "trump": 998, "biden": 68}, {"month": "2024-02", "trump": 646, "biden": 102}, {"month": "2024-03", "trump": 857, "biden": 135}, {"month": "2024-04", "trump": 721, "biden": 127}, {"month": "2024-05", "trump": 822, "biden": 158}, {"month": "2024-06", "trump": 643, "biden": 98}, {"month": "2024-07", "trump": 525, "biden": 130}, {"month": "2024-08", "trump": 899, "biden": 95}, {"month": "2024-09", "trump": 772, "biden": 167}, {"month": "2024-10", "trump": 825, "biden": 139}, {"month": "2024-11", "trump": 268, "biden": 92}, {"month": "2024-12", "trump": 349, "biden": 94}, {"month": "2025-01", "trump": 523, "biden": 132}, {"month": "2025-02", "trump": 538, "biden": 0}, {"month": "2025-03", "trump": 691, "biden": 0}, {"month": "2025-04", "trump": 527, "biden": 0}, {"month": "2025-05", "trump": 537, "biden": 0}, {"month": "2025-06", "trump": 510, "biden": 0}, {"month": "2025-07", "trump": 549, "biden": 0}, {"month": "2025-08", "trump": 578, "biden": 0}, {"month": "2025-09", "trump": 394, "biden": 0}, {"month": "2025-10", "trump": 459, "biden": 0}, {"month": "2025-11", "trump": 571, "biden": 0}, {"month": "2025-12", "trump": 343, "biden": 0}, {"month": "2026-01", "trump": 436, "biden": 0}, {"month": "2026-02", "trump": 132, "biden": 0}], "monthly_words_actor": [{"month": "2022-12", "trump_total": 0, "biden_total": 2072, "trump_avg": 0.0, "biden_avg": 690.7}, {"month": "2023-01", "trump_total": 15721, "biden_total": 104803, "trump_avg": 28.9, "biden_avg": 1204.6}, {"month": "2023-02", "trump_total": 13684, "biden_total": 126836, "trump_avg": 26.8, "biden_avg": 1307.6}, {"month": "2023-03", "trump_total": 17299, "biden_total": 185603, "trump_avg": 31.2, "biden_avg": 1237.4}, {"month": "2023-04", "trump_total": 11173, "biden_total": 149642, "trump_avg": 23.7, "biden_avg": 1178.3}, {"month": "2023-05", "trump_total": 13092, "biden_total": 182307, "trump_avg": 25.7, "biden_avg": 1118.4}, {"month": "2023-06", "trump_total": 15806, "biden_total": 162900, "trump_avg": 23.6, "biden_avg": 1428.9}, {"month": "2023-07", "trump_total": 15367, "biden_total": 98907, "trump_avg": 19.7, "biden_avg": 1019.7}, {"month": "2023-08", "trump_total": 18754, "biden_total": 105782, "trump_avg": 20.8, "biden_avg": 1274.5}, {"month": "2023-09", "trump_total": 19279, "biden_total": 190553, "trump_avg": 24.3, "biden_avg": 1127.5}, {"month": "2023-10", "trump_total": 20621, "biden_total": 167221, "trump_avg": 28.1, "biden_avg": 1316.7}, {"month": "2023-11", "trump_total": 19550, "biden_total": 124584, "trump_avg": 27.8, "biden_avg": 988.8}, {"month": "2023-12", "trump_total": 20120, "biden_total": 117112, "trump_avg": 25.6, "biden_avg": 1027.3}, {"month": "2024-01", "trump_total": 33724, "biden_total": 71793, "trump_avg": 33.8, "biden_avg": 1055.8}, {"month": "2024-02", "trump_total": 17105, "biden_total": 115616, "trump_avg": 26.5, "biden_avg": 1133.5}, {"month": "2024-03", "trump_total": 25763, "biden_total": 154894, "trump_avg": 30.1, "biden_avg": 1147.4}, {"month": "2024-04", "trump_total": 21055, "biden_total": 141626, "trump_avg": 29.2, "biden_avg": 1115.2}, {"month": "2024-05", "trump_total": 33107, "biden_total": 180835, "trump_avg": 40.3, "biden_avg": 1144.5}, {"month": "2024-06", "trump_total": 19516, "biden_total": 126277, "trump_avg": 30.4, "biden_avg": 1288.5}, {"month": "2024-07", "trump_total": 19398, "biden_total": 111458, "trump_avg": 36.9, "biden_avg": 857.4}, {"month": "2024-08", "trump_total": 30374, "biden_total": 72248, "trump_avg": 33.8, "biden_avg": 760.5}, {"month": "2024-09", "trump_total": 21676, "biden_total": 170174, "trump_avg": 28.1, "biden_avg": 1019.0}, {"month": "2024-10", "trump_total": 26227, "biden_total": 138558, "trump_avg": 31.8, "biden_avg": 996.8}, {"month": "2024-11", "trump_total": 9495, "biden_total": 76995, "trump_avg": 35.4, "biden_avg": 836.9}, {"month": "2024-12", "trump_total": 16727, "biden_total": 94882, "trump_avg": 47.9, "biden_avg": 1009.4}, {"month": "2025-01", "trump_total": 281542, "biden_total": 145845, "trump_avg": 538.3, "biden_avg": 1104.9}, {"month": "2025-02", "trump_total": 383058, "biden_total": 0, "trump_avg": 712.0, "biden_avg": 0.0}, {"month": "2025-03", "trump_total": 287692, "biden_total": 0, "trump_avg": 416.3, "biden_avg": 0.0}, {"month": "2025-04", "trump_total": 353965, "biden_total": 0, "trump_avg": 671.7, "biden_avg": 0.0}, {"month": "2025-05", "trump_total": 314764, "biden_total": 0, "trump_avg": 586.2, "biden_avg": 0.0}, {"month": "2025-06", "trump_total": 234485, "biden_total": 0, "trump_avg": 459.8, "biden_avg": 0.0}, {"month": "2025-07", "trump_total": 317582, "biden_total": 0, "trump_avg": 578.5, "biden_avg": 0.0}, {"month": "2025-08", "trump_total": 234109, "biden_total": 0, "trump_avg": 405.0, "biden_avg": 0.0}, {"month": "2025-09", "trump_total": 290470, "biden_total": 0, "trump_avg": 737.2, "biden_avg": 0.0}, {"month": "2025-10", "trump_total": 335109, "biden_total": 0, "trump_avg": 730.1, "biden_avg": 0.0}, {"month": "2025-11", "trump_total": 211524, "biden_total": 0, "trump_avg": 370.4, "biden_avg": 0.0}, {"month": "2025-12", "trump_total": 71810, "biden_total": 0, "trump_avg": 209.4, "biden_avg": 0.0}, {"month": "2026-01", "trump_total": 52150, "biden_total": 0, "trump_avg": 119.6, "biden_avg": 0.0}, {"month": "2026-02", "trump_total": 9119, "biden_total": 0, "trump_avg": 69.1, "biden_avg": 0.0}], "by_source": [{"source": "truth_social", "count": 21565}, {"source": "govinfo_cpd", "count": 3434}, {"source": "federal_register", "count": 1067}], "by_actor": [{"actor": "Donald J. Trump", "count": 23072}, {"actor": "Joseph R. Biden, Jr.", "count": 2994}], "by_event_type": [{"type": "social_media", "count": 21565}, {"type": "other", "count": 3450}, {"type": "proclamation", "count": 479}, {"type": "executive_order", "count": 285}, {"type": "notice", "count": 132}, {"type": "memorandum", "count": 118}, {"type": "determination", "count": 37}], "by_category": [{"category": "Truth Social - statement", "count": 12573}, {"category": "Budget and Presidential Materials", "count": 3434}, {"category": "Truth Social - retruth", "count": 3135}, {"category": "Truth Social - short_post", "count": 2436}, {"category": "Truth Social - endorsement", "count": 1758}, {"category": "Truth Social - attack", "count": 1022}, {"category": "Proclamation", "count": 479}, {"category": "Truth Social - question", "count": 436}, {"category": "Executive Order", "count": 281}, {"category": "Notice", "count": 132}, {"category": "Memorandum", "count": 118}, {"category": "Truth Social - announcement", "count": 116}, {"category": "Truth Social - policy_announcement", "count": 89}, {"category": "Determination", "count": 37}, {"category": "Other", "count": 16}, {"category": "Presidential Order", "count": 4}], "by_tier": [{"tier": "social_media", "count": 21565}, {"tier": "official", "count": 4501}], "by_year": [{"year": "2022", "count": 3}, {"year": "2023", "count": 9413}, {"year": "2024", "count": 9730}, {"year": "2025", "count": 6352}, {"year": "2026", "count": 568}], "official_categories": [{"category": "Budget and Presidential Materials", "count": 3434}, {"category": "Proclamation", "count": 479}, {"category": "Executive Order", "count": 281}, {"category": "Notice", "count": 132}, {"category": "Memorandum", "count": 118}, {"category": "Determination", "count": 37}, {"category": "Other", "count": 16}, {"category": "Presidential Order", "count": 4}], "official_event_types": [{"type": "other", "count": 3450}, {"type": "proclamation", "count": 479}, {"type": "executive_order", "count": 285}, {"type": "notice", "count": 132}, {"type": "memorandum", "count": 118}, {"type": "determination", "count": 37}], "official_by_actor": [{"actor": "Joseph R. Biden, Jr.", "count": 2994}, {"actor": "Donald J. Trump", "count": 1507}], "wc_dist": [{"label": "Leer", "count": 0}, {"label": "1-10", "count": 9261}, {"label": "11-50", "count": 7206}, {"label": "51-200", "count": 5113}, {"label": "201-500", "count": 1570}, {"label": "501-1K", "count": 1311}, {"label": "1K-5K", "count": 1355}, {"label": "5K+", "count": 250}], "wc_by_source": [{"source": "truth_social", "count": 21565, "mean": 33.7, "median": 15, "p25": 2, "p75": 47, "p95": 125, "max": 514}, {"source": "govinfo_cpd", "count": 3434, "mean": 1591.8, "median": 699, "p25": 334, "p75": 1802, "p95": 6427, "max": 31004}, {"source": "federal_register", "count": 1067, "mean": 916.8, "median": 753, "p25": 502, "p75": 1038, "p95": 2196, "max": 19874}], "top_words_trump_official": [{"word": "know", "count": 12776}, {"word": "people", "count": 11457}, {"word": "think", "count": 9757}, {"word": "secretary", "count": 8960}, {"word": "thank", "count": 8790}, {"word": "great", "count": 7962}, {"word": "trump", "count": 7936}, {"word": "want", "count": 7618}, {"word": "like", "count": 7110}, {"word": "one", "count": 7011}, {"word": "country", "count": 6617}, {"word": "right", "count": 6524}, {"word": "said", "count": 6239}, {"word": "good", "count": 5894}, {"word": "national", "count": 5848}, {"word": "well", "count": 5700}, {"word": "lot", "count": 5676}, {"word": "yes", "count": 5547}, {"word": "security", "count": 5259}, {"word": "say", "count": 5027}], "top_words_biden_official": [{"word": "america", "count": 9406}, {"word": "national", "count": 8775}, {"word": "people", "count": 8659}, {"word": "know", "count": 8370}, {"word": "biden", "count": 7427}, {"word": "security", "count": 6166}, {"word": "thank", "count": 6139}, {"word": "one", "count": 6051}, {"word": "administration", "count": 5854}, {"word": "american", "count": 5628}, {"word": "well", "count": 5469}, {"word": "including", "count": 5460}, {"word": "world", "count": 5457}, {"word": "laughter", "count": 5105}, {"word": "health", "count": 5092}, {"word": "years", "count": 5046}, {"word": "efforts", "count": 4871}, {"word": "dcpd", "count": 4756}, {"word": "year", "count": 4745}, {"word": "secretary", "count": 4725}], "longest_docs": [{"date": "2025-08-26", "actor": "Donald J. Trump", "source": "govinfo_cpd", "type": "other", "category": "Budget and Presidential Materials", "title": "Remarks During a Cabinet Meeting and an Exchange With Reporters", "words": 31004}, {"date": "2024-06-14", "actor": "Joseph R. Biden, Jr.", "source": "govinfo_cpd", "type": "other", "category": "Budget and Presidential Materials", "title": "Joint Statement by Group of Seven (G-7) Nation Leaders-G7 Apulia Leaders' Commun...", "words": 20349}, {"date": "2023-10-30", "actor": "Joseph R. Biden, Jr.", "source": "federal_register", "type": "executive_order", "category": "Executive Order", "title": "Safe, Secure, and Trustworthy Development and Use of Artificial Intelligence", "words": 19874}, {"date": "2025-07-08", "actor": "Donald J. Trump", "source": "govinfo_cpd", "type": "other", "category": "Budget and Presidential Materials", "title": "Remarks Following a Cabinet Meeting and an Exchange With Reporters", "words": 19637}, {"date": "2023-10-30", "actor": "Joseph R. Biden, Jr.", "source": "govinfo_cpd", "type": "other", "category": "Budget and Presidential Materials", "title": "Executive Order 14110-Safe, Secure, and Trustworthy Development and Use of Artif...", "words": 19504}, {"date": "2023-05-20", "actor": "Joseph R. Biden, Jr.", "source": "govinfo_cpd", "type": "other", "category": "Budget and Presidential Materials", "title": "Joint Statement-Group of Seven (G-7) Nations Hiroshima Leaders' Communiqué", "words": 19368}, {"date": "2025-09-05", "actor": "Donald J. Trump", "source": "govinfo_cpd", "type": "other", "category": "Budget and Presidential Materials", "title": "Remarks on Signing the Homebuyers Privacy Protection Act and Executive Orders an...", "words": 18391}, {"date": "2025-12-02", "actor": "Donald J. Trump", "source": "govinfo_cpd", "type": "other", "category": "Budget and Presidential Materials", "title": "Remarks Prior to a Cabinet Meeting and an Exchange With Reporters", "words": 17254}, {"date": "2025-02-14", "actor": "Donald J. Trump", "source": "govinfo_cpd", "type": "other", "category": "Budget and Presidential Materials", "title": "Interview With Sean Hannity of the Fox News Channel's \"Sean Hannity Show\"", "words": 16529}, {"date": "2025-08-25", "actor": "Donald J. Trump", "source": "govinfo_cpd", "type": "other", "category": "Budget and Presidential Materials", "title": "Remarks on Signing Executive Orders To Reduce Crime and an Exchange With Reporte...", "words": 15945}]};
+
+        // Chart.js default colors - FRAMEGATE Light Theme
+        Chart.defaults.color = '#737373';
+        Chart.defaults.borderColor = '#e5e5e5';
+
+        // Number formatter for German locale
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
+
+        // FRAMEGATE Color palette
+        const colors = {
+            primary: '#e7227a',
+            trump: '#ef4444',
+            biden: '#3b82f6',
+            social: '#f59e0b',
+            govinfo: '#059669',
+            register: '#8b5cf6'
+        };
+
+        // ===== CHART 1: Monthly Volume by Source (Stacked Bar) =====
+        const ctx1 = document.getElementById('chartMonthlyBySource').getContext('2d');
+        const monthlyBySourceData = {
+            labels: DATA.monthly_by_source.map(d => d.month),
+            datasets: [
+                {
+                    label: 'Truth Social',
+                    data: DATA.monthly_by_source.map(d => d.truth_social),
+                    backgroundColor: colors.social,
+                    borderColor: colors.social,
+                    borderWidth: 0
+                },
+                {
+                    label: 'GovInfo CPD',
+                    data: DATA.monthly_by_source.map(d => d.govinfo_cpd),
+                    backgroundColor: colors.govinfo,
+                    borderColor: colors.govinfo,
+                    borderWidth: 0
+                },
+                {
+                    label: 'Federal Register',
+                    data: DATA.monthly_by_source.map(d => d.federal_register),
+                    backgroundColor: colors.register,
+                    borderColor: colors.register,
+                    borderWidth: 0
+                }
+            ]
+        };
+        new Chart(ctx1, {
+            type: 'bar',
+            data: monthlyBySourceData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { usePointStyle: true, color: '#525252' }
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                        ticks: { color: '#737373' },
+                        grid: { display: false }
+                    },
+                    y: {
+                        stacked: true,
+                        ticks: {
+                            color: '#737373',
+                            callback: function(value) { return formatNumber(value); }
+                        },
+                        grid: { color: '#e5e5e5' }
+                    }
+                }
+            }
+        });
+
+        // ===== CHART 2: Monthly Volume Trump vs Biden (Grouped Bar) =====
+        const ctx2 = document.getElementById('chartMonthlyByActor').getContext('2d');
+        const monthlyByActorData = {
+            labels: DATA.monthly_by_actor.map(d => d.month),
+            datasets: [
+                {
+                    label: 'Trump',
+                    data: DATA.monthly_by_actor.map(d => d.trump),
+                    backgroundColor: colors.trump,
+                    borderColor: colors.trump,
+                    borderWidth: 0
+                },
+                {
+                    label: 'Biden',
+                    data: DATA.monthly_by_actor.map(d => d.biden),
+                    backgroundColor: colors.biden,
+                    borderColor: colors.biden,
+                    borderWidth: 0
+                }
+            ]
+        };
+        new Chart(ctx2, {
+            type: 'bar',
+            data: monthlyByActorData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { usePointStyle: true, color: '#525252' }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            color: '#737373',
+                            callback: function(value) { return formatNumber(value); }
+                        },
+                        grid: { color: '#e5e5e5' }
+                    },
+                    x: {
+                        ticks: { color: '#737373' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // ===== CHART 3: Average Words per Document per Month (Line) =====
+        const ctx3 = document.getElementById('chartAvgWordsPerMonth').getContext('2d');
+        const monthlyWordsActorData = {
+            labels: DATA.monthly_words_actor.map(d => d.month),
+            datasets: [
+                {
+                    label: 'Trump Ø Wörter/Dokument',
+                    data: DATA.monthly_words_actor.map(d => d.trump_avg),
+                    borderColor: colors.trump,
+                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.4,
+                    fill: false,
+                    pointRadius: 3,
+                    pointBackgroundColor: colors.trump,
+                    pointBorderColor: '#ffffff'
+                },
+                {
+                    label: 'Biden Ø Wörter/Dokument',
+                    data: DATA.monthly_words_actor.map(d => d.biden_avg),
+                    borderColor: colors.biden,
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.4,
+                    fill: false,
+                    pointRadius: 3,
+                    pointBackgroundColor: colors.biden,
+                    pointBorderColor: '#ffffff'
+                }
+            ]
+        };
+        new Chart(ctx3, {
+            type: 'line',
+            data: monthlyWordsActorData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { usePointStyle: true, color: '#525252' }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            color: '#737373',
+                            callback: function(value) { return formatNumber(Math.round(value)); }
+                        },
+                        grid: { color: '#e5e5e5' }
+                    },
+                    x: {
+                        ticks: { color: '#737373' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // ===== CHART 4: Total Words per Month (Line) =====
+        const ctx4 = document.getElementById('chartTotalWordsPerMonth').getContext('2d');
+        const totalWordsData = {
+            labels: DATA.monthly_words_actor.map(d => d.month),
+            datasets: [
+                {
+                    label: 'Trump Gesamtworte',
+                    data: DATA.monthly_words_actor.map(d => d.trump_total),
+                    borderColor: colors.trump,
+                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.4,
+                    fill: false,
+                    pointRadius: 3,
+                    pointBackgroundColor: colors.trump,
+                    pointBorderColor: '#ffffff'
+                },
+                {
+                    label: 'Biden Gesamtworte',
+                    data: DATA.monthly_words_actor.map(d => d.biden_total),
+                    borderColor: colors.biden,
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.4,
+                    fill: false,
+                    pointRadius: 3,
+                    pointBackgroundColor: colors.biden,
+                    pointBorderColor: '#ffffff'
+                }
+            ]
+        };
+        new Chart(ctx4, {
+            type: 'line',
+            data: totalWordsData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { usePointStyle: true, color: '#525252' }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            color: '#737373',
+                            callback: function(value) { return formatNumber(value); }
+                        },
+                        grid: { color: '#e5e5e5' }
+                    },
+                    x: {
+                        ticks: { color: '#737373' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // ===== CHART 5: Source Distribution (Doughnut) =====
+        const ctx5 = document.getElementById('chartSourceDistribution').getContext('2d');
+        const sourceDistData = {
+            labels: ['Truth Social', 'GovInfo CPD', 'Federal Register'],
+            datasets: [{
+                data: DATA.by_source.map(d => d.count),
+                backgroundColor: [colors.social, colors.govinfo, colors.register],
+                borderColor: '#ffffff',
+                borderWidth: 2
+            }]
+        };
+        new Chart(ctx5, {
+            type: 'doughnut',
+            data: sourceDistData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { usePointStyle: true, color: '#525252' }
+                    }
+                }
+            }
+        });
+
+        // ===== CHART 6: Event Types (Horizontal Bar) =====
+        const ctx6 = document.getElementById('chartEventTypes').getContext('2d');
+        const eventTypeData = {
+            labels: DATA.by_event_type.map(d => {
+                const typeMap = {
+                    'social_media': 'Social Media',
+                    'other': 'Sonstige',
+                    'proclamation': 'Proklamation',
+                    'executive_order': 'Executive Order',
+                    'notice': 'Mitteilung',
+                    'memorandum': 'Memorandum',
+                    'determination': 'Feststellung'
+                };
+                return typeMap[d.type] || d.type;
+            }),
+            datasets: [{
+                label: 'Dokumente',
+                data: DATA.by_event_type.map(d => d.count),
+                backgroundColor: colors.primary,
+                borderColor: colors.primary,
+                borderWidth: 0,
+                borderRadius: 4
+            }]
+        };
+        new Chart(ctx6, {
+            type: 'bar',
+            data: eventTypeData,
+            indexAxis: 'y',
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: '#737373',
+                            callback: function(value) { return formatNumber(value); }
+                        },
+                        grid: { color: '#e5e5e5' }
+                    },
+                    y: {
+                        ticks: { color: '#737373' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // ===== CHART 7: Top 20 Categories (Horizontal Bar) =====
+        const ctx7 = document.getElementById('chartTopCategories').getContext('2d');
+        const topCategories = DATA.by_category.slice(0, 20);
+        const categoryData = {
+            labels: topCategories.map(d => d.category),
+            datasets: [{
+                label: 'Dokumente',
+                data: topCategories.map(d => d.count),
+                backgroundColor: colors.primary,
+                borderColor: colors.primary,
+                borderWidth: 0,
+                borderRadius: 4
+            }]
+        };
+        new Chart(ctx7, {
+            type: 'bar',
+            data: categoryData,
+            indexAxis: 'y',
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: '#737373',
+                            callback: function(value) { return formatNumber(value); }
+                        },
+                        grid: { color: '#e5e5e5' }
+                    },
+                    y: {
+                        ticks: { color: '#737373' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // ===== CHART 8: Official Documents by Category (Horizontal Bar) =====
+        const ctx8 = document.getElementById('chartOfficialByCategory').getContext('2d');
+        const officialCatData = {
+            labels: DATA.official_categories.map(d => d.category),
+            datasets: [{
+                label: 'Dokumente',
+                data: DATA.official_categories.map(d => d.count),
+                backgroundColor: '#06b6d4',
+                borderColor: '#06b6d4',
+                borderWidth: 0,
+                borderRadius: 4
+            }]
+        };
+        new Chart(ctx8, {
+            type: 'bar',
+            data: officialCatData,
+            indexAxis: 'y',
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: '#737373',
+                            callback: function(value) { return formatNumber(value); }
+                        },
+                        grid: { color: '#e5e5e5' }
+                    },
+                    y: {
+                        ticks: { color: '#737373' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // ===== CHART 9: Official Documents Trump vs Biden (Doughnut) =====
+        const ctx9 = document.getElementById('chartOfficialByActor').getContext('2d');
+        const officialActorData = {
+            labels: ['Biden', 'Trump'],
+            datasets: [{
+                data: [2994, 1507],
+                backgroundColor: [colors.biden, colors.trump],
+                borderColor: '#ffffff',
+                borderWidth: 2
+            }]
+        };
+        new Chart(ctx9, {
+            type: 'doughnut',
+            data: officialActorData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { usePointStyle: true, color: '#525252' }
+                    }
+                }
+            }
+        });
+
+        // ===== CHART 10: Word Count Distribution (Bar) =====
+        const ctx10 = document.getElementById('chartWordCountDistribution').getContext('2d');
+        const wcDistData = {
+            labels: DATA.wc_dist.map(d => d.label),
+            datasets: [{
+                label: 'Dokumente',
+                data: DATA.wc_dist.map(d => d.count),
+                backgroundColor: colors.register,
+                borderColor: colors.register,
+                borderWidth: 0,
+                borderRadius: 4
+            }]
+        };
+        new Chart(ctx10, {
+            type: 'bar',
+            data: wcDistData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            color: '#737373',
+                            callback: function(value) { return formatNumber(value); }
+                        },
+                        grid: { color: '#e5e5e5' }
+                    },
+                    x: {
+                        ticks: { color: '#737373' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // ===== CHART 11: Trump Top Words (Horizontal Bar) =====
+        const ctx11 = document.getElementById('chartTopWordsTrump').getContext('2d');
+        const trumpWordsData = {
+            labels: DATA.top_words_trump_official.map(d => d.word),
+            datasets: [{
+                label: 'Häufigkeit',
+                data: DATA.top_words_trump_official.map(d => d.count),
+                backgroundColor: colors.trump,
+                borderColor: colors.trump,
+                borderWidth: 0,
+                borderRadius: 4
+            }]
+        };
+        new Chart(ctx11, {
+            type: 'bar',
+            data: trumpWordsData,
+            indexAxis: 'y',
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: '#737373',
+                            callback: function(value) { return formatNumber(value); }
+                        },
+                        grid: { color: '#e5e5e5' }
+                    },
+                    y: {
+                        ticks: { color: '#737373' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // ===== CHART 12: Biden Top Words (Horizontal Bar) =====
+        const ctx12 = document.getElementById('chartTopWordsBiden').getContext('2d');
+        const bidenWordsData = {
+            labels: DATA.top_words_biden_official.map(d => d.word),
+            datasets: [{
+                label: 'Häufigkeit',
+                data: DATA.top_words_biden_official.map(d => d.count),
+                backgroundColor: colors.biden,
+                borderColor: colors.biden,
+                borderWidth: 0,
+                borderRadius: 4
+            }]
+        };
+        new Chart(ctx12, {
+            type: 'bar',
+            data: bidenWordsData,
+            indexAxis: 'y',
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: '#737373',
+                            callback: function(value) { return formatNumber(value); }
+                        },
+                        grid: { color: '#e5e5e5' }
+                    },
+                    y: {
+                        ticks: { color: '#737373' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // ===== CHART 13: Documents by Year (Bar) =====
+        const ctx13 = document.getElementById('chartByYear').getContext('2d');
+        const yearData = {
+            labels: DATA.by_year.map(d => d.year),
+            datasets: [{
+                label: 'Dokumente',
+                data: DATA.by_year.map(d => d.count),
+                backgroundColor: colors.govinfo,
+                borderColor: colors.govinfo,
+                borderWidth: 0,
+                borderRadius: 4
+            }]
+        };
+        new Chart(ctx13, {
+            type: 'bar',
+            data: yearData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            color: '#737373',
+                            callback: function(value) { return formatNumber(value); }
+                        },
+                        grid: { color: '#e5e5e5' }
+                    },
+                    x: {
+                        ticks: { color: '#737373' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

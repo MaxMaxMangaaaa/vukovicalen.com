@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trump Truth Social — Explorative Datenanalyse | FRAMEGATE</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <style>
+        /* FRAMEGATE Design System */
+        :root {
+            --primary-500: #e7227a;
+            --primary-600: #cf1e6d;
+            --primary-400: #ec5691;
+            --secondary-500: #ef4444;
+            --success: #059669;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --bg-primary: #f7f8fc;
+            --bg-secondary: #f0f1f5;
+            --bg-tertiary: #e8e9ed;
+            --brand-gray: #414247;
+            --text-primary: #111112;
+            --text-secondary: #525252;
+            --text-tertiary: #737373;
+            --border-light: #e5e5e5;
+            --border-default: #d4d4d4;
+            --neutral-50: #fafafa;
+            --neutral-100: #f5f5f5;
+            --neutral-200: #e5e5e5;
+            --neutral-800: #262626;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid var(--primary-500);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            letter-spacing: -0.025em;
+        }
+
+        .header .subtitle {
+            font-size: 1.1em;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .header .brand {
+            font-size: 0.85em;
+            color: var(--primary-500);
+            font-weight: 600;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* KPI Cards */
+        .kpi-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .kpi-card {
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-500), var(--info), var(--warning), var(--success));
+            background-size: 200% 100%;
+        }
+
+        .kpi-card:hover {
+            border-color: var(--primary-500);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(231, 34, 122, 0.1);
+        }
+
+        .kpi-card .label {
+            font-size: 0.85em;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .kpi-card .value {
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--text-primary);
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Charts Section */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .chart-container {
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .chart-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-500), transparent);
+        }
+
+        .chart-container h3 {
+            color: var(--text-primary);
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .chart-canvas-wrapper {
+            position: relative;
+            height: 350px;
+        }
+
+        /* Full Width Charts */
+        .chart-container.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .chart-container.full-width .chart-canvas-wrapper {
+            height: 400px;
+        }
+
+        /* Tables */
+        .table-container {
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .table-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-500), transparent);
+        }
+
+        .table-container h3 {
+            color: var(--text-primary);
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+
+        table thead {
+            background-color: var(--bg-secondary);
+            border-bottom: 2px solid var(--border-default);
+        }
+
+        table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--primary-600);
+            text-transform: uppercase;
+            font-size: 0.8em;
+            letter-spacing: 0.5px;
+        }
+
+        table tbody tr {
+            border-bottom: 1px solid var(--border-light);
+            transition: background-color 0.2s;
+        }
+
+        table tbody tr:hover {
+            background-color: var(--bg-secondary);
+        }
+
+        table td {
+            padding: 12px 15px;
+            color: var(--text-secondary);
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: var(--neutral-50);
+        }
+
+        /* Accent Colors for Data */
+        .accent-primary { color: var(--primary-500); }
+        .accent-info { color: var(--info); }
+        .accent-warning { color: var(--warning); }
+        .accent-success { color: var(--success); }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-container.full-width {
+                grid-column: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .kpi-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .chart-canvas-wrapper {
+                height: 300px !important;
+            }
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-default);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-500);
+        }
+
+        .text-muted {
+            color: var(--text-tertiary);
+            font-size: 0.85em;
+        }
+
+        .position-relative {
+            position: relative;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 1px solid var(--border-light);
+            color: var(--text-tertiary);
+            font-size: 0.85em;
+        }
+
+        footer a {
+            color: var(--primary-500);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--brand-gray);
+            padding: 1rem 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            margin: -20px -20px 20px -20px;
+        }
+
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 600;
+            font-size: 1.125rem;
+            color: var(--primary-500);
+            text-decoration: none;
+        }
+
+        .logo:hover { color: #ffffff; }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links > a {
+            text-decoration: none;
+            color: var(--primary-500);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .nav-links > a:hover, .nav-links > a.active { color: #ffffff; }
+
+        .nav-dropdown { position: relative; }
+        .nav-dropdown > a { display: flex; align-items: center; gap: 0.25rem; }
+        .nav-dropdown > a::after { content: '▾'; font-size: 0.7em; }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--brand-gray);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 6px;
+            padding: 0.5rem 0;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s, visibility 0.2s;
+            margin-top: 0.5rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+
+        .nav-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #ec5691;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .dropdown-menu a:hover { background: rgba(231,34,122,0.15); color: #fff; }
+        .dropdown-menu a.active { color: #fff; }
+
+        .dropdown-section {
+            padding: 0.25rem 1rem;
+            font-size: 0.75rem;
+            color: #a3a3a3;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.5rem;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="../../index.html" class="logo">Alen Vukovic</a>
+            <div class="nav-links">
+                <a href="../../about.html">About</a>
+                <div class="nav-dropdown">
+                    <a href="../atlantic-pulse.html" class="active">Research</a>
+                    <div class="dropdown-menu">
+                        <a href="../atlantic-pulse.html">Atlantic Pulse</a>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-section">U.S. Media Watch</div>
+                        <a href="the-4x-gap.html">The 4× Gap</a>
+                        <a href="truth-social-dashboard.html" class="active">Truth Social Dashboard</a>
+                        <a href="master-corpus-dashboard.html">Master Corpus Dashboard</a>
+                    </div>
+                </div>
+                <a href="../../framegate.html">FRAMEGATE</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Trump Truth Social — Explorative Datenanalyse</h1>
+            <p class="subtitle">17.610 Posts | 01.01.2024 – 07.02.2026</p>
+            <p class="brand">FRAMEGATE.ai · Narrative Intelligence</p>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="kpi-container">
+            <div class="kpi-card">
+                <div class="label">Gesamt-Posts</div>
+                <div class="value accent-info">17.610</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">Gesamtworte</div>
+                <div class="value accent-warning">544.809</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">Aktive Tage</div>
+                <div class="value accent-success">765</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">Ø Posts/Tag</div>
+                <div class="value accent-primary">23,0</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">Ø Engagement</div>
+                <div class="value accent-info">19.398</div>
+            </div>
+            <div class="kpi-card">
+                <div class="label">Media-Posts</div>
+                <div class="value accent-warning">40,8%</div>
+            </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="charts-grid">
+            <!-- Monthly Posting Volume -->
+            <div class="chart-container full-width">
+                <h3>Monatliches Posting-Volumen</h3>
+                <div class="chart-canvas-wrapper">
+                    <canvas id="monthlyChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Average Engagement per Month -->
+            <div class="chart-container">
+                <h3>Ø Engagement pro Monat</h3>
+                <div class="chart-canvas-wrapper">
+                    <canvas id="engagementChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Average Words per Post per Month -->
+            <div class="chart-container">
+                <h3>Ø Wörter/Post pro Monat</h3>
+                <div class="chart-canvas-wrapper">
+                    <canvas id="wordsChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Hourly Distribution -->
+            <div class="chart-container full-width">
+                <h3>Uhrzeit-Verteilung (UTC)</h3>
+                <div class="chart-canvas-wrapper">
+                    <canvas id="hourlyChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Weekday Distribution -->
+            <div class="chart-container">
+                <h3>Wochentag-Verteilung</h3>
+                <div class="chart-canvas-wrapper">
+                    <canvas id="weekdayChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Post Types -->
+            <div class="chart-container">
+                <h3>Post-Typen</h3>
+                <div class="chart-canvas-wrapper">
+                    <canvas id="postTypesChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Word Count Distribution -->
+            <div class="chart-container full-width">
+                <h3>Wortanzahl-Verteilung</h3>
+                <div class="chart-canvas-wrapper">
+                    <canvas id="wcDistChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Top 25 Words -->
+            <div class="chart-container full-width">
+                <h3>Top 25 Wörter</h3>
+                <div class="chart-canvas-wrapper">
+                    <canvas id="topWordsChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Top Mentions -->
+            <div class="chart-container">
+                <h3>Top Mentions</h3>
+                <div class="chart-canvas-wrapper">
+                    <canvas id="topMentionsChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Top Hashtags -->
+            <div class="chart-container">
+                <h3>Top Hashtags</h3>
+                <div class="chart-canvas-wrapper">
+                    <canvas id="topHashtagsChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase Comparison Table -->
+        <div class="table-container position-relative">
+            <h3>Phasen-Vergleich</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Phase</th>
+                        <th>Posts</th>
+                        <th>Tage</th>
+                        <th>Posts/Tag</th>
+                        <th>Ø Wörter</th>
+                        <th>Ø Engagement</th>
+                        <th>Media %</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>2023 Vor-Primaries</strong></td>
+                        <td class="accent-info">9.905</td>
+                        <td>365</td>
+                        <td class="accent-warning">27,1</td>
+                        <td>25,3</td>
+                        <td class="accent-success">19.731</td>
+                        <td>30,6%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2024 Primaries</strong></td>
+                        <td class="accent-info">6.005</td>
+                        <td>182</td>
+                        <td class="accent-warning">33,0</td>
+                        <td>31,7</td>
+                        <td class="accent-success">15.770</td>
+                        <td>39,4%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2024 General</strong></td>
+                        <td class="accent-info">4.154</td>
+                        <td>152</td>
+                        <td class="accent-warning">27,3</td>
+                        <td>31,6</td>
+                        <td class="accent-success">21.705</td>
+                        <td>42,7%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Transition</strong></td>
+                        <td class="accent-info">426</td>
+                        <td>31</td>
+                        <td class="accent-warning">13,7</td>
+                        <td>47,9</td>
+                        <td class="accent-success">26.448</td>
+                        <td>26,1%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Präsidentschaft</strong></td>
+                        <td class="accent-info">7.025</td>
+                        <td>400</td>
+                        <td class="accent-warning">17,6</td>
+                        <td>48,6</td>
+                        <td class="accent-success">20.546</td>
+                        <td>41,7%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Top Posts Table -->
+        <div class="table-container position-relative">
+            <h3>Top 10 Posts (nach Engagement)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Datum</th>
+                        <th>Text-Vorschau</th>
+                        <th>Engagement</th>
+                        <th>Favoriten</th>
+                        <th>Reblogs</th>
+                        <th>Antworten</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>2024-07-14</strong></td>
+                        <td>I want to thank The United States Secret Service, and all of Law Enforcement, for their rapid response...</td>
+                        <td class="accent-success"><strong>385.805</strong></td>
+                        <td>266.321</td>
+                        <td>60.805</td>
+                        <td>58.679</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2024-07-14</strong></td>
+                        <td>Thank you to everyone for your thoughts and prayers yesterday, as it was God alone who prevented...</td>
+                        <td class="accent-success"><strong>248.404</strong></td>
+                        <td>186.762</td>
+                        <td>39.267</td>
+                        <td>22.375</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2025-02-28</strong></td>
+                        <td>A Statement from President Donald J. Trump「We had a very meaningful meeting in the White House...</td>
+                        <td class="accent-success"><strong>213.025</strong></td>
+                        <td>148.322</td>
+                        <td>32.143</td>
+                        <td>32.560</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2024-07-14</strong></td>
+                        <td>Based on yesterday's terrible events, I was going to delay my trip to Wisconsin, and The Republican...</td>
+                        <td class="accent-success"><strong>200.575</strong></td>
+                        <td>157.852</td>
+                        <td>24.717</td>
+                        <td>18.006</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2025-09-10</strong></td>
+                        <td>The Great, and even Legendary, Charlie Kirk, is dead. No one understood or had the Heart of the Youth...</td>
+                        <td class="accent-success"><strong>177.092</strong></td>
+                        <td>127.204</td>
+                        <td>31.246</td>
+                        <td>18.642</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2025-01-26</strong></td>
+                        <td>I was just informed that two repatriation flights from the United States, with a large number of Illegal...</td>
+                        <td class="accent-success"><strong>165.769</strong></td>
+                        <td>120.481</td>
+                        <td>29.155</td>
+                        <td>16.133</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2025-09-10</strong></td>
+                        <td>We must all pray for Charlie Kirk, who has been shot. A great guy from top to bottom. GOD BLESS HIM!</td>
+                        <td class="accent-success"><strong>162.602</strong></td>
+                        <td>124.641</td>
+                        <td>24.635</td>
+                        <td>13.326</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2025-09-11</strong></td>
+                        <td>TO MY GREAT FELLOW AMERICANS…</td>
+                        <td class="accent-success"><strong>161.103</strong></td>
+                        <td>117.273</td>
+                        <td>31.233</td>
+                        <td>12.597</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2025-09-10</strong></td>
+                        <td>In honor of Charlie Kirk, a truly Great American Patriot, I am ordering all American Flags throughout...</td>
+                        <td class="accent-success"><strong>158.539</strong></td>
+                        <td>119.923</td>
+                        <td>24.388</td>
+                        <td>14.228</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2025-09-18</strong></td>
+                        <td>I am pleased to inform our many U.S.A. Patriots that I am designating ANTIFA, A SICK, DANGEROUS...</td>
+                        <td class="accent-success"><strong>150.944</strong></td>
+                        <td>107.829</td>
+                        <td>27.496</td>
+                        <td>15.619</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <p>FRAMEGATE.ai · Narrative Intelligence | <a href="../index.html">vukovicalen.com</a></p>
+    </footer>
+
+    <script>
+        // Embedded data
+        const DATA = {"kpis": {"total_posts": 17610, "total_words": 544809, "days_active": 765, "avg_per_day": 23.0, "avg_engagement": 19398, "media_pct": 40.8, "posts_with_text": 14145, "empty_posts": 3465}, "monthly": [{"month": "2024-01", "posts": 1351, "words": 36720, "avg_words": 27.2, "avg_engagement": 13372, "media_pct": 36.3}, {"month": "2024-02", "posts": 920, "words": 17211, "avg_words": 18.7, "avg_engagement": 14471, "media_pct": 46.1}, {"month": "2024-03", "posts": 1036, "words": 26473, "avg_words": 25.6, "avg_engagement": 18059, "media_pct": 36.0}, {"month": "2024-04", "posts": 877, "words": 21210, "avg_words": 24.2, "avg_engagement": 16912, "media_pct": 42.0}, {"month": "2024-05", "posts": 1012, "words": 34581, "avg_words": 34.2, "avg_engagement": 16365, "media_pct": 37.3}, {"month": "2024-06", "posts": 809, "words": 20942, "avg_words": 25.9, "avg_engagement": 16443, "media_pct": 41.5}, {"month": "2024-07", "posts": 695, "words": 20013, "avg_words": 28.8, "avg_engagement": 26238, "media_pct": 39.4}, {"month": "2024-08", "posts": 1167, "words": 30933, "avg_words": 26.5, "avg_engagement": 20056, "media_pct": 41.0}, {"month": "2024-09", "posts": 959, "words": 22173, "avg_words": 23.1, "avg_engagement": 18318, "media_pct": 40.9}, {"month": "2024-10", "posts": 974, "words": 26798, "avg_words": 27.5, "avg_engagement": 18614, "media_pct": 45.6}, {"month": "2024-11", "posts": 359, "words": 9641, "avg_words": 26.9, "avg_engagement": 35014, "media_pct": 51.8}, {"month": "2024-12", "posts": 426, "words": 16727, "avg_words": 39.3, "avg_engagement": 26448, "media_pct": 26.1}, {"month": "2025-01", "posts": 442, "words": 12753, "avg_words": 28.9, "avg_engagement": 34319, "media_pct": 28.1}, {"month": "2025-02", "posts": 504, "words": 14354, "avg_words": 28.5, "avg_engagement": 33447, "media_pct": 36.7}, {"month": "2025-03", "posts": 638, "words": 18316, "avg_words": 28.7, "avg_engagement": 13673, "media_pct": 34.6}, {"month": "2025-04", "posts": 461, "words": 16971, "avg_words": 36.8, "avg_engagement": 10788, "media_pct": 42.3}, {"month": "2025-05", "posts": 515, "words": 19043, "avg_words": 37.0, "avg_engagement": 9098, "media_pct": 44.5}, {"month": "2025-06", "posts": 504, "words": 17604, "avg_words": 34.9, "avg_engagement": 14488, "media_pct": 37.9}, {"month": "2025-07", "posts": 613, "words": 19817, "avg_words": 32.3, "avg_engagement": 13323, "media_pct": 43.7}, {"month": "2025-08", "posts": 570, "words": 19179, "avg_words": 33.6, "avg_engagement": 25409, "media_pct": 40.9}, {"month": "2025-09", "posts": 415, "words": 16814, "avg_words": 40.5, "avg_engagement": 32339, "media_pct": 48.9}, {"month": "2025-10", "posts": 482, "words": 20862, "avg_words": 43.3, "avg_engagement": 27674, "media_pct": 39.2}, {"month": "2025-11", "posts": 609, "words": 33294, "avg_words": 54.7, "avg_engagement": 20112, "media_pct": 32.5}, {"month": "2025-12", "posts": 476, "words": 15487, "avg_words": 32.5, "avg_engagement": 18764, "media_pct": 56.3}, {"month": "2026-01", "posts": 606, "words": 27804, "avg_words": 45.9, "avg_engagement": 23476, "media_pct": 53.0}, {"month": "2026-02", "posts": 190, "words": 9089, "avg_words": 47.8, "avg_engagement": 15052, "media_pct": 53.2}], "hourly": [{"hour": 0, "count": 842}, {"hour": 1, "count": 979}, {"hour": 2, "count": 989}, {"hour": 3, "count": 816}, {"hour": 4, "count": 763}, {"hour": 5, "count": 419}, {"hour": 6, "count": 251}, {"hour": 7, "count": 75}, {"hour": 8, "count": 14}, {"hour": 9, "count": 34}, {"hour": 10, "count": 171}, {"hour": 11, "count": 390}, {"hour": 12, "count": 506}, {"hour": 13, "count": 688}, {"hour": 14, "count": 987}, {"hour": 15, "count": 1205}, {"hour": 16, "count": 995}, {"hour": 17, "count": 940}, {"hour": 18, "count": 1015}, {"hour": 19, "count": 1014}, {"hour": 20, "count": 1218}, {"hour": 21, "count": 1086}, {"hour": 22, "count": 1125}, {"hour": 23, "count": 1088}], "weekday": [{"day": "Montag", "count": 2601}, {"day": "Dienstag", "count": 2603}, {"day": "Mittwoch", "count": 2683}, {"day": "Donnerstag", "count": 2569}, {"day": "Freitag", "count": 2672}, {"day": "Samstag", "count": 2198}, {"day": "Sonntag", "count": 2284}], "post_types": [{"type": "statement", "count": 8318}, {"type": "media_post", "count": 3465}, {"type": "short_post", "count": 1852}, {"type": "retruth", "count": 1629}, {"type": "endorsement", "count": 1331}, {"type": "attack", "count": 575}, {"type": "question", "count": 296}, {"type": "policy_announcement", "count": 78}, {"type": "announcement", "count": 66}], "wc_dist": [{"label": "Leer", "count": 3465}, {"label": "1-10", "count": 5835}, {"label": "11-25", "count": 2340}, {"label": "26-50", "count": 2148}, {"label": "51-100", "count": 2142}, {"label": "101-200", "count": 1494}, {"label": "201-500", "count": 182}, {"label": "500+", "count": 4}], "top_mentions": [{"account": "@realDonaldTrump", "count": 476}, {"account": "@RSBN", "count": 137}, {"account": "@realamericasvoice", "count": 111}, {"account": "@NewsMax", "count": 104}, {"account": "@OAN", "count": 74}, {"account": "@Rumble", "count": 67}, {"account": "@realAmericasVoice", "count": 54}, {"account": "@TeamTrump", "count": 37}, {"account": "@IStandWithTrump47", "count": 36}, {"account": "@akaPR0B0SS", "count": 34}, {"account": "@SpiritualStreetfighter", "count": 23}, {"account": "@rumble", "count": 20}, {"account": "@realDonaldTrumpI", "count": 19}, {"account": "@realDonaldTrumpIt", "count": 17}, {"account": "@joemccuiston", "count": 17}], "top_hashtags": [{"tag": "#MAGA", "count": 31}, {"tag": "#Trump2024", "count": 24}, {"tag": "#TooBigToRig", "count": 19}, {"tag": "#1", "count": 13}, {"tag": "#Truth", "count": 12}, {"tag": "#PHPnews", "count": 12}, {"tag": "#SwampTheVote", "count": 9}, {"tag": "#TRUMP2024", "count": 8}, {"tag": "#AmericaFirst", "count": 8}, {"tag": "#TrumpRally", "count": 6}, {"tag": "#2", "count": 5}, {"tag": "#TrumpForce47", "count": 5}, {"tag": "#BringBackTrump", "count": 5}, {"tag": "#Maga4TheFelon", "count": 4}, {"tag": "#XTeam", "count": 4}], "top_words": [{"word": "trump", "count": 5066}, {"word": "president", "count": 3155}, {"word": "great", "count": 3022}, {"word": "america", "count": 2491}, {"word": "country", "count": 1897}, {"word": "biden", "count": 1781}, {"word": "people", "count": 1763}, {"word": "election", "count": 1500}, {"word": "american", "count": 1497}, {"word": "new", "count": 1483}, {"word": "border", "count": 1393}, {"word": "states", "count": 1392}, {"word": "never", "count": 1332}, {"word": "united", "count": 1269}, {"word": "make", "count": 1243}, {"word": "again", "count": 1216}, {"word": "under", "count": 1159}, {"word": "state", "count": 1152}, {"word": "joe", "count": 1137}, {"word": "first", "count": 1131}, {"word": "one", "count": 1111}, {"word": "news", "count": 1096}, {"word": "total", "count": 1087}, {"word": "secure", "count": 1071}, {"word": "donald", "count": 1045}], "phases": [{"phase": "2024 Primaries", "posts": 6005, "days": 182, "posts_per_day": 33.0, "avg_words": 31.7, "avg_engagement": 15770, "media_pct": 39.4}, {"phase": "2024 General", "posts": 4154, "days": 152, "posts_per_day": 27.3, "avg_words": 31.6, "avg_engagement": 21705, "media_pct": 42.7}, {"phase": "Transition", "posts": 426, "days": 31, "posts_per_day": 13.7, "avg_words": 47.9, "avg_engagement": 26448, "media_pct": 26.1}, {"phase": "Präsidentschaft", "posts": 7025, "days": 400, "posts_per_day": 17.6, "avg_words": 48.6, "avg_engagement": 20546, "media_pct": 41.7}], "eng_percentiles": {"p5": 3371, "p25": 10350, "p50": 15858, "p75": 24334, "p95": 46124, "p99": 75038, "max": 385805}, "top_posts": [{"date": "2024-07-14", "text": "I want to thank The United States Secret Service, and all of Law Enforcement, for their rapid response on the shooting that just took place in Butler,...", "engagement": 385805, "favourites": 266321, "reblogs": 60805, "replies": 58679}, {"date": "2024-07-14", "text": "Thank you to everyone for your thoughts and prayers yesterday, as it was God alone who prevented the unthinkable from happening. We will FEAR NOT, but...", "engagement": 248404, "favourites": 186762, "reblogs": 39267, "replies": 22375}, {"date": "2025-02-28", "text": "A Statement from President Donald J. Trump\"We had a very meaningful meeting in the White House today. Much was learned that could never be understood ...", "engagement": 213025, "favourites": 148322, "reblogs": 32143, "replies": 32560}, {"date": "2024-07-14", "text": "Based on yesterday's terrible events, I was going to delay my trip to Wisconsin, and The Republican National Convention, by two days, but have just de...", "engagement": 200575, "favourites": 157852, "reblogs": 24717, "replies": 18006}, {"date": "2025-09-10", "text": "The Great, and even Legendary, Charlie Kirk, is dead. No one understood or had the Heart of the Youth in the United States of America better than Char...", "engagement": 177092, "favourites": 127204, "reblogs": 31246, "replies": 18642}, {"date": "2025-01-26", "text": "I was just informed that two repatriation flights\u00a0from the United States, with\u00a0a\u00a0large number of Illegal\u00a0Criminals,\u00a0were not allowed to land\u00a0in Colomb...", "engagement": 165769, "favourites": 120481, "reblogs": 29155, "replies": 16133}, {"date": "2025-09-10", "text": "We must all pray for Charlie Kirk, who has been shot. A great guy from top to bottom. GOD BLESS HIM!", "engagement": 162602, "favourites": 124641, "reblogs": 24635, "replies": 13326}, {"date": "2025-09-11", "text": "TO MY GREAT FELLOW AMERICANS\u2026", "engagement": 161103, "favourites": 117273, "reblogs": 31233, "replies": 12597}, {"date": "2025-09-10", "text": "In honor of Charlie Kirk, a truly Great American Patriot, I am ordering all American Flags throughout the United States lowered to Half Mast until Sun...", "engagement": 158539, "favourites": 119923, "reblogs": 24388, "replies": 14228}, {"date": "2025-09-18", "text": "I am pleased to inform our many U.S.A. Patriots that I am designating ANTIFA, A SICK, DANGEROUS, RADICAL LEFT DISASTER, AS A MAJOR TERRORIST ORGANIZAT...", "engagement": 150944, "favourites": 107829, "reblogs": 27496, "replies": 15619}]};
+
+        // Utility function for number formatting with German style
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        // Chart.js default options - FRAMEGATE Light Theme
+        Chart.defaults.color = '#737373';
+        Chart.defaults.borderColor = '#e5e5e5';
+
+        // FRAMEGATE Color palette
+        const colors = {
+            primary: '#e7227a',
+            secondary: '#ef4444',
+            accent: '#f59e0b',
+            success: '#059669',
+            info: '#3b82f6',
+            line: '#e7227a',
+            gradient: ['#e7227a', '#3b82f6', '#f59e0b', '#059669', '#8b5cf6', '#06b6d4']
+        };
+
+        // Monthly Chart
+        const monthlyCtx = document.getElementById('monthlyChart').getContext('2d');
+        new Chart(monthlyCtx, {
+            type: 'bar',
+            data: {
+                labels: DATA.monthly.map(m => m.month),
+                datasets: [{
+                    label: 'Posts pro Monat',
+                    data: DATA.monthly.map(m => m.posts),
+                    backgroundColor: colors.primary,
+                    borderColor: colors.primary,
+                    borderWidth: 0,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: { color: '#525252' }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: { color: '#737373' },
+                        grid: { color: '#e5e5e5' }
+                    },
+                    x: {
+                        ticks: { color: '#737373' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // Engagement Chart
+        const engagementCtx = document.getElementById('engagementChart').getContext('2d');
+        new Chart(engagementCtx, {
+            type: 'line',
+            data: {
+                labels: DATA.monthly.map(m => m.month),
+                datasets: [{
+                    label: 'Ø Engagement',
+                    data: DATA.monthly.map(m => m.avg_engagement),
+                    borderColor: colors.secondary,
+                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 2,
+                    pointRadius: 4,
+                    pointBackgroundColor: colors.secondary,
+                    pointBorderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { color: '#525252' } }
+                },
+                scales: {
+                    y: {
+                        ticks: { color: '#737373' },
+                        grid: { color: '#e5e5e5' }
+                    },
+                    x: {
+                        ticks: { color: '#737373' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // Words per Post Chart
+        const wordsCtx = document.getElementById('wordsChart').getContext('2d');
+        new Chart(wordsCtx, {
+            type: 'line',
+            data: {
+                labels: DATA.monthly.map(m => m.month),
+                datasets: [{
+                    label: 'Ø Wörter pro Post',
+                    data: DATA.monthly.map(m => m.avg_words),
+                    borderColor: colors.accent,
+                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 2,
+                    pointRadius: 4,
+                    pointBackgroundColor: colors.accent,
+                    pointBorderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { color: '#525252' } }
+                },
+                scales: {
+                    y: {
+                        ticks: { color: '#737373' },
+                        grid: { color: '#e5e5e5' }
+                    },
+                    x: {
+                        ticks: { color: '#737373' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // Hourly Distribution Chart
+        const hourlyCtx = document.getElementById('hourlyChart').getContext('2d');
+        new Chart(hourlyCtx, {
+            type: 'bar',
+            data: {
+                labels: DATA.hourly.map(h => h.hour.toString().padStart(2, '0') + ':00'),
+                datasets: [{
+                    label: 'Posts pro Stunde (UTC)',
+                    data: DATA.hourly.map(h => h.count),
+                    backgroundColor: colors.success,
+                    borderColor: colors.success,
+                    borderWidth: 0,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { color: '#525252' } }
+                },
+                scales: {
+                    y: {
+                        ticks: { color: '#737373' },
+                        grid: { color: '#e5e5e5' }
+                    },
+                    x: {
+                        ticks: { color: '#737373' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // Weekday Distribution Chart
+        const weekdayCtx = document.getElementById('weekdayChart').getContext('2d');
+        new Chart(weekdayCtx, {
+            type: 'bar',
+            data: {
+                labels: DATA.weekday.map(w => w.day),
+                datasets: [{
+                    label: 'Posts pro Wochentag',
+                    data: DATA.weekday.map(w => w.count),
+                    backgroundColor: [colors.info, colors.info, colors.info, colors.info, colors.info, colors.primary, colors.primary],
+                    borderWidth: 0,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { color: '#525252' } }
+                },
+                scales: {
+                    y: {
+                        ticks: { color: '#737373' },
+                        grid: { color: '#e5e5e5' }
+                    },
+                    x: {
+                        ticks: { color: '#737373' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // Post Types Doughnut Chart
+        const postTypesCtx = document.getElementById('postTypesChart').getContext('2d');
+        new Chart(postTypesCtx, {
+            type: 'doughnut',
+            data: {
+                labels: DATA.post_types.map(p => {
+                    const typeNames = {
+                        'statement': 'Aussage',
+                        'media_post': 'Media Post',
+                        'retruth': 'Retruth',
+                        'short_post': 'Kurzer Post',
+                        'endorsement': 'Unterstützung',
+                        'attack': 'Angriff',
+                        'question': 'Frage',
+                        'announcement': 'Ankündigung',
+                        'policy_announcement': 'Policy-Ankündigung'
+                    };
+                    return typeNames[p.type] || p.type;
+                }),
+                datasets: [{
+                    data: DATA.post_types.map(p => p.count),
+                    backgroundColor: colors.gradient,
+                    borderColor: '#ffffff',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: { color: '#525252' },
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Word Count Distribution Chart
+        const wcDistCtx = document.getElementById('wcDistChart').getContext('2d');
+        new Chart(wcDistCtx, {
+            type: 'bar',
+            data: {
+                labels: DATA.wc_dist.map(w => w.label),
+                datasets: [{
+                    label: 'Anzahl Posts',
+                    data: DATA.wc_dist.map(w => w.count),
+                    backgroundColor: colors.info,
+                    borderColor: colors.info,
+                    borderWidth: 0,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { color: '#525252' } }
+                },
+                scales: {
+                    y: {
+                        ticks: { color: '#737373' },
+                        grid: { color: '#e5e5e5' }
+                    },
+                    x: {
+                        ticks: { color: '#737373' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // Top Words Horizontal Bar Chart
+        const topWordsCtx = document.getElementById('topWordsChart').getContext('2d');
+        new Chart(topWordsCtx, {
+            type: 'bar',
+            data: {
+                labels: DATA.top_words.map(w => w.word),
+                datasets: [{
+                    label: 'Vorkommen',
+                    data: DATA.top_words.map(w => w.count),
+                    backgroundColor: colors.accent,
+                    borderColor: colors.accent,
+                    borderWidth: 0,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { color: '#525252' } }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: '#737373' },
+                        grid: { color: '#e5e5e5' }
+                    },
+                    y: {
+                        ticks: { color: '#737373' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // Top Mentions Horizontal Bar Chart
+        const topMentionsCtx = document.getElementById('topMentionsChart').getContext('2d');
+        new Chart(topMentionsCtx, {
+            type: 'bar',
+            data: {
+                labels: DATA.top_mentions.map(m => m.account),
+                datasets: [{
+                    label: 'Erwähnungen',
+                    data: DATA.top_mentions.map(m => m.count),
+                    backgroundColor: '#8b5cf6',
+                    borderColor: '#8b5cf6',
+                    borderWidth: 0,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { color: '#525252' } }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: '#737373' },
+                        grid: { color: '#e5e5e5' }
+                    },
+                    y: {
+                        ticks: { color: '#737373' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // Top Hashtags Horizontal Bar Chart
+        const topHashtagsCtx = document.getElementById('topHashtagsChart').getContext('2d');
+        new Chart(topHashtagsCtx, {
+            type: 'bar',
+            data: {
+                labels: DATA.top_hashtags.map(h => h.tag),
+                datasets: [{
+                    label: 'Verwendungen',
+                    data: DATA.top_hashtags.map(h => h.count),
+                    backgroundColor: '#06b6d4',
+                    borderColor: '#06b6d4',
+                    borderWidth: 0,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { color: '#525252' } }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: '#737373' },
+                        grid: { color: '#e5e5e5' }
+                    },
+                    y: {
+                        ticks: { color: '#737373' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

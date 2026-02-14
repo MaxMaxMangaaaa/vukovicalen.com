@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The 4× Gap: How Trump's Ideology Outpaced American Journalism After Inauguration. A quantitative analysis measuring ideological shifts across 93,500 articles and 16 ideology dimensions.">
+    <meta name="author" content="Alen Vukovic">
+
+    <!-- Open Graph for Social Sharing -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="The 4× Gap: Trump's Ideology vs. American Journalism">
+    <meta property="og:description" content="How Trump's Truth Social communications outpaced journalistic response by a factor of four, measured across 16 ideology dimensions.">
+    <meta property="og:url" content="https://framegate.ai/atlantic-pulse-4x-gap">
+    <meta property="og:site_name" content="Framegate Intelligence">
+    <meta property="article:author" content="Alen Vukovic">
+    <meta property="article:published_time" content="2026-02-13">
+    <meta property="article:section" content="Analysis">
+
+    <title>The 4× Gap: Trump's Ideology vs. American Journalism | Framegate Atlantic Pulse</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        /* ===== RESET & VARIABLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #e7227a;
+            --primary-dark: #c41d63;
+            --bg-primary: #f7f8fc;
+            --bg-secondary: #f0f1f5;
+            --text-primary: #111112;
+            --text-secondary: #525252;
+            --text-tertiary: #737373;
+            --border-light: #e5e5e5;
+            --border-default: #d4d4d4;
+            --success: #059669;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --error: #ef4444;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        body {
+            font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            line-height: 1.3;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: var(--text-primary);
+        }
+
+        h1 {
+            font-size: 2.2em;
+            margin-top: 0;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            border-left: 4px solid var(--primary);
+            padding-left: 1em;
+            margin-left: -1em;
+            margin-top: 2em;
+        }
+
+        h3 {
+            font-size: 1.3em;
+            color: var(--text-primary);
+            margin-top: 1.5em;
+        }
+
+        p {
+            margin-bottom: 1em;
+            text-align: justify;
+        }
+
+        strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        em {
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .content-page {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+        }
+
+        /* ===== HEADER & METADATA ===== */
+        .article-header {
+            border-bottom: 2px solid var(--border-light);
+            padding-bottom: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .article-meta {
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-meta span {
+            display: inline-block;
+            margin-right: 1.5rem;
+        }
+
+        /* ===== DIVIDERS ===== */
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(to right, var(--border-light), transparent);
+            margin: 2rem 0;
+        }
+
+        /* ===== LISTS ===== */
+        ul, ol {
+            margin-left: 2em;
+            margin-bottom: 1em;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+            color: var(--text-primary);
+        }
+
+        /* ===== TABLES ===== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            font-size: 0.95em;
+        }
+
+        th {
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            padding: 1em;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        td {
+            padding: 0.75em 1em;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: rgba(247, 248, 252, 0.8);
+        }
+
+        tbody tr:hover {
+            background-color: rgba(231, 34, 122, 0.05);
+        }
+
+        tbody tr:last-child td {
+            border-bottom: 2px solid var(--border-default);
+        }
+
+        /* ===== BLOCKQUOTES & CALLOUTS ===== */
+        .hook {
+            background: linear-gradient(135deg, rgba(231, 34, 122, 0.08) 0%, rgba(231, 34, 122, 0.02) 100%);
+            border-left: 4px solid var(--primary);
+            padding: 1.5em;
+            margin: 1.5em 0;
+            border-radius: 4px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .example-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-light);
+            padding: 1.5em;
+            margin: 1.5em 0;
+            border-radius: 4px;
+        }
+
+        .thesis-statement {
+            background: linear-gradient(135deg, rgba(231, 34, 122, 0.12) 0%, rgba(231, 34, 122, 0.04) 100%);
+            border: 2px solid var(--primary);
+            padding: 1.5em;
+            margin: 2em 0;
+            border-radius: 4px;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+
+        /* ===== FOOTNOTES & ANNOTATIONS ===== */
+        .footnote-section {
+            margin-top: 3em;
+            padding-top: 2em;
+            border-top: 2px solid var(--border-default);
+        }
+
+        .footnote {
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            margin-bottom: 0.8em;
+            padding-left: 1em;
+            line-height: 1.5;
+        }
+
+        .footnote-marker {
+            font-size: 0.8em;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        sup {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.8em;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border-light);
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--primary-dark);
+            border-bottom-color: var(--primary);
+        }
+
+        /* ===== CODE/MEASUREMENT ===== */
+        .metric {
+            background: var(--bg-secondary);
+            border-left: 3px solid var(--info);
+            padding: 0.25em 0.5em;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            color: var(--info);
+            border-radius: 2px;
+        }
+
+        .scientific {
+            font-size: 0.95em;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* ===== SECTIONS & EMPHASIS ===== */
+        .section-intro {
+            font-size: 1.05em;
+            color: var(--text-primary);
+            margin-bottom: 1.5em;
+            line-height: 1.7;
+        }
+
+        .counter-argument {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(245, 158, 11, 0.02) 100%);
+            border-left: 4px solid var(--warning);
+            padding: 1.5em;
+            margin: 1.5em 0;
+            border-radius: 4px;
+        }
+
+        .limitation {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(239, 68, 68, 0.02) 100%);
+            border-left: 4px solid var(--error);
+            padding: 1.5em;
+            margin: 1.5em 0;
+            border-radius: 4px;
+        }
+
+        .key-insight {
+            background: linear-gradient(135deg, rgba(5, 150, 105, 0.08) 0%, rgba(5, 150, 105, 0.02) 100%);
+            border-left: 4px solid var(--success);
+            padding: 1.5em;
+            margin: 1.5em 0;
+            border-radius: 4px;
+        }
+
+        /* ===== SOURCES SECTION ===== */
+        .sources-section {
+            margin-top: 3em;
+            padding: 2em;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
+        }
+
+        .sources-section h3 {
+            margin-top: 0;
+        }
+
+        .sources-section ol {
+            margin-left: 2em;
+        }
+
+        .sources-section li {
+            margin-bottom: 0.8em;
+            color: var(--text-secondary);
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        /* ===== FOOTER ===== */
+        .article-footer {
+            margin-top: 3em;
+            padding-top: 2em;
+            border-top: 2px solid var(--border-default);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85em;
+        }
+
+        .footer-content {
+            margin-bottom: 1em;
+        }
+
+        .footer-provenance {
+            font-size: 0.8em;
+            color: var(--text-tertiary);
+            margin-top: 1.5em;
+            font-style: italic;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            .content-page {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.6em;
+            }
+
+            h2 {
+                font-size: 1.3em;
+            }
+
+            h3 {
+                font-size: 1.1em;
+            }
+
+            table {
+                font-size: 0.85em;
+            }
+
+            th, td {
+                padding: 0.6em 0.75em;
+            }
+
+            .hook, .thesis-statement, .counter-argument, .limitation, .key-insight, .example-box {
+                padding: 1em;
+            }
+
+            h2 {
+                margin-left: 0;
+                padding-left: 0.75em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content-page {
+                padding: 1rem;
+            }
+
+            body {
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 1.4em;
+            }
+
+            h2 {
+                font-size: 1.1em;
+                border-left-width: 3px;
+            }
+
+            h3 {
+                font-size: 1em;
+            }
+
+            p {
+                text-align: left;
+            }
+
+            table {
+                font-size: 0.8em;
+                overflow-x: auto;
+            }
+
+            .article-meta span {
+                display: block;
+                margin-right: 0;
+                margin-bottom: 0.5em;
+            }
+        }
+
+        /* ===== PRINT STYLES ===== */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .content-page {
+                box-shadow: none;
+                padding: 0;
+            }
+
+            h2 {
+                page-break-after: avoid;
+            }
+
+            table {
+                page-break-inside: avoid;
+            }
+
+            a {
+                border: none;
+                color: var(--text-primary);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="../../index.html" class="logo">Alen Vukovic</a>
+            <div class="nav-links">
+                <a href="../../about.html">About</a>
+                <div class="nav-dropdown">
+                    <a href="../atlantic-pulse.html" class="active">Research</a>
+                    <div class="dropdown-menu">
+                        <a href="../atlantic-pulse.html">Atlantic Pulse</a>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-section">U.S. Media Watch</div>
+                        <a href="the-4x-gap.html" class="active">The 4× Gap</a>
+                        <a href="truth-social-dashboard.html">Truth Social Dashboard</a>
+                        <a href="master-corpus-dashboard.html">Master Corpus Dashboard</a>
+                    </div>
+                </div>
+                <a href="../../framegate.html">FRAMEGATE</a>
+            </div>
+        </div>
+    </nav>
+
+    <article class="content-page">
+        <header class="article-header">
+            <h1>The 4× Gap: How Trump's Ideology Outpaced American Journalism After Inauguration</h1>
+            <div class="article-meta">
+                <span><strong>Atlantic Pulse</strong> | Framegate Intelligence</span>
+                <span>February 2026</span>
+            </div>
+        </header>
+
+        <!-- HOOK -->
+        <section>
+            <div class="hook">
+                <p><strong>Conservatism: +114%. Social Democracy: −86%.</strong> These are not poll numbers. They are the ideological coordinates of Trump's Truth Social posts, measured before and after his inauguration — across 93,500 articles and 16 ideology dimensions.</p>
+                <p style="margin: 1em 0 0 0;">Something shifted on January 20, 2025. Not just in the White House, but in the ideological texture of American public communications. This analysis quantifies that shift — and reveals an asymmetry that the usual commentary has failed to measure.</p>
+            </div>
+        </section>
+
+        <hr>
+
+        <!-- CONTEXT -->
+        <section>
+            <h2>Context: What Most See vs. What the Data Shows</h2>
+            <p class="section-intro">The dominant narrative about Trump's second term focuses on executive orders, tariffs, and personnel. Commentators describe a president governing "chaotically" — the Chaos Narrators, as we call them, see noise where there is signal.</p>
+
+            <p>The data tells a different story. When we measure ideological intensity across 16 dimensions — from nationalism to social justice, from authoritarianism to environmentalism — Trump's communications don't scatter randomly. They move in lockstep. Fifteen of sixteen dimensions shifted in the same ideological direction. That is not chaos. That is grammar.</p>
+
+            <p>Meanwhile, the press corps that covers Trump has barely moved. The gap between presidential ideology and journalistic response has widened to a ratio that, to our knowledge, has not been quantified before.</p>
+        </section>
+
+        <hr>
+
+        <!-- THESIS -->
+        <section>
+            <h2>Thesis</h2>
+            <div class="thesis-statement">
+                Between January 2024 and February 2026, Trump's Truth Social communications underwent an ideological intensification approximately four times greater than the shift observed in U.S. journalism — measured across 16 ideology dimensions in 93,500 articles. This asymmetry may be amplified by documented chilling effects on press freedom.
+            </div>
+        </section>
+
+        <hr>
+
+        <!-- EVIDENCE -->
+        <section>
+            <h2>Evidence Stack</h2>
+
+            <h3>Trump's America: The Ideological Acceleration</h3>
+            <p class="section-intro">Using automated ideology scoring on 11,466 articles from the administrative pool (Truth Social via Framegate pipeline), the five largest shifts were:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Dimension</th>
+                        <th>Change</th>
+                        <th>Effect Size (d)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Economic deregulation rhetoric<sup>1</sup></td>
+                        <td>+80.1%</td>
+                        <td>0.57 (medium)</td>
+                    </tr>
+                    <tr>
+                        <td>MAGA-aligned conservatism<sup>2</sup></td>
+                        <td>+113.5%</td>
+                        <td>0.52 (medium)</td>
+                    </tr>
+                    <tr>
+                        <td>Nationalism</td>
+                        <td>+30.8%</td>
+                        <td>0.35 (small-medium)</td>
+                    </tr>
+                    <tr>
+                        <td>Social Democracy</td>
+                        <td>−86.0%</td>
+                        <td>−0.46 (medium)</td>
+                    </tr>
+                    <tr>
+                        <td>Social Justice</td>
+                        <td>−63.4%</td>
+                        <td>−0.42 (medium)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p class="scientific">All shifts reached statistical significance after Bonferroni correction for 32 simultaneous comparisons (p &lt; 1×10⁻⁷⁰ for each). Data was winsorized at the 1st and 99th percentiles under a "robust" guard profile.</p>
+
+            <div class="footnote-section">
+                <div class="footnote">
+                    <span class="footnote-marker">1</span> The dimension our model labels "Free Market" captures deregulation and anti-regulation language patterns. This should not be confused with classical free-market ideology — Trump's economic policies have been described as protectionist and involving elements of "crony capitalism" (NPR, December 2025).
+                </div>
+                <div class="footnote">
+                    <span class="footnote-marker">2</span> The "Conservatism" dimension captures MAGA-aligned conservative rhetoric, not classical Burkean or libertarian conservatism. Conservative intellectuals remain sharply divided on Trump's relationship to the conservative tradition.
+                </div>
+            </div>
+
+            <h3>The Newsroom's America: A Measured Response</h3>
+            <p class="section-intro">Across 82,034 articles from 337 U.S. outlets, journalism shifted too — but at a fraction of the magnitude:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Dimension</th>
+                        <th>Change</th>
+                        <th>Effect Size (d)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Authoritarianism</td>
+                        <td>+18.0%</td>
+                        <td>0.24 (small)</td>
+                    </tr>
+                    <tr>
+                        <td>Nationalism</td>
+                        <td>+10.1%</td>
+                        <td>0.16 (small)</td>
+                    </tr>
+                    <tr>
+                        <td>Economic deregulation rhetoric</td>
+                        <td>+14.3%</td>
+                        <td>0.16 (small)</td>
+                    </tr>
+                    <tr>
+                        <td>Environmentalism</td>
+                        <td>−11.2%</td>
+                        <td>−0.14 (small)</td>
+                    </tr>
+                    <tr>
+                        <td>Globalism</td>
+                        <td>−13.6%</td>
+                        <td>−0.16 (small)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p class="scientific">The largest journalistic shift was increased coverage coded as "Authoritarianism." This likely reflects journalism reporting on authoritarian governance — coverage of executive orders, institutional norm-breaking, and democratic backsliding — rather than journalism itself becoming more authoritarian. The measurement captures thematic salience, not endorsement.</p>
+
+            <h3>The Gap</h3>
+            <ul>
+                <li><strong>Overall ideological intensity change:</strong> Trump Δ = +0.0119 vs. Journalism Δ = +0.0031 → <span class="metric">ratio = 3.84×</span></li>
+                <li><strong>Top effect size:</strong> Trump d = 0.57 vs. Journalism d = 0.24 → <span class="metric">ratio = 2.4×</span></li>
+            </ul>
+
+            <p>Both pools shifted in the same direction — toward nationalism and economic deregulation rhetoric, away from globalism and environmentalism. But Trump moved approximately four times further. The shared directionality suggests a common contextual driver (the policy environment), while the magnitude gap captures the additional ideological intensification in presidential communications.</p>
+        </section>
+
+        <hr>
+
+        <!-- COUNTER-ARGUMENT -->
+        <section>
+            <h2>Counter-Argument: The Strongest Objection</h2>
+
+            <div class="counter-argument">
+                <p>The most formidable objection to the 4× ratio combines three vulnerabilities identified in our stress test:</p>
+
+                <p><strong>First,</strong> our 16 ideology dimensions may capture topical salience rather than ideological depth. When Trump governs, his communications naturally shift toward policy topics — this could be agenda-setting rather than radicalization.</p>
+
+                <p><strong>Second,</strong> the two pools are not independent. Trump attacks media; media covers attacks; Trump escalates. The 4× ratio measures one side of a coupled system.</p>
+
+                <p><strong>Third</strong> — and most consequentially — the denominator may be artificially compressed. If journalism's response was suppressed by chilling effects, the "true" ratio could be smaller.</p>
+            </div>
+
+            <p>We address this third point in the next section.</p>
+        </section>
+
+        <hr>
+
+        <!-- PRESS FREEDOM -->
+        <section>
+            <h2>The Silent Third Actor: Press Freedom Under Pressure</h2>
+
+            <p>In 2025, Reporters Without Borders ranked the United States 57th out of 180 countries on their World Press Freedom Index. The Committee to Protect Journalists documented what they described as a "chilling effect" — more than 530 journalists received safety training between November 2024 and March 2025.</p>
+
+            <p>The mechanisms are specific and documented: the White House barred an Associated Press reporter; the FCC chair reinstated complaints against major networks two days after inauguration; ABC settled a defamation suit, as did CBS; Attorney General Bondi rescinded journalist source protection policies. The CPJ stated in December 2025 that this environment "creates conditions where journalists and newsrooms are forced to self-censor."</p>
+
+            <div class="limitation">
+                <p><strong>This raises a critical question our data cannot directly answer:</strong> Is journalism's relatively small ideological shift a sign of professional restraint — or compressed response?</p>
+            </div>
+
+            <p>We cannot prove the chill effect affected ideology scores. But the institutional pressure on American journalism in 2025 is too well-documented to omit from the analysis.</p>
+        </section>
+
+        <hr>
+
+        <!-- VILLAIN INTEGRATION -->
+        <section>
+            <h2>Villain Integration: The Chaos Narrators</h2>
+
+            <p>The dominant lens for interpreting Trump's communications remains the Chaos Narrative — the assumption that his messaging is erratic, unpredictable, and resistant to systematic analysis.</p>
+
+            <p>Our data suggests otherwise. When 15 of 16 ideology dimensions shift coherently in the same direction, with medium effect sizes and p-values below 10⁻⁷⁰, we are not observing noise. We are observing a structured ideological repositioning that the "chaos" frame obscures.</p>
+
+            <p>The challenge for analysts is to move beyond description ("Trump is more extreme") toward measurement. The 4× ratio is one attempt at that measurement — imperfect, bounded by the limitations of automated ideology scoring, but grounded in 93,500 articles rather than impression.</p>
+        </section>
+
+        <hr>
+
+        <!-- IMPLICATIONS -->
+        <section>
+            <h2>Implication: The EU Read-Across</h2>
+
+            <p>For European observers, the 4× gap carries a specific warning. If Trump's ideological acceleration continues at this rate while press freedom erosion dampens the corrective function of journalism, two consequences follow:</p>
+
+            <div class="key-insight">
+                <p><strong>First,</strong> European policy-makers relying on U.S. media for signal about American political direction are receiving an increasingly attenuated signal. The 4× gap means that the ideological reality of the Trump administration is substantially more intense than what journalism transmits. Policy calibration based on media coverage alone will systematically underestimate the ideological velocity of American governance.</p>
+            </div>
+
+            <p><strong>Second,</strong> the pattern has transatlantic precedent. The frame dynamics observable in Trump's communications — nationalism intensification, social democracy abandonment, media pressure campaigns — tend to cross the Atlantic with a lag of approximately 9-18 months. European populist movements are already borrowing from the MAGA playbook; the ideological coordinates documented here may preview the European rhetorical landscape of 2027.</p>
+        </section>
+
+        <hr>
+
+        <!-- WHAT TO WATCH -->
+        <section>
+            <h2>What to Watch</h2>
+
+            <ol>
+                <li><strong>The Chill Effect Trajectory (Q2-Q3 2026):</strong> Monitor RSF's next index release and CPJ quarterly reports. If the U.S. drops below rank 60, the denominator compression problem worsens and the 4× ratio becomes increasingly unreliable as a measure of relative shift.</li>
+
+                <li><strong>Social Democracy Dimension (Monthly):</strong> Trump's −86% collapse in Social Democracy rhetoric is the most dramatic single-dimension shift. Watch whether this accelerates further or stabilizes — it indicates the degree to which governing communications have abandoned even token bipartisan framing.</li>
+
+                <li><strong>Journalism's Authoritarianism Dimension (Monthly):</strong> The +18% increase is currently the largest journalistic shift. If this dimension decelerates while Trump's nationalism continues to rise, the gap will widen further.</li>
+
+                <li><strong>European Echo (H2 2026):</strong> Track whether the ideology coordinates documented here — particularly the Nationalism/Free Market intensification pattern — appear in European political communications with the expected 9-18 month lag.</li>
+
+                <li><strong>Construct Validity (Ongoing):</strong> The "Free Market" labeling issue (Attack 1 from our stress test) requires resolution. Future analyses should decompose this dimension into deregulation rhetoric vs. classical free-market economics to sharpen the finding.</li>
+            </ol>
+        </section>
+
+        <hr>
+
+        <!-- EPISTEMOLOGY -->
+        <section>
+            <h2>What We Know, What We Suspect, What We Cannot Prove</h2>
+
+            <div class="example-box">
+                <p><strong>What we know</strong> (high confidence): Trump's public communications shifted ideologically at approximately four times the rate of U.S. journalism after his inauguration. This holds across multiple measurement approaches. The shift is directionally coherent and statistically robust (n = 93,500, Bonferroni-corrected).</p>
+
+                <p style="margin-top: 1em; margin-bottom: 0;"><strong>What we suspect</strong> (moderate confidence): The 4× ratio may be partly inflated by press freedom compression. Trump's "economic deregulation rhetoric" shift reflects anti-regulation language, not classical free-market economics. Truth Social functions as a closed ideological space that amplifies messaging intensity.</p>
+            </div>
+
+            <p style="margin-top: 1em;"><strong>What we cannot prove</strong> (acknowledged limitations): Whether the shift represents genuine radicalization or strategic governing posture. Whether journalism's stability reflects restraint or suppression. Causation in any direction.</p>
+        </section>
+
+        <hr>
+
+        <!-- MEASUREMENT NOTE -->
+        <section>
+            <h2>Measurement Note</h2>
+
+            <p class="scientific">Ideology scores are derived from validated NLP models with κ ≥ 0.92 inter-rater reliability. They capture lexical and semantic patterns associated with each of 16 pre-defined ideological dimensions. The same model scored both pools; systematic model biases affect absolute levels but not the relative comparison. Effect sizes (Cohen's d) normalize for variance. Welch's t-test (robust to unequal variances) with Bonferroni correction (32 tests, α = 0.00156). Winsorization at 1%/99%.</p>
+        </section>
+
+        <hr>
+
+        <!-- SOURCES -->
+        <section class="sources-section">
+            <h3>Sources</h3>
+            <ol>
+                <li>Committee to Protect Journalists (2025). <em>First 100 Days Report.</em> CPJ.</li>
+                <li>Reporters Without Borders (2025). <em>World Press Freedom Index.</em> RSF.</li>
+                <li>Battista, A. &amp; Gallina, M. (2025). Counter-Resistant Digital Communities: The Impact of Truth Social. <em>SocietàMutamentoPolitica.</em></li>
+                <li>Modern Linguistic Society of Korea (2025). Critical Text Analysis of Fascist Features in Donald Trump's Social Media Posts. <em>Journal of Studies in Language, 41(3).</em></li>
+                <li>Wojczewski, T. (2025). Fascism and Foreign Policy: Trumpism and the Politics of National Decline and Rebirth. <em>Global Studies Quarterly, 5(3).</em> Oxford Academic.</li>
+                <li>McCombs, M. &amp; Shaw, D. (1972). The Agenda-Setting Function of Mass Media. <em>Public Opinion Quarterly.</em></li>
+                <li>Ghanem, S. (1997). Filling in the Tapestry: The Second Level of Agenda Setting. In <em>Communication and Democracy.</em> Erlbaum.</li>
+            </ol>
+
+            <p style="margin-top: 2em; font-style: italic; color: var(--text-secondary); font-size: 0.9em;"><strong>Falsification conditions:</strong> This finding would be undermined if (1) ideology scores are shown to capture salience rather than ideological depth, (2) the chill effect fully explains the denominator compression, or (3) a rolling temporal analysis reveals no discontinuity at the inauguration date.</p>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="article-footer">
+            <div class="footer-content">
+                © Framegate.ai | Alen Vukovic
+            </div>
+            <div class="footer-provenance">
+                Data: 93,500 articles | Dec 2022 – Feb 2026 | U.S. Discourse only<br>
+                Analysis: TV:0009 | Framegate Intelligence Engine<br>
+                Published: February 13, 2026
+            </div>
+        </footer>
+    </article>
+</body>
+</html>

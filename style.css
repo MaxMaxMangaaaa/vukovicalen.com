@@ -1,0 +1,789 @@
+/* ============================================
+   FRAMEGATE Design System v3 - Website Theme
+   Based on CFG_Colors.yaml & CFG_Typography.yaml
+   ============================================ */
+
+/* Google Fonts - Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* ============================================
+   CSS Variables (from YAML configs)
+   ============================================ */
+:root {
+    /* Brand Primary (Magenta) */
+    --primary-50: #fdeef3;
+    --primary-100: #fbdce7;
+    --primary-200: #f7b5cb;
+    --primary-300: #f28aaf;
+    --primary-400: #ec5691;
+    --primary-500: #e7227a;
+    --primary-600: #cf1e6d;
+    --primary-700: #b71a60;
+    --primary-800: #9f1653;
+    --primary-900: #871246;
+    --primary-950: #5a0c2f;
+    
+    /* Brand Secondary (Red) */
+    --secondary-50: #fef3f2;
+    --secondary-100: #fee4e2;
+    --secondary-200: #fecaca;
+    --secondary-300: #fca5a5;
+    --secondary-400: #f87171;
+    --secondary-500: #ef4444;
+    --secondary-600: #dc2626;
+    --secondary-700: #b91c1c;
+    --secondary-800: #991b1b;
+    --secondary-900: #7f1d1d;
+    --secondary-950: #450a0a;
+    
+    /* Semantic Colors */
+    --success-light: #10b981;
+    --success: #059669;
+    --success-dark: #047857;
+    --warning-light: #fbbf24;
+    --warning: #f59e0b;
+    --warning-dark: #d97706;
+    --error-light: #f87171;
+    --error: #ef4444;
+    --error-dark: #dc2626;
+    --info-light: #60a5fa;
+    --info: #3b82f6;
+    --info-dark: #2563eb;
+    
+    /* System Colors */
+    --bg-primary: #f7f8fc;
+    --bg-secondary: #f0f1f5;
+    --bg-tertiary: #e8e9ed;
+
+    /* Brand Gray (for buttons) */
+    --brand-gray: #414247;
+    --text-primary: #111112;
+    --text-secondary: #525252;
+    --text-tertiary: #737373;
+    --text-disabled: #a3a3a3;
+    --border-light: #e5e5e5;
+    --border-default: #d4d4d4;
+    --border-dark: #a3a3a3;
+    
+    /* Neutral Scale */
+    --neutral-50: #fafafa;
+    --neutral-100: #f5f5f5;
+    --neutral-200: #e5e5e5;
+    --neutral-300: #d4d4d4;
+    --neutral-400: #a3a3a3;
+    --neutral-500: #737373;
+    --neutral-600: #525252;
+    --neutral-700: #404040;
+    --neutral-800: #262626;
+    --neutral-900: #171717;
+    --neutral-950: #0a0a0a;
+    
+    /* Typography Scale */
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 1.875rem;
+    --text-4xl: 2.25rem;
+    --text-5xl: 3rem;
+    
+    /* Font Weights */
+    --font-light: 300;
+    --font-normal: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+    
+    /* Line Heights */
+    --leading-tight: 1.25;
+    --leading-snug: 1.375;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.625;
+    
+    /* Spacing */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-24: 6rem;
+}
+
+/* ============================================
+   Reset & Base
+   ============================================ */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: var(--text-base);
+    font-weight: var(--font-normal);
+    line-height: var(--leading-relaxed);
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   Navigation
+   ============================================ */
+nav {
+    background: var(--brand-gray);
+    border-bottom: none;
+    padding: var(--space-4) var(--space-6);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-weight: var(--font-semibold);
+    font-size: var(--text-lg);
+    color: var(--primary-500);
+    text-decoration: none;
+    letter-spacing: -0.025em;
+}
+
+.logo:hover {
+    color: #ffffff;
+}
+
+.nav-links {
+    display: flex;
+    gap: var(--space-8);
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--primary-500);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: #ffffff;
+}
+
+.nav-links a.active {
+    color: #ffffff;
+}
+
+<<<<<<< HEAD
+/* Dropdown Navigation */
+.nav-dropdown {
+    position: relative;
+}
+
+.nav-dropdown > a {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.nav-dropdown > a::after {
+    content: '▾';
+    font-size: 0.7em;
+    transition: transform 0.2s ease;
+}
+
+.nav-dropdown:hover > a::after {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--brand-gray);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    padding: var(--space-2) 0;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    margin-top: var(--space-2);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.nav-dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: var(--space-2) var(--space-4);
+    color: var(--primary-400);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-menu a:hover {
+    background: rgba(231, 34, 122, 0.15);
+    color: #ffffff;
+}
+
+.dropdown-menu .dropdown-section {
+    padding: var(--space-1) var(--space-4);
+    font-size: var(--text-xs);
+    color: var(--neutral-400);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: var(--space-2);
+}
+
+.dropdown-menu .dropdown-section:first-child {
+    margin-top: 0;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: var(--space-2) 0;
+}
+
+=======
+>>>>>>> 050ec53122887e897f41725f91b1cf2c62a03df4
+/* ============================================
+   Hero Section (Homepage)
+   ============================================ */
+.hero {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--space-16) var(--space-6);
+    background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+}
+
+.hero-content h1 {
+    font-size: var(--text-5xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-3);
+    letter-spacing: -0.025em;
+    line-height: var(--leading-tight);
+}
+
+.tagline {
+    font-size: var(--text-xl);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-8);
+    font-weight: var(--font-normal);
+}
+
+.cta-buttons {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: var(--space-3) var(--space-6);
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: var(--font-medium);
+    font-size: var(--text-sm);
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: var(--brand-gray);
+    color: var(--primary-500);
+}
+
+.btn-primary:hover {
+    background: var(--neutral-800);
+    color: var(--primary-400);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--brand-gray);
+    border: 1px solid var(--brand-gray);
+}
+
+.btn-secondary:hover {
+    background: var(--brand-gray);
+    color: var(--primary-500);
+}
+
+/* ============================================
+   Content Pages (GEO-optimized structure)
+   ============================================ */
+.content-page {
+    flex: 1;
+    padding: var(--space-12) var(--space-6);
+    background: var(--bg-primary);
+}
+
+.content-page article {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+/* H1 - Main Question (GEO) */
+.content-page h1 {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-6);
+    letter-spacing: -0.025em;
+    line-height: var(--leading-tight);
+}
+
+/* Summary / Intro */
+.summary {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-8);
+    padding-bottom: var(--space-8);
+    border-bottom: 1px solid var(--border-light);
+    line-height: var(--leading-relaxed);
+}
+
+/* H2 - Sub-Questions (GEO) */
+.content-page h2 {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+    margin-top: var(--space-12);
+    margin-bottom: var(--space-4);
+    letter-spacing: -0.025em;
+    line-height: var(--leading-snug);
+}
+
+/* H3 - Sub-sections / FAQ Questions */
+.content-page h3 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-3);
+    line-height: var(--leading-snug);
+}
+
+/* H4 - Details */
+.content-page h4 {
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-2);
+}
+
+/* Paragraphs */
+.content-page p {
+    margin-bottom: var(--space-4);
+    color: var(--text-primary);
+    line-height: var(--leading-relaxed);
+}
+
+/* Lists */
+.content-page ul,
+.content-page ol {
+    margin-left: var(--space-6);
+    margin-bottom: var(--space-4);
+}
+
+.content-page li {
+    margin-bottom: var(--space-2);
+    line-height: var(--leading-relaxed);
+}
+
+/* Strong / Bold */
+.content-page strong {
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+}
+
+/* Links */
+.content-page a {
+    color: var(--primary-600);
+    text-decoration: none;
+    font-weight: var(--font-medium);
+}
+
+.content-page a:hover {
+    text-decoration: underline;
+}
+
+/* Practical Example Box */
+.example-box {
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--primary-500);
+    padding: var(--space-4) var(--space-6);
+    margin: var(--space-6) 0;
+    border-radius: 0 6px 6px 0;
+}
+
+.example-box p {
+    margin-bottom: 0;
+    font-size: var(--text-sm);
+}
+
+.example-label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-semibold);
+    color: var(--primary-600);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-2);
+    display: block;
+}
+
+/* FAQ Section */
+.faq-section {
+    margin-top: var(--space-12);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--border-light);
+}
+
+.faq-section h2 {
+    margin-top: 0;
+}
+
+.faq-section h3 {
+    font-size: var(--text-lg);
+    margin-top: var(--space-6);
+}
+
+.faq-section p {
+    color: var(--text-secondary);
+}
+
+/* Conclusion */
+.conclusion {
+    margin-top: var(--space-12);
+    padding: var(--space-6);
+    background: var(--neutral-900);
+    color: #ffffff;
+    border-radius: 8px;
+}
+
+.conclusion p {
+    color: var(--neutral-200);
+    margin-bottom: 0;
+}
+
+/* Sources */
+.sources {
+    margin-top: var(--space-12);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--border-light);
+}
+
+.sources h2 {
+    font-size: var(--text-lg);
+    margin-top: 0;
+    margin-bottom: var(--space-4);
+}
+
+.sources ul {
+    list-style: none;
+    margin-left: 0;
+}
+
+.sources li {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-2);
+}
+
+.sources a {
+    font-style: italic;
+}
+
+/* Contact Section */
+.contact-section {
+    margin-top: var(--space-12);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--border-light);
+}
+
+.contact-section a {
+    color: var(--primary-600);
+}
+
+/* Scientific Sources Section */
+.sources-section {
+    margin-top: var(--space-12);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--border-light);
+}
+
+.sources-section h2 {
+    margin-top: 0;
+    margin-bottom: var(--space-6);
+}
+
+.sources-section h3 {
+    font-size: var(--text-lg);
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-3);
+    color: var(--text-primary);
+}
+
+.sources-section ol {
+    margin-left: var(--space-8);
+    margin-bottom: var(--space-4);
+}
+
+.sources-section li {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-2);
+    line-height: var(--leading-relaxed);
+}
+
+.sources-section em {
+    font-style: italic;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+footer {
+    text-align: center;
+    padding: var(--space-6);
+    color: var(--text-tertiary);
+    font-size: var(--text-sm);
+    border-top: 1px solid var(--border-light);
+    background: var(--bg-secondary);
+}
+
+footer a {
+    color: var(--text-tertiary);
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: var(--primary-600);
+}
+
+/* Separator dot */
+footer span.sep {
+    margin: 0 var(--space-2);
+}
+
+/* ============================================
+<<<<<<< HEAD
+   Framegate Discourse Intelligence — Artikel-Klassen
+   Für HTML-Exports aus der Thesis Engine
+   ============================================ */
+
+/* Figure/Plot Container */
+.figure-container {
+    margin: var(--space-8) 0;
+    text-align: center;
+}
+
+.figure-container img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+}
+
+.figure-caption {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    margin-top: var(--space-2);
+    font-style: italic;
+}
+
+/* Data Table */
+.content-page table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--space-6) 0;
+    font-size: var(--text-sm);
+}
+
+.content-page th {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-weight: var(--font-semibold);
+    text-align: left;
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 2px solid var(--primary-500);
+}
+
+.content-page td {
+    padding: var(--space-2) var(--space-4);
+    border-bottom: 1px solid var(--border-light);
+    color: var(--text-secondary);
+}
+
+.content-page tr:hover td {
+    background: var(--bg-secondary);
+}
+
+/* Metric Cards (Dashboard-Summaries) */
+.metric-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    margin: var(--space-6) 0;
+}
+
+.metric-card {
+    flex: 1;
+    min-width: 120px;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    padding: var(--space-4) var(--space-6);
+    text-align: center;
+    background: #ffffff;
+}
+
+.metric-card .value {
+    font-size: var(--text-3xl);
+    font-weight: var(--font-bold);
+    color: var(--primary-500);
+}
+
+.metric-card .label {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Verdict Badge */
+.verdict {
+    display: inline-block;
+    padding: var(--space-1) var(--space-3);
+    border-radius: 4px;
+    font-weight: var(--font-semibold);
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+}
+
+.verdict-supported    { background: #d1fae5; color: #065f46; }
+.verdict-refuted      { background: #fee2e2; color: #991b1b; }
+.verdict-ambiguous    { background: #fef3c7; color: #92400e; }
+.verdict-insufficient { background: var(--bg-tertiary); color: var(--neutral-700); }
+
+/* Disclaimer */
+.disclaimer {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-light);
+    padding: var(--space-4);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    margin-top: var(--space-12);
+    border-radius: 6px;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+
+=======
+   Responsive Design
+   ============================================ */
+>>>>>>> 050ec53122887e897f41725f91b1cf2c62a03df4
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: var(--text-4xl);
+    }
+    
+    .tagline {
+        font-size: var(--text-lg);
+    }
+    
+    .content-page h1 {
+        font-size: var(--text-3xl);
+    }
+    
+    .content-page h2 {
+        font-size: var(--text-xl);
+    }
+    
+    .nav-links {
+        gap: var(--space-4);
+    }
+    
+    .content-page {
+        padding: var(--space-8) var(--space-4);
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: var(--text-3xl);
+    }
+<<<<<<< HEAD
+
+    .content-page h1 {
+        font-size: var(--text-2xl);
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+    }
+
+=======
+    
+    .content-page h1 {
+        font-size: var(--text-2xl);
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+    }
+    
+>>>>>>> 050ec53122887e897f41725f91b1cf2c62a03df4
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+<<<<<<< HEAD
+
+    /* Framegate Metric Cards — Mobile */
+    .metric-card {
+        min-width: 90px;
+        padding: var(--space-3);
+    }
+
+    .metric-card .value {
+        font-size: var(--text-2xl);
+    }
+=======
+>>>>>>> 050ec53122887e897f41725f91b1cf2c62a03df4
+}
