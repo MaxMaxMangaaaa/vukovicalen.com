@@ -187,11 +187,25 @@ nav {
     transition: color 0.2s ease;
 }
 
+.nav-links a:visited {
+    color: var(--primary-500);
+}
+
 .nav-links a:hover {
     color: #ffffff;
 }
 
-.nav-links a.active {
+.nav-links a.active,
+.nav-links a.active:visited {
+    color: #ffffff;
+}
+
+.dropdown-menu a:visited {
+    color: var(--primary-400);
+}
+
+.dropdown-menu a.active,
+.dropdown-menu a.active:visited {
     color: #ffffff;
 }
 
