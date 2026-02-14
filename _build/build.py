@@ -273,9 +273,17 @@ def publish_from_vault(vault_id: str, meta: dict, nav_html: str, footer_html: st
     new_html = new_html.replace("{PATH}", meta.get("path", ""))
     new_html = new_html.replace("{PUBLISHED}", meta.get("published", ""))
 
+    # Set active state on Research nav link
+    new_html = re.sub(
+        r'href="([^"]*atlantic-pulse\.html)"',
+        r'href="\1" class="active"',
+        new_html,
+        count=1
+    )
+
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(new_html, encoding="utf-8")
-    print(f"  ✓ Published: {output_path.relative_to(ROOT)}")
+    print(f"  ✓ Published: {output_path.relative_to(ROOT)} (from vault {vault_id})")
     return True
 
 
@@ -357,5 +365,88 @@ def main():
     print("=" * 60)
 
 
-if __name__ == "__main__":
+def slugify(text: str) -> str:
+    """Convert text to URL-friendly slug."""
+    slug = text.lower().strip()
+    slug = re.sub(r"[^\w\s-]", "", slug)
+    slug = re.sub(r"[\s_]+", "-", slug)
+    slug = re.sub(r"-+", "-", slug)
+    return slug.strip("-")
+
+
+def cmd_publish(vault_id: str, title: str, subtitle: str = "",
+                category: str = "us-media-watch", description: str = ""):
+    """Register a new vault article and publish it.
+
+    Usage:
+        python _build/build.py publish TV:0010 "Article Title" --subtitle "Sub" --category "us-media-watch"
+    """
+    # Normalize vault_id (accept TV:0010, 0010, etc.)
+    vid = vault_id.replace("TV:", "").replace("tv:", "").strip()
+
+    slug = slugify(title)
+    path = f"research/{slug}.html"
+
+    print(f"\n  Publishing vault {vid} as '{title}'")
+    print(f"  → {path}")
+
+    # Load articles.json
+    config = load_json(ARTICLES_JSON)
+
+    # Check if already exists
+    if slug in config["articles"]:
+        print(f"  ⚠ Article '{slug}' already exists — updating vault_id to {vid}")
+        config["articles"][slug]["vault_id"] = vid
+    else:
+        # Add new entry
+        config["articles"][slug] = {
+            "title": title,
+            "subtitle": subtitle or title,
+            "path": path,
+            "category": category,
+            "published": datetime.now().strftime("%Y-%m-%d"),
+            "author": "Alen Vukovic",
+            "description": description or title,
+            "og_title": title,
+            "og_description": description or subtitle or title,
+            "vault_id": vid,
+            "type": "research_article",
+            "skip_rebuild": False,
+        }
+        print(f"  ✓ Added to articles.json")
+
+    # Ensure category exists
+    if category not in config["categories"]:
+        config["categories"][category] = {
+            "label": category.replace("-", " ").title(),
+            "order": len(config["categories"]) + 1,
+            "show_section_header": True,
+        }
+        print(f"  ✓ Added category: {category}")
+
+    # Save
+    ARTICLES_JSON.write_text(
+        json.dumps(config, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
+
+    # Now run full build
     main()
+
+
+if __name__ == "__main__":
+    args = sys.argv[1:]
+
+    if args and args[0] == "publish":
+        # python _build/build.py publish 0010 "Title" "Subtitle" "category" "description"
+        if len(args) < 3:
+            print("Usage: python _build/build.py publish <vault_id> <title> [subtitle] [category] [description]")
+            print('Example: python _build/build.py publish 0010 "The 4× Gap" "Trump vs. Journalism" "us-media-watch" "93,500 articles analyzed."')
+            sys.exit(1)
+        vault_id = args[1]
+        title = args[2]
+        subtitle = args[3] if len(args) > 3 else ""
+        category = args[4] if len(args) > 4 else "us-media-watch"
+        description = args[5] if len(args) > 5 else ""
+        cmd_publish(vault_id, title, subtitle, category, description)
+    else:
+        main()
