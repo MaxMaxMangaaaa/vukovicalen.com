@@ -162,16 +162,19 @@ nav {
     align-items: center;
 }
 
-.logo {
+.logo,
+.logo:link,
+.logo:visited {
     font-weight: var(--font-semibold);
     font-size: var(--text-lg);
     color: var(--primary-500);
-    text-decoration: none;
+    text-decoration: none !important;
     letter-spacing: -0.025em;
 }
 
 .logo:hover {
     color: #ffffff;
+    text-decoration: none !important;
 }
 
 .nav-links {
@@ -179,33 +182,45 @@ nav {
     gap: var(--space-8);
 }
 
-.nav-links a {
-    text-decoration: none;
+.nav-links a,
+.nav-links a:link,
+.nav-links a:visited {
+    text-decoration: none !important;
     color: var(--primary-500);
     font-size: var(--text-sm);
     font-weight: var(--font-medium);
     transition: color 0.2s ease;
 }
 
-.nav-links a:visited {
-    color: var(--primary-500);
-}
-
 .nav-links a:hover {
+    text-decoration: none !important;
     color: #ffffff;
 }
 
 .nav-links a.active,
-.nav-links a.active:visited {
+.nav-links a.active:link,
+.nav-links a.active:visited,
+.nav-links a.active:hover {
+    text-decoration: none !important;
     color: #ffffff;
 }
 
+.dropdown-menu a,
+.dropdown-menu a:link,
 .dropdown-menu a:visited {
+    text-decoration: none !important;
     color: var(--primary-400);
 }
 
+.dropdown-menu a:hover {
+    text-decoration: none !important;
+}
+
 .dropdown-menu a.active,
-.dropdown-menu a.active:visited {
+.dropdown-menu a.active:link,
+.dropdown-menu a.active:visited,
+.dropdown-menu a.active:hover {
+    text-decoration: none !important;
     color: #ffffff;
 }
 
