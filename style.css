@@ -123,6 +123,13 @@
     box-sizing: border-box;
 }
 
+/* GLOBAL LINK RESET - No purple, no underlines anywhere */
+a,
+a:link,
+a:visited {
+    text-decoration: none !important;
+}
+
 html {
     font-size: 16px;
     scroll-behavior: smooth;
@@ -356,10 +363,12 @@ nav {
     flex-wrap: wrap;
 }
 
-.btn {
+.btn,
+.btn:link,
+.btn:visited {
     padding: var(--space-3) var(--space-6);
     border-radius: 6px;
-    text-decoration: none;
+    text-decoration: none !important;
     font-weight: var(--font-medium);
     font-size: var(--text-sm);
     transition: all 0.2s ease;
@@ -477,14 +486,17 @@ nav {
 }
 
 /* Links */
-.content-page a {
-    color: var(--primary-600);
-    text-decoration: none;
+.content-page a,
+.content-page a:link,
+.content-page a:visited {
+    color: var(--primary-600) !important;
+    text-decoration: none !important;
     font-weight: var(--font-medium);
 }
 
 .content-page a:hover {
-    text-decoration: underline;
+    text-decoration: underline !important;
+    color: var(--primary-700) !important;
 }
 
 /* Practical Example Box */
@@ -569,8 +581,12 @@ nav {
     margin-bottom: var(--space-2);
 }
 
-.sources a {
+.sources a,
+.sources a:link,
+.sources a:visited {
     font-style: italic;
+    color: var(--primary-600) !important;
+    text-decoration: none !important;
 }
 
 /* Contact Section */
@@ -580,8 +596,11 @@ nav {
     border-top: 1px solid var(--border-light);
 }
 
-.contact-section a {
-    color: var(--primary-600);
+.contact-section a,
+.contact-section a:link,
+.contact-section a:visited {
+    color: var(--primary-600) !important;
+    text-decoration: none !important;
 }
 
 /* Scientific Sources Section */
@@ -631,13 +650,16 @@ footer {
     background: var(--bg-secondary);
 }
 
-footer a {
+footer a,
+footer a:link,
+footer a:visited {
     color: var(--text-tertiary);
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 footer a:hover {
     color: var(--primary-600);
+    text-decoration: none !important;
 }
 
 /* Separator dot */

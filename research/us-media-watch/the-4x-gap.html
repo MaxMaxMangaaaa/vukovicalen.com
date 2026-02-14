@@ -97,6 +97,7 @@
         .content-page {
             max-width: 900px;
             margin: 0 auto;
+            margin-top: 40px;
             padding: 2rem;
             background: white;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
@@ -231,9 +232,11 @@
             font-size: 0.8em;
         }
 
-        a {
+        a,
+        a:link,
+        a:visited {
             color: var(--primary);
-            text-decoration: none;
+            text-decoration: none !important;
             border-bottom: 1px solid var(--border-light);
             transition: color 0.2s ease;
         }

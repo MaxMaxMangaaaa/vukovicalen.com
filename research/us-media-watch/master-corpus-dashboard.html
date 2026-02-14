@@ -294,13 +294,20 @@
             font-size: 0.85em;
         }
 
-        .footer a {
+        .footer a,
+        .footer a:link,
+        .footer a:visited {
             color: var(--primary-500);
-            text-decoration: none;
+            text-decoration: none !important;
         }
 
         .footer a:hover {
-            text-decoration: underline;
+            text-decoration: underline !important;
+        }
+
+        /* More space between nav and header (like Atlantic Pulse) */
+        .header {
+            margin-top: 40px;
         }
 
         /* Scrollbar styling */
@@ -372,6 +379,14 @@
         .nav-dropdown { position: relative; }
         .nav-dropdown > a { display: flex; align-items: center; gap: 0.25rem; }
         .nav-dropdown > a::after { content: '▾'; font-size: 0.7em; }
+        .nav-dropdown::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            height: 0.5rem;
+        }
 
         .dropdown-menu {
             position: absolute;
