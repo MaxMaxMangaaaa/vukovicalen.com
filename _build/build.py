@@ -133,6 +133,9 @@ def rebuild_main_page(page_path: Path, nav_html: str, footer_html: str):
     html = replace_block(html, "nav", nav_html)
     html = replace_block(html, "footer", footer_html)
     html = set_active(html, page_path.name)
+    # Cache-busting for style.css
+    ts = str(int(datetime.now().timestamp()))
+    html = re.sub(r'style\.css(\?v=\d+)?', f'style.css?v={ts}', html)
     page_path.write_text(html, encoding="utf-8")
     print(f"  ✓ {page_path.name}")
 
@@ -223,6 +226,7 @@ def fill_template(template: str, meta: dict, nav_html: str, footer_html: str,
     new_html = new_html.replace("{PATH}", meta.get("path", ""))
     new_html = new_html.replace("{PUBLISHED}", meta.get("published", ""))
     new_html = new_html.replace("{PUBLISHED_DISPLAY}", format_date_display(meta.get("published", "")))
+    new_html = new_html.replace("{BUILD_TS}", str(int(datetime.now().timestamp())))
 
     # Set active state on Research nav link
     new_html = re.sub(
