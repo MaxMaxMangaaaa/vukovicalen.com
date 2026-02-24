@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="FRAMEGATE analyzes 93,000+ texts from 337 curated U.S. sources across 461 validated metrics. LIZ is the multi-talent expert — research assistant, strategy advisor, and campaign analyst in one.">
+    <meta name="description" content="FRAMEGATE is a corpus-based research engine for Narrative Intelligence. It operates on a curated U.S. discourse corpus with hundreds of metrics. LIZ is the analysis interface — adapting outputs to your role.">
     <meta name="keywords" content="FRAMEGATE, LIZ, Narrative Intelligence, Discourse Intelligence, political communication analysis, media analysis, framing, discourse analysis, AI-augmented analysis, campaign strategy, think tank, CEO communication, anti-hallucination AI, Fleiss Kappa, evidence-based intelligence, U.S. Political &amp; Media Communications, Quantitative Content Analysis">
     <meta name="author" content="Alen Vukovic">
 
     <!-- Open Graph -->
     <meta property="og:type" content="article">
     <meta property="og:title" content="What Is FRAMEGATE — And How Does LIZ Turn Political Discourse Into Evidence-Based Intelligence?">
-    <meta property="og:description" content="93,000+ texts. 337 curated sources. 461 validated metrics. Zero hallucinations. FRAMEGATE is the research engine. LIZ is the multi-talent expert who makes it accessible.">
+    <meta property="og:description" content="FRAMEGATE is a corpus-based research engine for Narrative Intelligence. Curated U.S. discourse corpus. Hundreds of metrics. Verification gates by design. LIZ is the analysis interface.">
     <meta property="og:url" content="https://vukovicalen.com/framegate.html">
     <meta property="og:site_name" content="Alen Vukovic">
 
@@ -76,7 +76,7 @@
             <h1>What Is FRAMEGATE — And How Does LIZ Turn Political Discourse Into Evidence-Based Intelligence?</h1>
 
             <p class="summary">
-                FRAMEGATE is an evidence-based research engine for Narrative Intelligence. It analyzes over 93,000 texts from 337 curated U.S. media sources and 60 political podcasts across 461 metrics in 25 analytical categories — covering the period from December 2022 to February 2026. LIZ is the dialogue interface to this engine: a multi-talent expert who adapts to your role, answers your questions, and delivers results from validated data only. No hallucinations. No opinions. No guesswork. This article explains how FRAMEGATE works, why it exists, and what it means for decision-makers in politics, business, media, and research.
+                FRAMEGATE is a corpus-based research engine for Narrative Intelligence. In its current build, it operates on a curated U.S. discourse corpus (media outlets and political podcasts), computes hundreds of metrics across multiple analytical categories, and covers a multi-year time window (late 2022 to early 2026). Exact corpus counts, source lists, and metric catalogs are documented per release. LIZ is a dialogue interface that can render the same underlying analysis in role-appropriate formats (e.g., executive briefing, research summary, data export), while keeping outputs bound to the same computed evidence. LIZ is designed to answer questions using computed results from the curated corpus, with multiple verification steps that constrain and detect unsupported claims. Where evidence is weak or missing, the system is designed to surface caveats rather than improvise. This article explains how FRAMEGATE works, why it exists, and what it means for decision-makers in politics, business, media, and research.
             </p>
 
             <!-- ============================================
@@ -88,16 +88,16 @@
                 Alen Vukovic grew up during the Yugoslav Wars. As a child, he experienced firsthand what happens when narratives replace reality — when media framing, political rhetoric, and public discourse diverge so far from the truth that entire populations make catastrophic decisions based on distorted information. That experience left a permanent mark: a deep, visceral understanding that the stories a society tells itself are not background noise. They are the operating system. And when that operating system is corrupted, people suffer.
             </p>
             <p>
-                Decades later, on February 28, 2025, that childhood lesson returned with full force. On that day, Ukrainian President Volodymyr Zelensky sat down with President Donald Trump and Vice President J.D. Vance in the Oval Office — and what followed was one of the most extraordinary diplomatic confrontations in modern American history. The meeting escalated into a public clash that shocked governments and analysts worldwide. Zelensky appeared blindsided. Commentators called it unprecedented.
+                Decades later, on February 28, 2025, that childhood lesson returned with full force. On that day, Ukrainian President Volodymyr Zelensky sat down with President Donald Trump and Vice President J.D. Vance in the Oval Office — and what followed was a highly publicized and contentious Oval Office exchange that triggered substantial media coverage and international commentary. Zelensky appeared blindsided. Many outlets framed the exchange as unusually confrontational for a diplomatic setting.
             </p>
             <p>
-                But was it really unforeseeable?
+                Retrospectively, this type of event motivates a measurable question: whether discourse indicators changed in the weeks leading up to the meeting, and whether those changes were detectable across pools.
             </p>
             <p>
-                Alen Vukovic had read 20+ newspapers daily for years, followed political podcasts, tracked analyst commentary, and studied campaign dynamics across the Atlantic. He felt informed. Deeply, confidently informed. And yet — like almost everyone else — he had not seen it coming. Not the specific confrontation, but the trajectory that made it inevitable: the months of escalating rhetoric, the shifting narrative frames around Ukraine in Trump's communications and Vance's public positioning, the slow realignment of Republican discourse from cautious support to open skepticism. All of it was there — distributed across hundreds of articles, speeches, and social media posts. But no single newspaper showed the full pattern. No single analyst connected all the threads.
+                Alen Vukovic had read 20+ newspapers daily for years, followed political podcasts, tracked analyst commentary, and studied campaign dynamics across the Atlantic. He felt informed. Deeply, confidently informed. And yet — like almost everyone else — he had not seen it coming. Not the specific confrontation, but a trajectory that may have increased the probability of confrontation, as reflected in measurable discourse shifts: the months of escalating rhetoric, the shifting narrative frames around Ukraine in Trump's communications and Vance's public positioning, the slow realignment of Republican discourse from cautious support to open skepticism. Many relevant signals were distributed across sources and formats, making it difficult to reconstruct the full pattern from any single outlet or briefing.
             </p>
             <p>
-                If we had been properly informed — not in the sense of reading more, but in the sense of actually understanding the discourse architecture — the trajectory toward that Oval Office moment would have been visible weeks in advance. Not as a prediction. As a structural pattern.
+                If we had been properly informed — not in the sense of reading more, but in the sense of actually understanding the discourse architecture — the trajectory toward that Oval Office moment can be investigated as an early-signal question: whether measurable indicators shifted prior to the event, and whether such shifts generalize across cases.
             </p>
             <p>
                 That was the moment FRAMEGATE became inevitable. Not because the technology was ready. Because the need was undeniable.
@@ -121,33 +121,33 @@
             <h2>What Is FRAMEGATE and Who Is LIZ?</h2>
 
             <p>
-                FRAMEGATE is the engine. It is the data foundation, the analytical pipeline, the validation layer, and the quality control system. It holds 64 structured Parquet databases covering U.S. political and media discourse from December 2022 through February 2026 — and growing. Every text in this database has been analyzed across 461 individual metrics in 25 categories. Every metric has been scientifically validated. Every result is traceable to its source article.
+                FRAMEGATE is the engine. It is the data foundation, the analytical pipeline, the validation layer, and the quality control system. It holds 64 structured Parquet databases covering U.S. political and media discourse from December 2022 through February 2026 — and growing. Every text in this database has been analyzed across 461 individual metrics in 25 categories. Metrics and outputs are designed to be versioned and auditable. Validation results and traceability metadata are recorded per metric and per analysis run, enabling review back to document and source identifiers.
             </p>
             <p>
-                LIZ is the expert. She is the dialogue interface to this engine — a multi-talent agent who adapts to whoever is asking. LIZ is not a chatbot. She is not a search bar. She is not a dashboard with pre-built charts.
+                LIZ is the expert. She is the dialogue interface to this engine — a multi-talent agent who adapts to whoever is asking. LIZ is not a general-purpose conversational bot; she is an analysis interface constrained by the corpus, computed artifacts, and verification gates. She is not a search bar. She is not a dashboard with pre-built charts.
             </p>
             <p>
-                LIZ is a conversation partner who understands your question, navigates the entire database, applies the right analytical methods, and delivers exactly what you need — in the format you need it. No predefined templates. No rigid report structures. No one-size-fits-all dashboards.
+                LIZ is a conversation partner who understands your question, navigates the entire database, applies the right analytical methods, and delivers exactly what you need — in the format you need it. Outputs are template-supported but parameterizable: the same evidence artifacts can be rendered as executive briefs, research summaries, or structured exports depending on user intent.
             </p>
             <p>
-                When you talk to LIZ, you talk to someone who has read every single one of those 93,000+ texts, remembers every data point, and can cross-reference any pattern across 3 years of discourse data in seconds.
+                When you talk to LIZ, you talk to someone who can query and aggregate across the full corpus, retrieving the relevant subsets and computed metrics on demand, and cross-reference patterns across 3 years of discourse data in seconds.
             </p>
 
             <h3>The 5 Guarantees</h3>
             <p>
-                <strong>100% client-oriented.</strong> There are no standard reports. LIZ delivers what you need, the way you need it — whether that is a 2-page executive briefing or a deep statistical analysis across 14 variables.
+                <strong>Client-oriented outputs.</strong> Analyses can be rendered as briefings, reports, or datasets, depending on the use case — whether that is a 2-page executive briefing or a deep statistical analysis across 14 variables.
             </p>
             <p>
-                <strong>100% evidence-based.</strong> Every number, every claim, every finding traces back to specific source articles in the database. Nothing is generated from thin air.
+                <strong>Evidence-bound by design.</strong> Reported numbers and claims are intended to be tied to computed artifacts and traceability metadata, enabling audit back to documents and sources. Nothing is generated from thin air.
             </p>
             <p>
-                <strong>100% source-safe.</strong> LIZ references only from 337 curated, validated media sources and 60 verified podcasts. No Wikipedia. No Reddit. No content farms. No uncontrolled internet sources. Every source has been selected, weighted, and balanced across ideology, geography, media type, reach, and urban-rural distribution.
+                <strong>Corpus-constrained sourcing.</strong> LIZ references only the curated corpus configured for FRAMEGATE analyses, rather than uncontrolled internet sources. No Wikipedia. No Reddit. No content farms. Every source has been selected, scored, and documented across ideology, geography, media type, reach, and urban-rural distribution.
             </p>
             <p>
-                <strong>100% reliable.</strong> The system delivers the right data the first time. Every time. Built on an anti-hallucination architecture with multiple safety layers that make fabrication structurally impossible.
+                <strong>Reliability by architecture.</strong> Reliability is addressed through deterministic computation, schema validation, and post-generation gates that are designed to catch mismatches before outputs are published. The architecture constrains generative steps and uses verification gates to detect and prevent unsupported statements from propagating.
             </p>
             <p>
-                <strong>100% statistical.</strong> Every analytical field has been validated using Fleiss' Kappa — the gold standard for inter-rater reliability in scientific research. The weighted Scientific Confidence Score across all 461 metrics is 99%.
+                <strong>Statistically validated.</strong> Reliability is assessed using inter-rater and test–retest style procedures appropriate to metric type (e.g., kappa-family measures for categorical outputs). A large majority of categorical fields exceed pre-defined agreement thresholds (e.g., &kappa; &ge; 0.75). A composite confidence score is computed from these reliability results; its definition and thresholds are documented in the validation appendix.
             </p>
 
             <!-- ============================================
@@ -211,10 +211,10 @@
             </div>
 
             <p>
-                Once the user confirms the analytical plan, the FRAMEGATE engine takes over. 93 individual steps execute in strict sequence — from data loading and statistical computation through visualization rendering to the final quality gate. Every step is logged with its status, duration, and output. 35 of these steps are fully deterministic (zero AI involvement). The remaining steps use AI-augmented analysis with anti-hallucination safeguards at every stage.
+                Once the user confirms the analytical plan, the FRAMEGATE engine takes over. In the current pipeline configuration, an analysis run executes a multi-step workflow in strict sequence — from data loading and statistical computation through visualization rendering to the final quality gate. Every step is logged with its status, duration, and output. A substantial portion of these steps are fully deterministic (zero AI involvement). The remaining steps use AI-augmented analysis with constrained generation and verification safeguards at every stage. Step counts and gate definitions are logged in telemetry for each run.
             </p>
             <p>
-                The telemetry table you see is not decoration. It is the audit trail. Every client can verify exactly which steps ran, how long they took, and what they produced. This level of transparency does not exist in any comparable system.
+                The telemetry table you see is not decoration. It is the audit trail. Every client can verify exactly which steps ran, how long they took, and what they produced. The telemetry log provides an audit trail for each run (steps, status, runtime, and artifact outputs), enabling internal and client-facing review.
             </p>
 
             <h3>Step 4: Quality Gates, Automatic Stop, and the Finished Output</h3>
@@ -223,18 +223,86 @@
                 <span class="screenshot-label">Quality Gate FAIL — Automatic Pipeline Stop and Resume</span>
                 <img src="Liz_in_Action_4_20260224.png" alt="LIZ in Action: Text Quality Gate fails with 3 checks, pipeline stops automatically, manual fix applied, resume from checkpoint, pipeline completes with PDF and HTML output" loading="lazy">
                 <p class="screenshot-caption">
-                    <strong>The pipeline protects its own output quality.</strong> At Step 10.5c, the Text Quality Gate — a deterministic checkpoint with 9 automated checks — detected 3 violations: an unauthorized attribution line, a deprecated term, and a raw database column name that should have been replaced with its publication-safe display name. The pipeline stopped immediately. No corrupted data reaches the final report. After the fix, the pipeline resumed from the exact checkpoint and completed successfully — producing a downloadable PDF report and a publish-ready HTML article.
+                    <strong>The pipeline protects its own output quality.</strong> At Step 10.5c, the Text Quality Gate — a deterministic checkpoint with 9 automated checks — detected 3 violations: an unauthorized attribution line, a deprecated term, and a raw database column name that should have been replaced with its publication-safe display name. The pipeline is designed to stop on violations detected by deterministic gates, preventing non-compliant text from being published downstream. After the fix, the pipeline resumed from the exact checkpoint and completed successfully — producing a downloadable PDF report and a publish-ready HTML article.
                 </p>
             </div>
 
             <p>
-                This is what "anti-hallucination by architecture" looks like in practice. The pipeline does not trust its own AI-generated text. It verifies it — deterministically, with zero AI involvement in the verification step. If the text fails even one of the 9 quality checks, the entire pipeline stops. No PDF is generated. No HTML is published. The problem must be fixed before the engine continues.
+                This is what "hallucination reduction by architecture" looks like in practice. The pipeline does not trust its own AI-generated text. It verifies it — deterministically, with zero AI involvement in the verification step. If the text fails even one of the quality checks, the pipeline is designed to stop. No PDF is generated. No HTML is published. The problem must be fixed before the engine continues.
             </p>
             <p>
                 The timestamp in the telemetry table tells the full story: 65 minutes of total execution time, 93 steps tracked to the second, and a quality gate that caught what a human reviewer might have missed. After the fix, the pipeline resumed from the exact checkpoint — no re-computation of earlier steps, no wasted time or API cost.
             </p>
             <p>
-                The finished output is twofold. First: a publication-quality PDF report, available for download — a self-contained document with all findings, visualizations, statistical evidence, and methodology documentation. The PDF page itself is not displayed in the terminal; it is generated as a file ready for distribution. Second: an HTML article, automatically published to the research website. Both formats read from the same verified source text — the single source of truth that passed all 9 quality checks. Any other output format (PowerPoint, Excel, JSON, CSV, Parquet) can be generated from the same validated data on request.
+                The finished output is twofold. First: a publication-quality PDF report, available for download — a self-contained document with all findings, visualizations, statistical evidence, and methodology documentation. The PDF page itself is not displayed in the terminal; it is generated as a file ready for distribution. Second: an HTML article, automatically published to the research website. Both formats read from the same verified source text — the single source of truth that passed all quality checks. Any other output format (PowerPoint, Excel, JSON, CSV, Parquet) can be generated from the same validated data on request.
+            </p>
+
+            <h3>Step 5: The Finished Report — What the Pipeline Produces</h3>
+
+            <p>
+                After approximately 40 to 65 minutes of pipeline execution, the system produces a self-contained PDF report. The following screenshots show the actual output of a completed analysis run.
+            </p>
+
+            <div class="screenshot-figure">
+                <span class="screenshot-label">PDF Report — Cover Page</span>
+                <img src="Liz_in_Action_5_20260224.png" alt="FRAMEGATE Thesis Report: Cover page showing research question, author, and date" loading="lazy">
+                <p class="screenshot-caption">
+                    <strong>The cover page of a completed FRAMEGATE analysis.</strong> It states the research question (here: the extent to which journalistic media amplify Trump's personal messaging across pre- and post-inauguration phases), the author, and the production date. The report is 26 pages long and was generated entirely by the pipeline — no manual formatting, no post-processing.
+                </p>
+            </div>
+
+            <div class="screenshot-figure">
+                <span class="screenshot-label">PDF Report — Table of Contents</span>
+                <img src="Liz_in_Action_7_20260224.png" alt="FRAMEGATE Thesis Report: Table of Contents showing 8 sections across 26 pages" loading="lazy">
+                <p class="screenshot-caption">
+                    <strong>The report follows a fixed analytical structure with 8 sections.</strong> Each section serves a distinct function in the evidence chain — from summary through findings and claims to self-assessment and stated limitations.
+                </p>
+            </div>
+
+            <p>
+                The 8 sections reflect the pipeline's analytical logic:
+            </p>
+            <p>
+                <strong>1. Executive Summary</strong> condenses the verdict, the core findings, and the governance recommendation into a single page. It states whether the thesis is supported, partially supported, or not supported — and under what conditions.
+            </p>
+            <p>
+                <strong>2. Key Findings</strong> presents the empirical results: statistical tests, effect sizes, confidence intervals, and visualizations. Each finding is tied to specific data and methods. This is the evidential core of the report.
+            </p>
+            <p>
+                <strong>3. Claims</strong> formalizes findings into structured, auditable statements. Each claim carries an evidence type (quantitative, pattern-based, temporal), a confidence level, and references to the underlying data. Claims are schema-validated before inclusion.
+            </p>
+            <p>
+                <strong>4. Reasoning Model Insights</strong> documents how the pipeline interpreted the data — which analytical paths it considered, which alternatives it evaluated, and why it arrived at its conclusions rather than others.
+            </p>
+            <p>
+                <strong>5. Meta-Reasoner Assessment</strong> evaluates the quality of the pipeline's own reasoning. It flags internal contradictions, identifies where evidence is thin, and assesses whether the analytical methods were appropriate for the data structure.
+            </p>
+            <p>
+                <strong>6. Governance Verdict</strong> is the pipeline's self-assessment: can the findings be published as-is, or are there unresolved issues that require further work? This section determines whether the report receives a PASS, CONDITIONAL PROCEED, or FAIL verdict.
+            </p>
+            <p>
+                <strong>7. Data Quality Assessment</strong> reports on the reliability of the underlying data — quality scores per variable, critical-variable identification, and whether data quality constrains any specific finding.
+            </p>
+            <p>
+                <strong>8. Limitations</strong> states what the analysis cannot claim, where the evidence is insufficient, and which methodological constraints apply. This section is generated by the pipeline itself, not added post-hoc.
+            </p>
+
+            <div class="screenshot-figure">
+                <span class="screenshot-label">PDF Report — Executive Summary</span>
+                <img src="Liz_in_Action_6_20260224.png" alt="FRAMEGATE Thesis Report: Executive Summary showing methods, verdict, and core findings" loading="lazy">
+                <p class="screenshot-caption">
+                    <strong>The Executive Summary of an actual analysis.</strong> It documents the multi-method design (Random Forest, Wilcoxon, DiD+ITS, bootstrap NAS), the corpus scope (94,826 documents, three discourse pools), the verdict (partially supported), and the key empirical findings — including effect sizes, significance levels, and the governance recommendation.
+                </p>
+            </div>
+
+            <p>
+                The entire report — from cover to limitations — is produced by the pipeline without manual intervention. The same verified source text feeds both the PDF and the HTML article published on the research website. Additional output formats (Excel summary tables, JSON data exports, Parquet files) can be generated from the same data foundation on request.
+            </p>
+
+            <p style="margin-top: 1.5rem;">
+                <a href="research/thesis-to-what-extent-do-journalistic-media-ampl-plots/202602-feb26__ThesisVault__1771938772_0001__thesis-to-what-extent-do-journalistic-media-ampl.pdf" download class="btn btn-secondary" style="font-size: 0.875rem;">
+                    Download Full Report (PDF, 26 pages)
+                </a>
             </p>
 
             <!-- ============================================
@@ -253,10 +321,10 @@
 
             <h3>Pool 2: Journalistic Texts</h3>
             <p>
-                337 U.S. media sources form the backbone of the analysis. These are not randomly selected. They form a carefully balanced portfolio across 5 dimensions:
+                The outlet portfolio is curated and scored along multiple dimensions (e.g., ideology, reach, geography, media type). These are not randomly selected. Portfolio distributions are documented in the source registry and can be summarized per analysis run. The portfolio is balanced across 5 dimensions:
             </p>
             <p>
-                <strong>Ideological balance</strong> reflects the actual American media spectrum: 47% of outlets fall in the center, 40% lean moderately left or right, and 13% represent more pronounced positions — included in controlled proportions to map the full discourse without overweighting fringe voices.
+                <strong>Ideological balance</strong> reflects the actual American media spectrum: the majority of outlets fall in the center or lean moderately, with a smaller proportion representing more pronounced positions — included in controlled proportions to map the full discourse without overweighting fringe voices. Exact distributions are documented in the source registry.
             </p>
             <p>
                 <strong>Geographic coverage</strong> ensures all 50 U.S. states are represented. Each outlet carries a penetration score reflecting its reach in individual states. The analysis is not dominated by New York and Washington.
@@ -278,7 +346,7 @@
 
             <h3>Pool 4: Comments and Reactions</h3>
             <p>
-                Public reactions on platforms like X and Truth Social function as a discourse barometer. They do not set narratives — but they reveal how narratives land, which frames trigger emotional responses, and where polarization accelerates. Platforms are distribution channels, not editorial entities. A tweet becomes decision-relevant only when media or creators frame it. This pool is used as signal input, not as primary source.
+                Public reactions on platforms like X and Truth Social function as a discourse barometer. They do not set narratives — but they reveal how narratives land, which frames trigger emotional responses, and where polarization accelerates. In this framework, platform content is treated primarily as a distribution and reaction signal. Depending on the use case, it can be included as secondary input rather than as the primary evidence base. This pool is used as signal input, not as primary source.
             </p>
 
             <h3>The Process: From Raw Data to Validated Intelligence</h3>
@@ -295,10 +363,10 @@
                 <strong>Step 3 — Analysis.</strong> Every text passes through 25 analytical categories comprising 461 individual metrics. These categories range from surface-level content (keywords, topics, article focus) through political structure (bias, ideology, conflict lines, call-to-action) and narrative architecture (framing, causality, semantic structure) to deep psychological layers (emotions, moral foundations, polyvagal markers, Big Five personality indicators, motivation theory).
             </p>
             <p>
-                <strong>Step 4 — Quality Assurance.</strong> This is where FRAMEGATE fundamentally differs from any other system. A multi-layered verification pipeline ensures that no fabricated data, no corrupted analysis, and no hallucinated finding ever reaches the output. Details in the next section.
+                <strong>Step 4 — Quality Assurance.</strong> This is where FRAMEGATE fundamentally differs from any other system. A multi-layered verification pipeline is designed to detect and prevent fabricated data, corrupted analysis, and unsupported findings from reaching the output. Details in the next section.
             </p>
             <p>
-                <strong>Step 5 — Validation.</strong> The entire methodology is validated using Fleiss' Kappa across 6 months of repeated analysis, achieving a Scientific Confidence Score of 99%.
+                <strong>Step 5 — Validation.</strong> The system evaluates test–retest stability across repeated runs over time. Depending on metric type, appropriate agreement measures are computed. Threshold definitions and results are documented in the validation appendix.
             </p>
             <p>
                 <strong>Step 6 — Output.</strong> Results are delivered in whatever format the client needs: PDF reports for board meetings, PowerPoint decks for campaign briefings, JSON files for data teams and machine learning pipelines, Parquet and CSV files for analysts who want raw data, Excel spreadsheets for quick reviews, or publish-ready HTML for web publication. All from the same validated data foundation.
@@ -316,38 +384,38 @@
                 Most AI systems generate text by predicting what sounds plausible. They have no ground truth. They have no data to check against. They produce fluent, confident-sounding output that may or may not reflect reality. That is hallucination — and it is the default behavior of large language models.
             </p>
             <p>
-                FRAMEGATE is built to make hallucination structurally impossible. Not through a disclaimer. Through engineering.
+                FRAMEGATE is designed to reduce hallucination risk through constrained generation and verification gates. Not through a disclaimer. Through engineering.
             </p>
 
             <h3>Layer 1: Data Ground Truth Injection</h3>
             <p>
-                When the analytical pipeline processes a thesis, the actual calculated values from the database are injected directly into every step that involves interpretation. The AI does not generate numbers from memory or from the thesis hypothesis. It receives the real, computed top-N values from the data bundle and is instructed: all numeric values must come from the actual data. The data comes first. The interpretation follows.
+                When the analytical pipeline processes a thesis, the actual calculated values from the database are intended to be injected directly into every step that involves interpretation. Numeric values are injected from computed artifacts (data bundles) rather than generated. Deterministic checks can compare reported numbers against source tables. The data comes first. The interpretation follows.
             </p>
 
             <h3>Layer 2: Decision Points That Stop the Pipeline</h3>
             <p>
-                At critical junctures, the pipeline includes Decision Points — steps where only PASS or FAIL is allowed. No warnings. No "close enough." If a verification step detects a mismatch between the AI's interpretation and the actual data values, the entire pipeline stops. No further analysis is produced. No contaminated findings reach downstream steps. This is not a soft guard. It is a hard gate.
+                The pipeline includes decision gates that can stop execution if specified checks fail; these events are recorded in telemetry. At critical junctures, only PASS or FAIL is allowed. No warnings. No "close enough." If a verification step detects a mismatch between the AI's interpretation and the actual data values, the pipeline is designed to stop. No further analysis is produced until the issue is resolved. This is not a soft guard. It is a hard gate.
             </p>
 
             <h3>Layer 3: 35 Deterministic Steps Without AI</h3>
             <p>
-                Of the 93 steps in the analytical pipeline, 35 are completely deterministic — they run without any AI involvement. Zero interpretation. Pure computation: data loading, statistical calculation, schema validation, file integrity checks, plot generation verification, and publication safety screening. These steps cannot hallucinate because no language model is involved.
+                A substantial portion of the pipeline steps are completely deterministic — they run without any AI involvement. Zero interpretation. Pure computation: data loading, statistical calculation, schema validation, file integrity checks, plot generation verification, and publication safety screening. These steps do not involve generative models, so LLM hallucination risk is not present at those stages.
             </p>
 
             <h3>Layer 4: Schema Validation Before Every Write</h3>
             <p>
-                Before any AI-generated result is saved, it passes through JSON Schema validation. If the output structure does not match the expected schema — wrong data types, missing fields, invalid values — the step fails. No corrupted artifact is stored. Ever.
+                Before any AI-generated result is saved, it passes through JSON Schema validation. If the output structure does not match the expected schema — wrong data types, missing fields, invalid values — the step fails. Schema validation prevents a defined class of structural output errors from being persisted.
             </p>
 
             <h3>Layer 5: 12-Gate Visualization Verification</h3>
             <p>
-                Every chart and visualization passes through a 12-gate verification pipeline. This includes code security analysis, sandboxed execution, data fidelity checks that compare rendered chart values against source data with only 1% tolerance, and multimodal visual review. If a chart shows 47% but the data says 46.2%, the gate catches it.
+                Every chart and visualization passes through a 12-gate verification pipeline. This includes code security analysis, sandboxed execution, data fidelity checks that compare rendered chart values against source data within configured tolerances, and multimodal visual review. Visualization checks can compare plotted values against source tables; failures block publication.
             </p>
 
             <div class="example-box">
                 <span class="example-label">What This Means in Practice</span>
                 <p>
-                    When LIZ tells you "confidence is the dominant emotion in Trump's Truth Social posts with a 34.2% share," that number has been validated across 6 independent measurement cycles, confirmed at clinical research standards, verified against the source database, and is traceable to specific texts. It is not a guess. It is not an approximation. It is a verified measurement.
+                    When LIZ reports an effect (e.g., "Confidence ranks highest under metric X in pool Y during window Z"), the statement is intended to be backed by the underlying tables and the validation protocol. Where reliability thresholds are met, they are reported; where they are not, caveats are included. It is not a guess. It is not an approximation. It is a measurement tied to computed artifacts.
                 </p>
             </div>
 
@@ -360,7 +428,7 @@
                 Not every question requires the same depth of analysis. A campaign manager who needs a quick status check on narrative momentum needs a different level of thinking than a think tank director preparing a 50-page policy brief.
             </p>
             <p>
-                FRAMEGATE operates with 6 levels of analytical depth. Think of them as the difference between asking a junior analyst, a senior researcher, and a McKinsey partner the same question.
+                FRAMEGATE can operate at multiple levels of analytical depth, from descriptive summaries to comparative inference and robustness-aware interpretation. Think of them as 6 floors of increasing sophistication.
             </p>
 
             <h3>Floors 1 and 2: Description</h3>
@@ -375,7 +443,7 @@
 
             <h3>Floors 5 and 6: Strategic Intelligence</h3>
             <p>
-                "What does this mean for decisions, and what should be considered?" This is where LIZ operates like a McKinsey partner with deep domain expertise. She has methodological competence. She can think in multiple directions simultaneously. She evaluates the quality of her own methods. She establishes quality criteria. She delivers evidence-based results and anticipates counter-arguments. She generates recommendations with explicit confidence levels, caveats for data quality limitations, and alternative interpretations.
+                "What does this mean for decisions, and what should be considered?" This is where LIZ operates at the highest analytical depth. She has methodological competence. She can think in multiple directions simultaneously. She evaluates the quality of her own methods. She establishes quality criteria. She delivers evidence-based results and anticipates counter-arguments. Where decision implications are discussed, they are framed as scenario-relevant considerations rather than prescriptive recommendations, with explicit confidence levels, caveats for data quality limitations, and alternative interpretations.
             </p>
             <p>
                 At Floor 5 and 6, LIZ does not just tell you what the data shows. She tells you what it means for your specific situation, what risks you should consider, what the strongest counter-argument would be, and where the evidence is strong enough to act on — and where it is not.
@@ -395,7 +463,7 @@
 
             <h3>Time Advantage — Early Warning</h3>
             <p>
-                You see narrative shifts before they appear in polls. When an interpretive frame begins to tip — when a previously fringe position starts appearing in mainstream outlets, when emotional intensity around a topic spikes across 3 or more ideological clusters simultaneously — LIZ detects it. Not because she predicts the future. Because she reads everything, every day, and sees the structural patterns that human readers miss when they follow 20 sources instead of 337. Typical lead time: 2 to 3 weeks before a narrative shift becomes visible in public polling or mainstream editorial consensus.
+                You see narrative shifts before they appear in polls. When an interpretive frame begins to tip — when a previously fringe position starts appearing in mainstream outlets, when emotional intensity around a topic spikes across 3 or more ideological clusters simultaneously — LIZ detects it. Not because she predicts the future. Because she reads everything, every day, and sees the structural patterns that human readers miss when they follow 20 sources instead of 337. In some cases, aggregated discourse indicators may surface shifts earlier than manual monitoring. Quantifying typical lead times requires systematic backtesting and is treated as an ongoing evaluation objective.
             </p>
 
             <h3>Risk Reduction</h3>
@@ -419,7 +487,7 @@
             <h2>What Roles Can LIZ Play?</h2>
 
             <p>
-                LIZ is not one tool. She is a multi-talent expert who adapts her role to whoever is asking. The same engine, the same data, the same validation — but a different conversation depending on what you need.
+                LIZ is not one tool. She is an analysis interface that adapts her output format and depth to whoever is asking. The same engine, the same data, the same validation — but a different conversation depending on what you need.
             </p>
 
             <h3>For Campaign Managers: Research Assistant and Strategy Advisor</h3>
@@ -490,16 +558,16 @@
                 Validation is not a feature of FRAMEGATE. It is the foundation.
             </p>
             <p>
-                The methodology employs Fleiss' Kappa — the gold standard for measuring inter-rater reliability in scientific research, originally developed by Joseph Fleiss in 1971. The concept is straightforward: if multiple independent raters analyze the same material and arrive at the same conclusions, the measurement is reliable. If they disagree, it is not.
+                The methodology employs kappa-family measures — a widely used approach for measuring inter-rater reliability in scientific research, originally developed by Joseph Fleiss in 1971. The concept is straightforward: if multiple independent raters analyze the same material and arrive at the same conclusions, the measurement is reliable. If they disagree, it is not.
             </p>
             <p>
-                FRAMEGATE adapted this principle for AI-augmented analysis. The same dataset was analyzed repeatedly over 6 months. Each monthly analysis serves as an independent "rater." If the system produces the same analytical results for the same text in January, March, and June — across all 461 metrics — the measurement is reliable.
+                FRAMEGATE adapted this principle for AI-augmented analysis. The system evaluates test–retest stability across repeated runs over time. Depending on metric type, appropriate agreement measures are computed (e.g., kappa-family measures for categorical outputs, correlation-based measures for continuous variables). If the system produces consistent analytical results for the same text across runs, the measurement is reliable.
             </p>
             <p>
-                The results: 461 analytical fields were validated across all 25 categories. 94.5% meet the clinical minimum standard of &kappa; &ge; 0.75 — the threshold used in medical and psychological research. The weighted Scientific Confidence Score across all metrics is 99%.
+                The results: a large majority of categorical fields exceed pre-defined agreement thresholds (e.g., &kappa; &ge; 0.75). Threshold definitions, distributions, and weighting schemes are documented in the validation appendix.
             </p>
             <p>
-                Additionally, the pipeline operates at Six Sigma level: 3.0&sigma; at 100% throughput rate. The typical industry standard for natural language processing pipelines is 2.0 to 2.5&sigma; at 85 to 95% throughput rate. FRAMEGATE significantly exceeds this standard.
+                Operational reliability is monitored via pipeline throughput and failure rates; quality gates enforce pass/fail criteria at each stage.
             </p>
             <p>
                 The validation encompasses multiple layers: tolerance tests for numerical values, correlation analyses between months, classical Fleiss' Kappa calculation for categorical data, and separate analyses for complex mixed structures. The system identifies unstable components and validates production readiness against scientific reference values (Landis &amp; Koch, 1977).
@@ -554,7 +622,7 @@
             </p>
 
             <p>
-                These are not previews or mockups. They are complete, published analyses produced by the FRAMEGATE engine and delivered through LIZ — with full statistical backing, validated data, and traceable sources.
+                These are not previews or mockups. They are analyses published with documented methods, results tables, and stated limitations — produced by the FRAMEGATE engine and delivered through LIZ.
             </p>
 
             <!-- ============================================
@@ -575,12 +643,12 @@
 
             <h3>Does the methodology meet academic standards for reproducibility?</h3>
             <p>
-                Yes. Every analysis runs through a deterministic 93-step pipeline with 35 purely deterministic steps (zero AI involvement), schema validation, and full telemetry logging. The statistical methods are grounded in 74 peer-reviewed publications spanning framing theory, discourse analysis, political psychology, and computational social science. Inter-rater reliability tests between human coders and FRAMEGATE achieved Cohen's Kappa of 0.82 — well above the 0.80 threshold considered "almost perfect agreement" in social science.
+                Yes. Every analysis runs through a deterministic multi-step pipeline with a substantial portion of purely deterministic steps (zero AI involvement), schema validation, and full telemetry logging. Method choices are informed by established literature in framing, political psychology, and computational social science (bibliography available). Where human benchmarking is conducted, study design and agreement metrics are reported.
             </p>
 
             <h3>Can I publish results from a FRAMEGATE analysis?</h3>
             <p>
-                Yes. You may publish any results from your analysis with the attribution "Generated by framegate.ai" and the corresponding citation. Publication follows journalistic, scientific, and Creative Commons standards. LIZ can generate the citation block for you automatically in whatever format your institution requires.
+                Yes. Sources are acquired and processed under the project's licensing and compliance framework. You may publish results from your analysis with the attribution "Generated by framegate.ai" and the corresponding citation. Publication and attribution rules are specified per engagement. LIZ can generate the citation block for you automatically in whatever format your institution requires.
             </p>
 
             <h3>Which market does FRAMEGATE currently cover?</h3>
@@ -602,7 +670,7 @@
 
             <h3>How do I verify that the sources are legitimate?</h3>
             <p>
-                Every source in the FRAMEGATE database has been legally acquired and editorially verified. All 337 media outlets and 60 podcasts are curated — meaning each one was individually assessed for editorial standards, publication regularity, and relevance to U.S. political discourse before inclusion. LIZ does not scrape the internet. She references only from this curated pool. 100% source safety is not a marketing claim — it is an architectural constraint.
+                Every source in the FRAMEGATE database has been legally acquired and editorially verified. All 337 media outlets and 60 podcasts are curated — meaning each one was individually assessed for editorial standards, publication regularity, and relevance to U.S. political discourse before inclusion. LIZ does not scrape the internet. She references only from this curated pool. Corpus-constrained sourcing is an architectural constraint, not a marketing claim.
             </p>
 
             <h3>Can I trace a specific claim back to the original text?</h3>
@@ -612,7 +680,7 @@
 
             <h3>Am I allowed to publish what LIZ delivers?</h3>
             <p>
-                Yes. You can publish any analysis results with the attribution "Generated by framegate.ai" and the appropriate citation. The citation format follows journalistic standards, scientific referencing conventions, and Creative Commons guidelines. LIZ can generate the citation automatically for you.
+                Yes. You can publish analysis results with the attribution "Generated by framegate.ai" and the appropriate citation. Publication and attribution rules are specified per engagement. LIZ can generate the citation automatically for you.
             </p>
 
             <h3>Does FRAMEGATE replace my own research?</h3>
@@ -666,7 +734,7 @@
 
             <h3>Are all sources in the database legally acquired?</h3>
             <p>
-                Yes. Every single one of the 337 media outlets, 60 podcasts, and all associated texts has been legally acquired through proper channels. The database is legally clean — no scraping, no gray-area data harvesting, no copyright violations. This is not a compliance footnote. It is a foundational design principle.
+                Yes. Every single one of the 337 media outlets, 60 podcasts, and all associated texts has been legally acquired through proper channels. Sources are acquired and processed under the project's licensing and compliance framework — no scraping, no gray-area data harvesting. This is not a compliance footnote. It is a foundational design principle.
             </p>
 
             <h3>Can I see which outlets and metrics are in the system before commissioning an analysis?</h3>
@@ -707,12 +775,12 @@
 
                 <h3>Who is LIZ?</h3>
                 <p>
-                    LIZ is the dialogue interface to the FRAMEGATE engine. She is a multi-talent expert who adapts to your role: research assistant for campaign teams, analysis engine for think tanks, early warning system for CEOs, story finder for journalists, positioning advisor for PR strategists. She delivers results from validated data only — no hallucinations, no unverified sources, only from the 337 curated media outlets and 60 podcasts.
+                    LIZ is the dialogue interface to the FRAMEGATE engine. She is an analysis interface that adapts to your role: research assistant for campaign teams, analysis engine for think tanks, early warning system for CEOs, story finder for journalists, positioning advisor for PR strategists. She is designed to deliver results from the curated corpus with multiple verification steps — constrained to the curated media outlets and podcasts.
                 </p>
 
                 <h3>Can I explore the data freely?</h3>
                 <p>
-                    There are no predefined reports, dashboards, or standard templates. LIZ is a dialogue interface — you ask your question, and she navigates the full database to deliver exactly what you need. Every analysis is 100% client-oriented. You can explore any dimension, any time period, any combination of variables. The output format adapts to your needs: PDF, PowerPoint, JSON, Excel, CSV, Parquet, or HTML.
+                    There are no predefined reports, dashboards, or standard templates. LIZ is a dialogue interface — you ask your question, and she navigates the full database to deliver exactly what you need. Every analysis is client-oriented. You can explore any dimension, any time period, any combination of variables. The output format adapts to your needs: PDF, PowerPoint, JSON, Excel, CSV, Parquet, or HTML.
                 </p>
 
                 <h3>Why does FRAMEGATE not use social media platforms as primary sources?</h3>
@@ -741,7 +809,7 @@
                  ============================================ -->
             <div class="conclusion">
                 <p>
-                    FRAMEGATE exists because in an era of accelerating polarization, reading 20 newspapers is no longer enough to understand how political discourse actually works. The engine analyzes over 93,000 texts from 337 curated sources across 461 validated metrics — and LIZ makes that intelligence accessible through natural dialogue, adapted to your role, delivered in your format. Not opinions. Not impressions. Evidence — reproducible, traceable, and validated at 99% Scientific Confidence. For decision-makers who do not want to react faster, but see earlier.
+                    FRAMEGATE exists because in an era of accelerating polarization, reading 20 newspapers is no longer enough to understand how political discourse actually works. The engine analyzes over 93,000 texts from 337 curated sources across 461 validated metrics — and LIZ makes that intelligence accessible through natural dialogue, adapted to your role, delivered in your format. Not opinions. Not impressions. Evidence — reproducible and traceable by design, with reliability results reported per metric and per release. For decision-makers who do not want to react faster, but see earlier.
                 </p>
             </div>
 
