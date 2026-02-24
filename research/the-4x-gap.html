@@ -23,15 +23,44 @@
     <nav>
     <div class="nav-container">
         <a href="../index.html" class="logo">Alen Vukovic</a>
+        <button class="hamburger" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('nav-open')">
+            <span></span><span></span><span></span>
+        </button>
         <div class="nav-links">
             <a href="../about.html">About</a>
             <div class="nav-dropdown">
-                <a href="../research/atlantic-pulse.html" class="active">Research</a>
+                <a href="#" class="nav-trigger">Research</a>
                 <div class="dropdown-menu">
-                    <a href="../research/atlantic-pulse.html">Atlantic Pulse</a>
-                    <div class="dropdown-divider"></div>
-                    <div class="dropdown-section">U.S. Media Watch</div>
-                    <a href="../research/the-4x-gap.html">The 4× Gap</a>
+                        <div class="dropdown-category">
+                            <div class="dropdown-section">Transatlantic Narrative Transfer<span class="chevron">&#8250;</span></div>
+                            <div class="dropdown-submenu">
+                            <a href="atlantic-pulse.html">Atlantic Pulse</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-category">
+                            <div class="dropdown-section">U.S. Discourse Dynamics<span class="chevron">&#8250;</span></div>
+                            <div class="dropdown-submenu">
+                            <a href="thesis-confidence-ist-die-strkste-emotion-in-den.html">Confidence as Dominant Emotion</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-category">
+                            <div class="dropdown-section">Polarization &amp; Ideological Drift<span class="chevron">&#8250;</span></div>
+                            <div class="dropdown-submenu">
+                            <a href="the-4x-gap.html" class="active">The 4&#215; Gap</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-category">
+                            <div class="dropdown-section">Algorithmic Amplification<span class="chevron">&#8250;</span></div>
+                            <div class="dropdown-submenu">
+                            <span class="submenu-empty">Coming soon</span>
+                            </div>
+                        </div>
+                        <div class="dropdown-category">
+                            <div class="dropdown-section">Presidential &amp; Partisan Playbooks<span class="chevron">&#8250;</span></div>
+                            <div class="dropdown-submenu">
+                            <a href="thesis-to-what-extent-do-journalistic-media-ampl.html">Journalistic Amplification</a>
+                            </div>
+                        </div>
                 </div>
             </div>
             <a href="../framegate.html">FRAMEGATE</a>
