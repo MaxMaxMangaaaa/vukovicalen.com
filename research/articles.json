@@ -1,0 +1,92 @@
+{
+  "categories": {
+    "transatlantic-narrative-transfer": {
+      "label": "Transatlantic Narrative Transfer",
+      "order": 1,
+      "show_section_header": true
+    },
+    "us-discourse-dynamics": {
+      "label": "U.S. Discourse Dynamics",
+      "order": 2,
+      "show_section_header": true
+    },
+    "polarization-ideological-drift": {
+      "label": "Polarization & Ideological Drift",
+      "order": 3,
+      "show_section_header": true
+    },
+    "algorithmic-amplification": {
+      "label": "Algorithmic Amplification",
+      "order": 4,
+      "show_section_header": true
+    },
+    "presidential-partisan-playbooks": {
+      "label": "Presidential & Partisan Playbooks",
+      "order": 5,
+      "show_section_header": true
+    },
+    "media-amplification": {
+      "label": "Media Amplification & Framing",
+      "order": 6,
+      "show_section_header": true
+    }
+  },
+  "articles": {
+    "atlantic-pulse": {
+      "title": "Atlantic Pulse",
+      "subtitle": "Atlantic Pulse",
+      "path": "research/atlantic-pulse.html",
+      "category": "transatlantic-narrative-transfer",
+      "published": "2025-12-01",
+      "author": "Alen Vukovic",
+      "description": "Atlantic Pulse",
+      "og_title": "Atlantic Pulse",
+      "og_description": "Atlantic Pulse",
+      "vault_id": "",
+      "type": "research_article",
+      "skip_rebuild": false
+    },
+    "thesis-confidence-ist-die-strkste-emotion-in-den": {
+      "title": "Confidence as Dominant Emotion",
+      "subtitle": "Confidence ist die stärkste Emotion in den Trust Social Posts",
+      "path": "research/thesis-confidence-ist-die-strkste-emotion-in-den.html",
+      "category": "us-discourse-dynamics",
+      "published": "2026-02-01",
+      "author": "Alen Vukovic",
+      "description": "Confidence ist die stärkste Emotion in den Trust Social Posts",
+      "og_title": "Confidence as Dominant Emotion",
+      "og_description": "Confidence ist die stärkste Emotion in den Trust Social Posts",
+      "vault_id": "",
+      "type": "research_article",
+      "skip_rebuild": false
+    },
+    "the-4x-gap": {
+      "title": "The 4× Gap",
+      "subtitle": "Trump's Ideology vs. American Journalism",
+      "path": "research/the-4x-gap.html",
+      "category": "polarization-ideological-drift",
+      "published": "2026-01-15",
+      "author": "Alen Vukovic",
+      "description": "The 4× Gap: Trump's Ideology vs. American Journalism",
+      "og_title": "The 4× Gap",
+      "og_description": "Trump's Ideology vs. American Journalism",
+      "vault_id": "",
+      "type": "research_article",
+      "skip_rebuild": false
+    },
+    "thesis-to-what-extent-do-journalistic-media-ampl": {
+      "title": "Media Amplification of Trump's Framing",
+      "subtitle": "To what extent do journalistic media amplify Donald Trump's personal framing",
+      "path": "research/thesis-to-what-extent-do-journalistic-media-ampl.html",
+      "category": "media-amplification",
+      "published": "2026-02-24",
+      "author": "Alen Vukovic",
+      "description": "To what extent do journalistic media amplify Donald Trump's personal framing",
+      "og_title": "Media Amplification of Trump's Framing",
+      "og_description": "To what extent do journalistic media amplify Donald Trump's personal framing",
+      "vault_id": "1771938772",
+      "type": "research_article",
+      "skip_rebuild": false
+    }
+  }
+}
