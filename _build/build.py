@@ -54,39 +54,45 @@ def compute_root(page_path: Path) -> str:
 # ─── NAV BUILDER ─────────────────────────────────────────────────────
 
 def build_dropdown_links(articles: dict, categories: dict, root_prefix: str) -> str:
-    """Generate the dropdown menu <a> tags from articles.json."""
+    """Generate the two-level dropdown: Level 1 = category titles, Level 2 = articles.
+
+    Structure per category:
+        <div class="dropdown-category">
+            <div class="dropdown-section">Category Label<span class="chevron">›</span></div>
+            <div class="dropdown-submenu">
+                <a href="...">Article Title</a>
+            </div>
+        </div>
+    """
     lines = []
 
-    # Group by category
+    # Group articles by category
     by_cat = {}
     for aid, a in articles.items():
         cat = a.get("category", "other")
         by_cat.setdefault(cat, []).append(a)
 
-    # Sort categories by order
-    sorted_cats = sorted(by_cat.items(),
-                         key=lambda x: categories.get(x[0], {}).get("order", 999))
+    # ALL categories from registry, sorted by order (even empty ones)
+    sorted_cats = sorted(categories.items(), key=lambda x: x[1].get("order", 999))
 
-    first_cat = True
-    for cat_id, cat_articles in sorted_cats:
-        cat_meta = categories.get(cat_id, {})
+    for cat_id, cat_meta in sorted_cats:
+        label = cat_meta.get("label", cat_id)
+        cat_articles = by_cat.get(cat_id, [])
 
-        # Divider between categories (not before first)
-        if not first_cat:
-            lines.append('                    <div class="dropdown-divider"></div>')
+        lines.append('                    <div class="dropdown-category">')
+        lines.append(f'                        <div class="dropdown-section">{label}<span class="chevron">&rsaquo;</span></div>')
+        lines.append('                        <div class="dropdown-submenu">')
 
-        # Section header (if enabled)
-        if cat_meta.get("show_section_header"):
-            label = cat_meta.get("label", cat_id)
-            lines.append(f'                    <div class="dropdown-section">{label}</div>')
+        if cat_articles:
+            for a in sorted(cat_articles, key=lambda x: x.get("published", ""), reverse=True):
+                href = root_prefix + a["path"]
+                title = a["title"]
+                lines.append(f'                            <a href="{href}">{title}</a>')
+        else:
+            lines.append('                            <span class="submenu-empty">Coming soon</span>')
 
-        # Article links
-        for a in sorted(cat_articles, key=lambda x: x.get("published", ""), reverse=True):
-            href = root_prefix + a["path"]
-            title = a["title"]
-            lines.append(f'                    <a href="{href}">{title}</a>')
-
-        first_cat = False
+        lines.append('                        </div>')
+        lines.append('                    </div>')
 
     return "\n".join(lines)
 
@@ -238,12 +244,11 @@ def fill_template(template: str, meta: dict, nav_html: str, footer_html: str,
     new_html = new_html.replace("{PUBLISHED_DISPLAY}", format_date_display(meta.get("published", "")))
     new_html = new_html.replace("{BUILD_TS}", str(int(datetime.now().timestamp())))
 
-    # Set active state on Research nav link
-    new_html = re.sub(
-        r'href="([^"]*atlantic-pulse\.html)"',
-        r'href="\1" class="active"',
-        new_html,
-        count=1
+    # Set active state on Research nav trigger for article pages
+    new_html = new_html.replace(
+        'class="nav-trigger"',
+        'class="nav-trigger active"',
+        1
     )
     return new_html
 
@@ -371,12 +376,11 @@ def main():
                 html = replace_block(html, "footer", footer_html)
                 # Set Research as active — find the Research nav link
                 html = re.sub(r'class="active"', '', html)
-                # Match the Research link regardless of prefix
-                html = re.sub(
-                    r'href="([^"]*atlantic-pulse\.html)"',
-                    r'href="\1" class="active"',
-                    html,
-                    count=1
+                # Set Research nav trigger as active for research pages
+                html = html.replace(
+                    'class="nav-trigger"',
+                    'class="nav-trigger active"',
+                    1
                 )
                 article_path.write_text(html, encoding="utf-8")
                 print(f"  ✓ {meta['path']} (nav/footer updated, content preserved)")

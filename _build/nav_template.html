@@ -1,10 +1,13 @@
 <nav>
     <div class="nav-container">
         <a href="{ROOT}index.html" class="logo">Alen Vukovic</a>
+        <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('nav-open')">
+            <span></span><span></span><span></span>
+        </button>
         <div class="nav-links">
             <a href="{ROOT}about.html">About</a>
             <div class="nav-dropdown">
-                <a href="{ROOT}research/atlantic-pulse.html">Research</a>
+                <a href="#" class="nav-trigger">Research</a>
                 <div class="dropdown-menu">
 {DROPDOWN_LINKS}
                 </div>
