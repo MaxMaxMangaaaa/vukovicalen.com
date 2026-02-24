@@ -7,7 +7,7 @@
         <div class="nav-links">
             <a href="{ROOT}about.html">About</a>
             <div class="nav-dropdown">
-                <a href="#" class="nav-trigger">Research</a>
+                <a href="#" class="nav-trigger" onclick="if(window.innerWidth<=768){event.preventDefault();this.parentElement.classList.toggle('dropdown-open')}">Research</a>
                 <div class="dropdown-menu">
 {DROPDOWN_LINKS}
                 </div>
