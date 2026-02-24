@@ -46,6 +46,20 @@
       "vault_id": "0001",
       "type": "research_article",
       "skip_rebuild": false
+    },
+    "thesis-to-what-extent-do-journalistic-media-ampl": {
+      "title": "Journalistic Amplification of Trump\u2019s Messaging",
+      "subtitle": "How journalistic media amplify and counter-frame Trump\u2019s personal messaging across pre- and post-inauguration phases.",
+      "path": "research/thesis-to-what-extent-do-journalistic-media-ampl.html",
+      "category": "playbooks",
+      "published": "2026-02-26",
+      "author": "Alen Vukovic",
+      "description": "Multi-method analysis of 94,826 documents across three discourse pools quantifying amplification, counter-framing, and attenuation of Trump\u2019s core narratives.",
+      "og_title": "Journalistic Amplification of Trump\u2019s Messaging \u2014 FRAMEGATE",
+      "og_description": "How journalistic media amplify and counter-frame Trump\u2019s messaging across pre- and post-inauguration phases. 94,826 documents, 23 claims.",
+      "vault_id": "0001",
+      "type": "research_article",
+      "skip_rebuild": false
     }
   },
   "categories": {

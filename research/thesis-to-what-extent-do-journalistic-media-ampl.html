@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="To what extent do journalistic media amplify Donald Trump&#x27;s personal messaging over time, and how does this amplification shift between the 2024 campaign phase (pre-inauguration) and the 2025 pre">
+    <meta name="description" content="How journalistic media amplify and counter-frame Trump&#x27;s messaging across pre- and post-inauguration phases. 94,826 documents, 23 claims, multi-method analysis.">
     <meta name="author" content="Alen Vukovic">
 
     <!-- Open Graph -->
     <meta property="og:type" content="article">
-    <meta property="og:title" content="To what extent do journalistic media amplify Donald Trump&#x27;s personal — FRAMEGATE">
-    <meta property="og:description" content="To what extent do journalistic media amplify Donald Trump&#x27;s personal messaging over time, and how does this amplification shift between the 2024 campaign phase (pre-inauguration) and the 2025 pre">
+    <meta property="og:title" content="Journalistic Amplification of Trump&#x27;s Messaging — FRAMEGATE">
+    <meta property="og:description" content="How journalistic media amplify and counter-frame Trump&#x27;s messaging across pre- and post-inauguration phases. 94,826 documents, 23 claims, multi-method analysis.">
     <meta property="og:url" content="https://vukovicalen.com/research/thesis-to-what-extent-do-journalistic-media-ampl.html">
     <meta property="og:site_name" content="Alen Vukovic">
     <meta property="article:author" content="Alen Vukovic">
     <meta property="article:published_time" content="2026-02-26">
     <meta property="article:section" content="Research">
 
-    <title>To what extent do journalistic media amplify Donald Trump&#x27;s personal | Alen Vukovic</title>
+    <title>Journalistic Amplification of Trump&#x27;s Messaging | Alen Vukovic</title>
     <link rel="stylesheet" href="../style.css?v=1771944213">
 </head>
 <body>
@@ -58,7 +58,7 @@
                         <div class="dropdown-category">
                             <div class="dropdown-section">Presidential &amp; Partisan Playbooks<span class="chevron">&#8250;</span></div>
                             <div class="dropdown-submenu">
-                            <span class="submenu-empty">Coming soon</span>
+                            <a href="thesis-to-what-extent-do-journalistic-media-ampl.html" class="active">Journalistic Amplification</a>
                             </div>
                         </div>
                 </div>
@@ -69,8 +69,8 @@
 </nav>
 
     <section class="article-hero">
-        <h1>To what extent do journalistic media amplify Donald Trump&#x27;s personal</h1>
-        <p class="subtitle">To what extent do journalistic media amplify Donald Trump&#x27;s personal messaging over time, and how does this amplification shift between the 2024 campaign phase (pre-inauguration) and the 2025 presidential phase (post-inauguration)? Pools: (1) Trump&#x27;s own communication (Truth Social posts), (2) journalistic coverage with Trump as central actor, (3) the broader journalistic pool. Goal: quantify amplification vs. counter-framing vs. attenuation of Trump&#x27;s core personal narratives across pre- vs. post-inauguration periods, and surface the top five drivers of change suitable for building a time-series index.</p>
+        <h1>Journalistic Amplification of Trump&#x27;s Messaging</h1>
+        <p class="subtitle">How journalistic media amplify and counter-frame Trump&#x27;s personal messaging across pre- and post-inauguration phases. Three discourse pools (Truth Social, Trump-centric journalism, broad journalism), 94,826 documents, multi-method analysis including Random Forest, Wilcoxon, DiD+ITS, and bootstrap NAS distribution.</p>
         <p class="article-meta">
             <span>Alen Vukovic</span> <span>|</span> <span>February 2026</span> <span>|</span> <span>Framegate Narrative Intelligence</span>
         </p>
@@ -142,7 +142,7 @@
 
         <h3>Figure 1: Confidence Dominates Emotional Profile Across All Pools</h3>
         <div class="figure-container">
-            <img src="thesis-to-what-extent-do-journalistic-media-ampl-plots/result_f01_mean_ranking_all_15_emotions.png" alt="Figure 1: Confidence Dominates Emotional Profile Across All Pools">
+            <img src="thesis-to-what-extent-do-journalistic-media-ampl-plots/result_f01_mean_emotion_ranking_all_pools.png" alt="Figure 1: Confidence Dominates Emotional Profile Across All Pools">
         </div>
         <p class="figure-caption">Across 94,826 documents spanning all pools, Confidence dominates the emotional landscape with a mean intensity of <span class="stat-notation">0.564</span> — the only emotion to breach the 0.5 threshold — directly contradicting the framing hypothesis that anger or defiance would lead Trump-centered discourse. Enthusiasm (<span class="stat-notation">0.483</span>), Fear (<span class="stat-notation">0.474</span>), and Indignation (<span class="stat-notation">0.471</span>) cluster tightly in second through fourth position, suggesting a discourse environment defined more by assertive certainty than reactive hostility. Defiance ranks fifth at <span class="stat-notation">0.441</span>, while Anger falls outside the top five entirely, indicating that combative emotional registers are present but subordinate to confidence-projecting framing. This baseline establishes that the dominant emotional signal being amplified — or attenuated — across journalistic pools is one of self-assured authority, a finding that materially shapes how pool-level amplification differentials should be interpreted across pre- and post-inauguration phases.</p>
 
@@ -158,7 +158,7 @@
 
         <h3>Figure 2: RF Feature Importance — Progressivism Dominates Over Theory Picks</h3>
         <div class="figure-container">
-            <img src="thesis-to-what-extent-do-journalistic-media-ampl-plots/result_f02_histogram_confidence_distribution.png" alt="Figure 2: RF Feature Importance — Progressivism Dominates Over Theory Picks">
+            <img src="thesis-to-what-extent-do-journalistic-media-ampl-plots/result_f02_rf_feature_importance_top20.png" alt="Figure 2: RF Feature Importance — Progressivism Dominates Over Theory Picks">
         </div>
         <p class="figure-caption">The Random Forest model — achieving near-perfect cross-validated accuracy of 99.6% — identifies Progressivism (importance = <span class="stat-notation">0.0042</span>) as the single strongest empirical driver separating Trump&#x27;s communication pool from journalistic coverage, outpacing the second-ranked feature, V2Tone Negative Score (<span class="stat-notation">0.0020</span>), by more than 2x. This directly contradicts the thesis-predicted top drivers: the theoretically anticipated top-5 features are entirely absent from the top 20, confirming a systematic theory-data mismatch. The dominance of an ideological lean measure — rather than emotional or adversarial framing variables — suggests that pool differentiation is primarily structured around ideological positioning, not tone or affect. Free Market ideology ranks 4th (<span class="stat-notation">0.0012</span>), further reinforcing that the empirical signal is ideological rather than rhetorical, which reframes how amplification indices for the Trump media ecosystem should be constructed.</p>
 
@@ -174,7 +174,7 @@
 
         <h3>Figure 3: Post-Inauguration NAS Distribution — Admin Pool Amplification Bias</h3>
         <div class="figure-container">
-            <img src="thesis-to-what-extent-do-journalistic-media-ampl-plots/result_f03_cohens_d_effect_sizes_vs_confidence.png" alt="Figure 3: Post-Inauguration NAS Distribution — Admin Pool Amplification Bias">
+            <img src="thesis-to-what-extent-do-journalistic-media-ampl-plots/result_f03_nas_histogram_admin_vs_broad_post.png" alt="Figure 3: Post-Inauguration NAS Distribution — Admin Pool Amplification Bias">
         </div>
         <p class="figure-caption">Post-inauguration Admin Pool NAS scores distribute with a clear positive bias, with the distribution peak occurring between NAS=<span class="stat-notation">0.05</span> and NAS=<span class="stat-notation">0.20</span> and the bulk of bootstrap samples falling in positive territory, indicating net amplification of Trump&#x27;s presidential messaging over counter-framing. The distribution is markedly right-skewed relative to neutral (NAS=0), with frequency counts reaching ~100 samples near NAS=<span class="stat-notation">0.10</span>–<span class="stat-notation">0.15</span>, while the negative tail extends only to approximately <span class="stat-notation">-0.55</span> and is substantially thinner — confirming that journalistic amplification outpaces counter-framing in the post-inauguration phase. Critically, the absence of a comparative pre-inauguration distribution due to a structural temporal data gap means phase-shift quantification relies solely on this post-inauguration snapshot, limiting direct before-after inference but nonetheless establishing a positive amplification baseline. This supports the thesis that journalistic media net-amplify Trump&#x27;s core narratives in the presidential phase, though the magnitude of the shift from the campaign phase cannot yet be confirmed visually.</p>
 
@@ -190,7 +190,7 @@
 
         <h3>Figure 4: Frame Z-Score Divergence — Admin vs. Journalistic Pool</h3>
         <div class="figure-container">
-            <img src="thesis-to-what-extent-do-journalistic-media-ampl-plots/result_f04_grouped_bar_tone_split_top6.png" alt="Figure 4: Frame Z-Score Divergence — Admin vs. Journalistic Pool">
+            <img src="thesis-to-what-extent-do-journalistic-media-ampl-plots/result_f04_heatmap_frame_zscores_pools_phases.png" alt="Figure 4: Frame Z-Score Divergence — Admin vs. Journalistic Pool">
         </div>
         <p class="figure-caption">The post-inauguration journalistic pool systematically counter-frames Trump&#x27;s core personal narratives, with the &#x27;Inform&#x27; frame showing the starkest divergence: z = <span class="stat-notation">-1.68</span> in the Admin Pool versus <span class="stat-notation">+0.29</span> in the Journalistic Pool, a spread of nearly 2 full standard deviations. Moral authority (<span class="stat-notation">-1.24</span> vs. <span class="stat-notation">+0.21</span>) and moral strength (<span class="stat-notation">-1.17</span> vs. <span class="stat-notation">+0.20</span>) follow the same pattern, indicating that frames Trump deploys to assert legitimacy and virtue are precisely those most aggressively counter-framed by journalists post-inauguration. Conversely, &#x27;Liberty Oppression&#x27; (<span class="stat-notation">+1.05</span> admin, <span class="stat-notation">-0.18</span> journalistic) and &#x27;Self Promotion&#x27; (<span class="stat-notation">+0.80</span> admin, <span class="stat-notation">-0.14</span> journalistic) are elevated in Trump&#x27;s own output but attenuated by media coverage, suggesting selective amplification rather than wholesale counter-framing. These divergences directly support the thesis: journalistic pools do not amplify Trump&#x27;s personal messaging post-inauguration but instead invert his dominant frames, most forcefully in the normative and informational registers.</p>
 
@@ -206,7 +206,7 @@
 
         <h3>Figure 5: Theory Drivers Pre/Post Wilcoxon Significance Test</h3>
         <div class="figure-container">
-            <img src="thesis-to-what-extent-do-journalistic-media-ampl-plots/result_f05_line_confidence_temporal_trend.png" alt="Figure 5: Theory Drivers Pre/Post Wilcoxon Significance Test">
+            <img src="thesis-to-what-extent-do-journalistic-media-ampl-plots/result_f05_wilcoxon_top5_drivers_pre_post.png" alt="Figure 5: Theory Drivers Pre/Post Wilcoxon Significance Test">
         </div>
         <p class="figure-caption">All five theoretically pre-specified narrative drivers show statistically significant pre-to-post shifts (Bonferroni-corrected Wilcoxon W statistics ranging from approximately 2,950 for Stance Polarity to over 4,200 for Villain framing, n=94,826), confirming that the inauguration period marks a measurable structural break in Trump-related discourse amplification. The Villain framing driver produces the largest W statistic (~4,250), followed closely by Trump Vs Checks &amp; Balances (~3,800) and Authoritarianism (~4,150), indicating that adversarial and institutional-threat narratives shifted most dramatically between the campaign and presidential phases. Critically, however, the chart&#x27;s own footnote flags a theory mismatch: these five drivers were NOT confirmed as empirical top predictors by the Random Forest model, which instead elevated Progressivism, V2Tone Negative Score, and ideological lean variables as the dominant empirical drivers. This finding nuances the thesis — while theoretically motivated narrative frames do shift significantly across phases, the actual predictive architecture of amplification change is driven by tonal and ideological dimensions not captured in the original theoretical framework.</p>
 
@@ -222,7 +222,7 @@
 
         <h3>Figure 6: RF Empirical vs. Theory — Top-5 Feature Divergence</h3>
         <div class="figure-container">
-            <img src="thesis-to-what-extent-do-journalistic-media-ampl-plots/result_f06_regression_r2_zero_tone_predictors.png" alt="Figure 6: RF Empirical vs. Theory — Top-5 Feature Divergence">
+            <img src="thesis-to-what-extent-do-journalistic-media-ampl-plots/result_f06_rf_empirical_vs_theoretical_top5.png" alt="Figure 6: RF Empirical vs. Theory — Top-5 Feature Divergence">
         </div>
         <p class="figure-caption">The Random Forest model identifies Progressivism (importance score: <span class="stat-notation">0.00416</span>) as the single dominant discriminating feature between pools and phases — more than twice as important as the second-ranked feature, V2Tone Negative Score (<span class="stat-notation">0.0020</span>) — directly challenging the thesis assumption that Authoritarianism or Us-Vs-Them framing would lead the ideological signal hierarchy. Critically, Authoritarianism does not appear in the empirical top 20 at all, while Us-Vs-Them ranks only sixth at <span class="stat-notation">0.000785</span>, well below the theory-specified threshold for top-5 inclusion. This finding reframes the amplification dynamic: journalistic differentiation from Trump&#x27;s messaging is driven primarily by ideological lean (Progressivism, Free Market) and tonal negativity, not by the confrontational framing constructs the thesis prioritized. The divergence between empirical and theoretical top-5 rankings demands a revision of the index architecture, substituting tone polarity and progressive framing intensity as the primary time-series drivers.</p>
 
@@ -238,7 +238,7 @@
 
         <h3>Figure 7: Admin Pool Conflict Frame Bimodal Intensity Distribution</h3>
         <div class="figure-container">
-            <img src="thesis-to-what-extent-do-journalistic-media-ampl-plots/result_f07.png" alt="Figure 7: Admin Pool Conflict Frame Bimodal Intensity Distribution">
+            <img src="thesis-to-what-extent-do-journalistic-media-ampl-plots/result_f07_distribution_conflict_hero_villain_pools.png" alt="Figure 7: Admin Pool Conflict Frame Bimodal Intensity Distribution">
         </div>
         <p class="figure-caption">The Admin Pool&#x27;s conflict frame intensity distribution is strikingly bimodal, with the largest concentrations at the poles — approximately 700 samples near 0.0 and ~525 near 1.0 — while the mean settles at <span class="stat-notation">0.44</span>, masking a highly polarized underlying structure. This extreme skewness confirms why parametric tests are inappropriate and Mann-Whitney U tests are required; the mean of <span class="stat-notation">0.44</span> is a statistical artifact of opposing mass rather than a central tendency. The distribution&#x27;s shape directly supports the thesis that journalistic coverage of Trump does not uniformly amplify or attenuate conflict framing — instead, it bifurcates sharply, with substantial portions of content either almost entirely devoid of conflict framing or saturated with it. This polarization pattern, identified as one of 14 high-skew variables, signals that conflict amplification is not a gradual, continuous process but an on/off dynamic that a simple index average would dangerously obscure.</p>
 
