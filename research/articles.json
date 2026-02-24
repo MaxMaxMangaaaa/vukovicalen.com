@@ -1,16 +1,15 @@
 {
   "metadata": {
-    "version": "1.0.0",
-    "last_updated": "2026-02-14",
-    "description": "Research article registry for vukovicalen.com"
+    "version": "3.0.0",
+    "last_updated": "2026-02-24",
+    "description": "Research article registry for vukovicalen.com — 5 Research Areas, two-level nav"
   },
-  "featured": "atlantic-pulse",
   "articles": {
     "atlantic-pulse": {
       "title": "Atlantic Pulse",
       "subtitle": "The U.S. Political Idea Competition Forecast",
       "path": "research/atlantic-pulse.html",
-      "category": "special",
+      "category": "transatlantic-narrative",
       "published": "2026-02-01",
       "author": "Alen Vukovic",
       "description": "A GIS-exclusive brief on the U.S. political idea competition with implications for transatlantic decision-making.",
@@ -24,7 +23,7 @@
       "title": "The 4\u00d7 Gap",
       "subtitle": "How Trump's communications outpaced journalistic response by a factor of four, measured across 16 ideology dimensions and 93,500 articles.",
       "path": "research/the-4x-gap.html",
-      "category": "us-media-watch",
+      "category": "polarization",
       "published": "2026-02-13",
       "author": "Alen Vukovic",
       "description": "How Trump's Truth Social communications outpaced journalistic response by a factor of four, measured across 16 ideology dimensions.",
@@ -33,18 +32,47 @@
       "vault_id": "0009",
       "type": "research_article",
       "skip_rebuild": false
+    },
+    "thesis-confidence-ist-die-strkste-emotion-in-den": {
+      "title": "Confidence as Dominant Emotion",
+      "subtitle": "Confidence ist die stärkste Emotion in den Trust Social Posts von Trump in 2025",
+      "path": "research/thesis-confidence-ist-die-strkste-emotion-in-den.html",
+      "category": "discourse-dynamics",
+      "published": "2026-02-24",
+      "author": "Alen Vukovic",
+      "description": "Quantitative analysis of emotional patterns in Trump's Trust Social posts, examining whether confidence dominates the emotional spectrum.",
+      "og_title": "Confidence as Dominant Emotion — FRAMEGATE",
+      "og_description": "Is confidence the strongest emotion in Trump's 2025 Trust Social posts? A quantitative content analysis.",
+      "vault_id": "0001",
+      "type": "research_article",
+      "skip_rebuild": false
     }
   },
   "categories": {
-    "special": {
-      "label": "Atlantic Pulse",
-      "order": 1,
-      "show_section_header": false
+    "transatlantic-narrative": {
+      "label": "Transatlantic Narrative Transfer",
+      "description": "How U.S. political narratives travel into European discourse — tracking diffusion patterns, timing, and transformation.",
+      "order": 1
     },
-    "us-media-watch": {
-      "label": "U.S. Media Watch",
-      "order": 2,
-      "show_section_header": true
+    "discourse-dynamics": {
+      "label": "U.S. Discourse Dynamics",
+      "description": "Recurring patterns, topic cycles, triggers, and narrative shifts in U.S. political discourse over time.",
+      "order": 2
+    },
+    "polarization": {
+      "label": "Polarization & Ideological Drift",
+      "description": "Measuring polarization as alignment dynamics and tracking ideological drift across outlets, elite communication, and time periods.",
+      "order": 3
+    },
+    "amplification": {
+      "label": "Algorithmic Amplification",
+      "description": "How attention logics amplify narratives — outrage, reward mechanics, and their coupling to media routines.",
+      "order": 4
+    },
+    "playbooks": {
+      "label": "Presidential & Partisan Playbooks",
+      "description": "Recurring communication playbooks from presidential, candidate, and party communications — pressure moves, reframing, conflict steering.",
+      "order": 5
     }
   }
 }
