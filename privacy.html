@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Datenschutzerklärung für vukovicalen.com und den internen API-Client CampaignConsult Media Intelligence.">
+    <meta name="robots" content="index,follow">
+    <title>Datenschutzerklärung / Privacy Policy · Alen Vukovic</title>
+    <style>
+        :root {
+            --primary: #e7227a;
+            --primary-dark: #b71a60;
+            --brand-gray: #414247;
+            --text: #111112;
+            --text-secondary: #525252;
+            --text-tertiary: #737373;
+            --background: #f7f8fc;
+            --surface: #ffffff;
+            --surface-soft: #f0f1f5;
+            --border: #e5e5e5;
+            --max-width: 840px;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            color: var(--text);
+            background: var(--background);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.68;
+        }
+
+        a {
+            color: var(--primary-dark);
+            text-decoration-thickness: 1px;
+            text-underline-offset: 0.18em;
+        }
+
+        a:hover,
+        a:focus-visible {
+            color: var(--primary);
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: var(--brand-gray);
+            padding: 1rem 1.5rem;
+        }
+
+        .nav-container {
+            width: min(100%, 900px);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .logo,
+        .back-link {
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .logo {
+            color: var(--primary);
+            font-size: 1.125rem;
+        }
+
+        .back-link {
+            color: #ffffff;
+            font-size: 0.875rem;
+        }
+
+        main {
+            padding: 4rem 1.5rem 5rem;
+        }
+
+        article {
+            width: min(100%, var(--max-width));
+            margin: 0 auto;
+        }
+
+        h1,
+        h2,
+        h3 {
+            line-height: 1.28;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            margin: 0 0 1rem;
+            font-size: clamp(2.1rem, 6vw, 3.2rem);
+        }
+
+        h2 {
+            margin: 3.3rem 0 1rem;
+            padding-top: 0.25rem;
+            font-size: clamp(1.45rem, 3vw, 1.75rem);
+            border-top: 1px solid var(--border);
+        }
+
+        h3 {
+            margin: 2rem 0 0.65rem;
+            font-size: 1.17rem;
+        }
+
+        p,
+        ul {
+            margin: 0 0 1rem;
+        }
+
+        ul {
+            padding-left: 1.4rem;
+        }
+
+        li + li {
+            margin-top: 0.4rem;
+        }
+
+        .intro {
+            margin: 0 0 2rem;
+            color: var(--text-secondary);
+            font-size: 1.12rem;
+        }
+
+        .meta {
+            display: inline-block;
+            margin-bottom: 1.35rem;
+            color: var(--text-tertiary);
+            font-size: 0.875rem;
+        }
+
+        .notice,
+        .api-box {
+            margin: 1.5rem 0;
+            padding: 1.25rem 1.4rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .notice p:last-child,
+        .api-box p:last-child,
+        .api-box ul:last-child {
+            margin-bottom: 0;
+        }
+
+        .api-title {
+            display: block;
+            margin-bottom: 0.65rem;
+            color: var(--primary-dark);
+            font-size: 0.77rem;
+            font-weight: 700;
+            letter-spacing: 0.075em;
+            text-transform: uppercase;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--surface);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.94rem;
+        }
+
+        th,
+        td {
+            padding: 0.85rem 1rem;
+            text-align: left;
+            vertical-align: top;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            width: 31%;
+            background: var(--surface-soft);
+            font-weight: 650;
+        }
+
+        tr:last-child th,
+        tr:last-child td {
+            border-bottom: 0;
+        }
+
+        address {
+            font-style: normal;
+        }
+
+        .small {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        footer {
+            padding: 2rem 1.5rem;
+            color: var(--text-tertiary);
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 0.875rem;
+        }
+
+        footer a {
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 640px) {
+            main {
+                padding-top: 2.5rem;
+            }
+
+            .nav-container {
+                align-items: flex-start;
+            }
+
+            th,
+            td {
+                display: block;
+                width: 100%;
+            }
+
+            th {
+                padding-bottom: 0.45rem;
+                border-bottom: 0;
+            }
+
+            td {
+                padding-top: 0.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav aria-label="Hauptnavigation">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Alen Vukovic</a>
+            <a href="index.html" class="back-link">Zur Startseite</a>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <span class="meta">Stand: 23. August 2026</span>
+            <h1>Datenschutzerklärung <span lang="en">/ Privacy Policy</span></h1>
+            <p class="intro">
+                Diese Datenschutzerklärung erläutert, wie personenbezogene Daten beim Besuch von
+                <strong>vukovicalen.com</strong> sowie im Zusammenhang mit dem internen API-Client
+                <strong>CampaignConsult Media Intelligence</strong> verarbeitet werden.
+            </p>
+
+            <div class="notice">
+                <strong>Das Wichtigste in Kürze</strong>
+                <p>
+                    Die Website stellt Informationen und Forschungsergebnisse bereit. Der zugehörige API-Client ist ein
+                    internes, nicht öffentlich zugängliches Recherchewerkzeug. Er nutzt die YouTube Data API ausschließlich
+                    lesend für öffentlich zugängliche Kanal- und Videometadaten. Es gibt keine Nutzerkonten, kein YouTube-OAuth,
+                    keine Verarbeitung privater YouTube-Kontodaten und keine Aktionen im Namen von YouTube-Nutzern.
+                </p>
+            </div>
+
+            <h2>1. Verantwortlicher</h2>
+            <address>
+                <strong>Framegate Intelligence UG (haftungsbeschränkt)</strong><br>
+                vertreten durch den geschäftsführenden Gesellschafter Alen Vukovic<br>
+                Austernweg 7<br>
+                89081 Ulm<br>
+                Deutschland<br><br>
+                E-Mail: <a href="mailto:info@framegate.ai">info@framegate.ai</a><br>
+                Telefon: +49 7304 4008001
+            </address>
+
+            <h2>2. Geltungsbereich</h2>
+            <p>Diese Erklärung gilt für:</p>
+            <ul>
+                <li>den Besuch der Website vukovicalen.com,</li>
+                <li>Kontaktaufnahmen über die auf der Website genannte E-Mail-Adresse,</li>
+                <li>die interne Nutzung des API-Clients CampaignConsult Media Intelligence und</li>
+                <li>die Verarbeitung öffentlich zugänglicher YouTube-API-Daten im Rahmen dieses Clients.</li>
+            </ul>
+            <p>
+                Externe Websites, auf die lediglich verlinkt wird, verarbeiten Daten in eigener Verantwortung. Für sie gelten
+                die Datenschutzhinweise der jeweiligen Anbieter.
+            </p>
+
+            <h2>3. Besuch der Website und Hosting</h2>
+            <h3>Bereitstellung über GitHub Pages</h3>
+            <p>
+                Diese Website wird über GitHub Pages bereitgestellt. Anbieter ist GitHub, Inc., 88 Colin P. Kelly Jr. Street,
+                San Francisco, CA 94107, USA. Beim Aufruf kann GitHub technisch erforderliche Verbindungs- und Nutzungsdaten
+                verarbeiten, insbesondere IP-Adresse, Datum und Uhrzeit des Abrufs, aufgerufene Ressource, Referrer,
+                Browser- und Geräteinformationen sowie Status- und Fehlerdaten.
+            </p>
+            <p>
+                Die Verarbeitung dient der sicheren, stabilen und effizienten Bereitstellung der Website und beruht auf
+                Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt im sicheren und wirtschaftlichen Betrieb des
+                Informationsangebots. Informationen zur Verarbeitung durch GitHub enthält die
+                <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub-Datenschutzerklärung</a>.
+            </p>
+
+            <h3>Schriftarten und externe Ressourcen</h3>
+            <p>
+                Die Website kann zur einheitlichen Darstellung Schriftarten von Google Fonts laden. Dabei kann eine Verbindung
+                zu Servern von Google hergestellt und insbesondere die IP-Adresse des abrufenden Geräts verarbeitet werden.
+                Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse ist eine konsistente und technisch
+                zuverlässige Darstellung. Weitere Informationen enthält die
+                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Datenschutzerklärung von Google</a>.
+            </p>
+            <p class="small">
+                Nach aktuellem Stand setzen wir selbst keine Analyse-, Marketing- oder Werbe-Cookies und kein eigenes
+                Reichweiten-Tracking auf dieser Website ein.
+            </p>
+
+            <h2>4. Kontaktaufnahme</h2>
+            <p>
+                Wenn Sie uns per E-Mail oder telefonisch kontaktieren, verarbeiten wir die von Ihnen übermittelten Angaben,
+                insbesondere Namen, Kontaktdaten, Inhalt und Zeitpunkt der Nachricht, um Ihre Anfrage zu bearbeiten.
+                Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, soweit die Kommunikation der Anbahnung oder Durchführung eines
+                Vertrags dient, im Übrigen Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt in der sachgerechten
+                Bearbeitung und Dokumentation von Anfragen.
+            </p>
+            <p>
+                Wir löschen Kontaktinhalte, sobald sie für die Bearbeitung und Dokumentation nicht mehr erforderlich sind,
+                sofern keine gesetzlichen Aufbewahrungspflichten oder berechtigten Nachweisinteressen entgegenstehen.
+            </p>
+
+            <h2>5. YouTube API Services</h2>
+            <div class="api-box">
+                <span class="api-title">Transparenzhinweis für YouTube API Services</span>
+                <p>
+                    CampaignConsult Media Intelligence verwendet die <strong>YouTube Data API v3</strong>. Der Client arbeitet
+                    ausschließlich mit einem projektbezogenen API-Schlüssel und öffentlich zugänglichen Daten. Er verwendet
+                    keine YouTube-Nutzeranmeldung und fordert keine OAuth-Berechtigungen an.
+                </p>
+            </div>
+
+            <div class="table-wrap" role="region" aria-label="Übersicht zur YouTube-API-Datenverarbeitung" tabindex="0">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th scope="row">API-Client</th>
+                            <td>CampaignConsult Media Intelligence, internes und nicht öffentlich zugängliches Kommandozeilen- und Analysewerkzeug</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Zugriff</th>
+                            <td>Nur lesender Zugriff über YouTube Data API v3, insbesondere auf <code>channels.list</code>, <code>playlistItems.list</code> und <code>videos.list</code></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Verarbeitete API-Daten</th>
+                            <td>Öffentliche Kanal- und Video-IDs, Kanalnamen und Handles, Titel, Beschreibungen, Veröffentlichungszeitpunkte, Laufzeiten, Kategorien, Tags, Thumbnails, öffentliche Statistiken sowie öffentliche Status- und Livestream-Metadaten</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Nicht verarbeitet</th>
+                            <td>Keine Passwörter oder YouTube-Anmeldedaten, keine privaten oder nicht autorisierten Kontodaten, keine individuellen Seh- oder Suchverläufe, keine privaten Abonnements und keine Daten aus YouTube Analytics oder YouTube Reporting</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Keine Schreibaktionen</th>
+                            <td>Der Client lädt keine Videos hoch, ändert oder löscht keine Inhalte, verwaltet keine Abonnements und veröffentlicht keine Kommentare oder Bewertungen</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Zweck</th>
+                            <td>Quelleninventarisierung, Medien- und Kommunikationsforschung, methodische Qualitätssicherung sowie aggregierte Analysen politischer und gesellschaftlicher Kommunikation</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Speicherung und Aktualisierung</th>
+                            <td>Nicht autorisierte YouTube-API-Daten werden spätestens nach 30 Kalendertagen gelöscht oder über die YouTube API aktualisiert. Aktuelle Darstellungen verwenden den jeweils verfügbaren aktuellen Datenstand. Historische Angaben werden nur mit eindeutigem Zeitbezug dargestellt, soweit dies nach den YouTube-Richtlinien zulässig ist.</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Weitergabe</th>
+                            <td>Keine Vermietung und kein Verkauf personenbezogener API-Daten. Zugriff erhalten nur intern autorisierte Personen und technisch erforderliche Dienstleister unter angemessenen Schutzvorkehrungen. Aggregierte Forschungsergebnisse können veröffentlicht oder Auftraggebern bereitgestellt werden.</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Löschanfragen</th>
+                            <td>Anfragen zu Auskunft, Berichtigung oder Löschung können an <a href="mailto:info@framegate.ai">info@framegate.ai</a> gerichtet werden.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Zweck und Rechtsgrundlage</h3>
+            <p>
+                Die Verarbeitung der öffentlich zugänglichen API-Daten erfolgt zur systematischen Quellenerschließung und
+                Analyse öffentlicher Medien- und Politikkommunikation. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Unsere
+                berechtigten Interessen liegen in Forschung, Medienbeobachtung, Qualitätssicherung sowie der Erstellung
+                nachvollziehbarer, aggregierter Kommunikationsanalysen. Wir beziehen dabei die Art der öffentlich bereitgestellten
+                Informationen, den öffentlichen Kontext der untersuchten Kanäle und die Rechte betroffener Personen in die
+                Interessenabwägung ein.
+            </p>
+            <p>
+                Soweit öffentlich bereitgestellte Inhalte ausnahmsweise besondere Kategorien personenbezogener Daten erkennen
+                lassen, wird ihre Verarbeitung auf den konkreten Forschungs- und Analysezweck begrenzt und nur vorgenommen,
+                soweit hierfür eine anwendbare Rechtsgrundlage besteht. Es findet keine Überwachung privater Zuschauer und keine
+                individuelle Werbeadressierung statt.
+            </p>
+
+            <h3>YouTube- und Google-Bedingungen</h3>
+            <p>
+                Die Nutzung der YouTube API Services unterliegt den
+                <a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener noreferrer">YouTube-Nutzungsbedingungen</a>,
+                den
+                <a href="https://developers.google.com/youtube/terms/api-services-terms-of-service" target="_blank" rel="noopener noreferrer">YouTube API Services Terms of Service</a>
+                und den
+                <a href="https://developers.google.com/youtube/terms/developer-policies" target="_blank" rel="noopener noreferrer">YouTube API Services Developer Policies</a>.
+                Informationen darüber, wie Google personenbezogene Daten verarbeitet und Kontrollmöglichkeiten bereitstellt,
+                finden Sie in der
+                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google-Datenschutzerklärung</a>.
+            </p>
+
+            <h3>Keine Endnutzer-Autorisierung</h3>
+            <p>
+                Der derzeitige Client ist ausschließlich für interne Nutzer bestimmt. Er bietet keine öffentliche Anmeldung,
+                greift nicht im Namen eines YouTube-Nutzers auf dessen Konto zu und speichert keine OAuth-Tokens. Sollte der Client
+                künftig autorisierte YouTube-Nutzerdaten oder öffentlich zugängliche Nutzerfunktionen verwenden, werden diese
+                Datenschutzerklärung, die Einwilligungs- und Löschprozesse sowie die Nutzungsbedingungen vorab entsprechend erweitert.
+            </p>
+
+            <h2>6. Forschung, Auswertung und Veröffentlichung</h2>
+            <p>
+                Analysen zielen auf öffentliche Kommunikationsmuster, Quellen, Themen, Reichweiten und Darstellungsweisen. Ergebnisse
+                werden bevorzugt aggregiert oder mit einem klaren öffentlichen Quellen- und Zeitbezug dargestellt. Wir erstellen keine
+                individuellen Zuschauerprofile und verbinden YouTube-API-Daten nicht mit privaten Seh-, Such- oder Standortdaten.
+            </p>
+            <p>
+                Bei Analysen öffentlicher Kanäle können Kanalnamen, Handles und öffentlich auftretende Personen genannt werden, wenn
+                dies für die Einordnung, Nachvollziehbarkeit oder Dokumentation erforderlich ist. Betroffene können sich zur Prüfung
+                einer Berichtigung, Einschränkung oder Löschung an die oben genannte Kontaktadresse wenden.
+            </p>
+
+            <h2>7. Empfänger und Drittlandübermittlungen</h2>
+            <p>
+                Personenbezogene Daten können an technische Dienstleister übermittelt werden, soweit dies für Hosting, IT-Sicherheit,
+                Kommunikation oder den Betrieb der eingesetzten Dienste erforderlich ist. Dazu können insbesondere GitHub sowie Google
+                und YouTube gehören. Diese Anbieter können Daten auch außerhalb des Europäischen Wirtschaftsraums verarbeiten. In diesem
+                Fall erfolgt die Übermittlung nach Maßgabe der gesetzlichen Voraussetzungen, etwa auf Grundlage eines
+                Angemessenheitsbeschlusses oder geeigneter Garantien wie Standardvertragsklauseln.
+            </p>
+            <p>Wir verkaufen keine personenbezogenen Daten und nutzen YouTube-API-Daten nicht für personalisierte Werbung.</p>
+
+            <h2>8. Speicherdauer</h2>
+            <p>
+                Wir speichern personenbezogene Daten nur so lange, wie sie für den jeweiligen Zweck erforderlich sind oder gesetzliche
+                Aufbewahrungs- und Nachweispflichten bestehen. Für nicht autorisierte YouTube-API-Daten gilt zusätzlich die oben
+                beschriebene Lösch- oder Aktualisierungsfrist von höchstens 30 Kalendertagen. Nach Wegfall des Zwecks werden Daten gelöscht
+                oder anonymisiert, soweit keine vorrangigen gesetzlichen oder vertraglichen Gründe entgegenstehen.
+            </p>
+
+            <h2>9. Datensicherheit</h2>
+            <p>
+                Wir treffen angemessene technische und organisatorische Maßnahmen, um Daten gegen Verlust, unbeabsichtigte Veränderung,
+                unbefugten Zugriff und unzulässige Offenlegung zu schützen. API-Schlüssel und andere Zugangsdaten werden nicht öffentlich
+                bereitgestellt und der Zugriff auf lokale Forschungsdaten wird auf autorisierte Personen begrenzt.
+            </p>
+
+            <h2>10. Keine automatisierte Entscheidung im Einzelfall</h2>
+            <p>
+                Es findet keine ausschließlich automatisierte Entscheidung mit rechtlicher oder vergleichbar erheblicher Wirkung im
+                Sinne von Art. 22 DSGVO statt. Automatisierte oder KI-gestützte Analysen dienen der Forschungs- und Entscheidungsvorbereitung
+                und werden nicht zur automatischen Entscheidung über Rechte oder Ansprüche einzelner Personen eingesetzt.
+            </p>
+
+            <h2>11. Ihre Datenschutzrechte</h2>
+            <p>Soweit die gesetzlichen Voraussetzungen erfüllt sind, haben Sie insbesondere das Recht auf:</p>
+            <ul>
+                <li>Auskunft über die zu Ihrer Person verarbeiteten Daten (Art. 15 DSGVO),</li>
+                <li>Berichtigung unrichtiger Daten (Art. 16 DSGVO),</li>
+                <li>Löschung (Art. 17 DSGVO),</li>
+                <li>Einschränkung der Verarbeitung (Art. 18 DSGVO),</li>
+                <li>Datenübertragbarkeit (Art. 20 DSGVO), soweit anwendbar, und</li>
+                <li>Widerspruch gegen eine Verarbeitung auf Grundlage berechtigter Interessen (Art. 21 DSGVO).</li>
+            </ul>
+            <p>
+                Zur Ausübung Ihrer Rechte genügt eine Nachricht an
+                <a href="mailto:info@framegate.ai">info@framegate.ai</a>. Wir können erforderlichenfalls angemessene Angaben zur
+                Identitätsprüfung anfordern.
+            </p>
+            <p>
+                Sie haben außerdem das Recht, sich bei einer Datenschutzaufsichtsbehörde zu beschweren. Für den Sitz des Verantwortlichen
+                ist insbesondere der
+                <a href="https://www.baden-wuerttemberg.datenschutz.de/beschwerde/" target="_blank" rel="noopener noreferrer">Landesbeauftragte für den Datenschutz und die Informationsfreiheit Baden-Württemberg</a>
+                zuständig.
+            </p>
+
+            <h2>12. Änderungen dieser Datenschutzerklärung</h2>
+            <p>
+                Wir aktualisieren diese Datenschutzerklärung, wenn sich Funktionen, Verarbeitungen oder rechtliche Anforderungen ändern.
+                Es gilt die auf dieser Seite veröffentlichte Fassung mit dem oben angegebenen Stand.
+            </p>
+
+            <h2 lang="en">13. YouTube API Services — English compliance summary</h2>
+            <div class="api-box" lang="en">
+                <span class="api-title">Summary for reviewers and English-speaking users</span>
+                <ul>
+                    <li><strong>API Client:</strong> CampaignConsult Media Intelligence is an internal, non-public research and analytics client.</li>
+                    <li><strong>Access:</strong> Read-only access to public channel and video metadata through YouTube Data API v3 using an API key.</li>
+                    <li><strong>No OAuth:</strong> The client does not request access to private YouTube accounts, user credentials, viewing history, private subscriptions or OAuth tokens.</li>
+                    <li><strong>No write operations:</strong> It does not upload, edit or delete videos and does not post comments, ratings or subscriptions.</li>
+                    <li><strong>Purpose:</strong> Source inventory, media and communications research, quality assurance and aggregated analysis.</li>
+                    <li><strong>Retention:</strong> Non-Authorized YouTube API Data is deleted or refreshed through the YouTube API within 30 calendar days.</li>
+                    <li><strong>Sharing:</strong> Personal API Data is not sold or rented. Access is limited to authorized internal personnel and necessary service providers.</li>
+                    <li><strong>Requests:</strong> Access, correction and deletion requests can be sent to <a href="mailto:info@framegate.ai">info@framegate.ai</a>.</li>
+                    <li><strong>Policies:</strong> See the <a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener noreferrer">YouTube Terms of Service</a> and the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a>.</li>
+                </ul>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        &copy; 2026 Framegate Intelligence UG (haftungsbeschränkt) &middot;
+        <a href="mailto:info@framegate.ai">info@framegate.ai</a> &middot;
+        <a href="index.html">vukovicalen.com</a>
+    </footer>
+</body>
+</html>
