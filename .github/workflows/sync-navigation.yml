@@ -1,0 +1,74 @@
+name: Sync navigation
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Sync navigation only
+        run: |
+          python - <<'PY'
+          import importlib.util
+          from pathlib import Path
+
+          root = Path('.')
+          spec = importlib.util.spec_from_file_location('buildmod', root / '_build' / 'build.py')
+          build = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(build)
+
+          config = build.load_json(root / 'research' / 'articles.json')
+          articles = config['articles']
+          categories = config['categories']
+
+          targets = [
+              root / 'index.html',
+              root / 'about.html',
+              root / 'framegate.html',
+              root / 'framegate-deep-dive.html',
+          ]
+          targets += sorted((root / 'research').glob('*.html'))
+
+          for path in targets:
+              if not path.exists():
+                  continue
+              html = path.read_text(encoding='utf-8')
+              root_prefix = build.compute_root(path.resolve())
+              nav = build.build_nav(articles, categories, root_prefix)
+              html = build.replace_block(html, 'nav', nav)
+
+              if path.name == 'about.html':
+                  html = html.replace('href="about.html"', 'href="about.html" class="active"', 1)
+              elif path.parent.name == 'research':
+                  html = html.replace('class="nav-trigger"', 'class="nav-trigger active"', 1)
+
+              path.write_text(html, encoding='utf-8')
+              print(f'Synced {path}')
+          PY
+
+      - name: Commit generated navigation
+        run: |
+          if git diff --quiet; then
+            echo "Navigation already synchronized."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html about.html framegate.html framegate-deep-dive.html research/*.html
+          git commit -m "Sync navigation across static pages"
+          git push
