@@ -37,23 +37,25 @@ jobs:
           categories = config['categories']
           footer = (root / '_build' / 'footer_template.html').read_text(encoding='utf-8')
 
-          targets = [
+          nav_targets = [
               root / 'index.html',
               root / 'about.html',
               root / 'framegate.html',
               root / 'framegate-deep-dive.html',
           ]
-          targets += sorted((root / 'research').glob('*.html'))
-          targets += sorted((root / 'knowledge').glob('*.html'))
+          nav_targets += sorted((root / 'research').glob('*.html'))
+          nav_targets += sorted((root / 'knowledge').glob('*.html'))
 
-          for path in targets:
+          footer_targets = list(nav_targets)
+          footer_targets += [root / 'impressum.html', root / 'privacy.html']
+
+          for path in nav_targets:
               if not path.exists():
                   continue
               html = path.read_text(encoding='utf-8')
               root_prefix = build.compute_root(path.resolve())
               nav = build.build_nav(articles, categories, root_prefix)
               html = build.replace_block(html, 'nav', nav)
-              html = build.replace_block(html, 'footer', footer)
 
               if path.name == 'about.html' and path.parent == root:
                   html = html.replace('href="about.html"', 'href="about.html" class="active"', 1)
@@ -63,7 +65,15 @@ jobs:
                   html = html.replace(f'href="{root_prefix}knowledge/index.html"', f'href="{root_prefix}knowledge/index.html" class="active"', 1)
 
               path.write_text(html, encoding='utf-8')
-              print(f'Synced {path}')
+              print(f'Synced navigation: {path}')
+
+          for path in footer_targets:
+              if not path.exists():
+                  continue
+              html = path.read_text(encoding='utf-8')
+              html = build.replace_block(html, 'footer', footer)
+              path.write_text(html, encoding='utf-8')
+              print(f'Synced footer: {path}')
           PY
 
       - name: Commit generated navigation and footer
@@ -74,6 +84,6 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html about.html framegate.html framegate-deep-dive.html research/*.html knowledge/*.html
+          git add index.html about.html framegate.html framegate-deep-dive.html impressum.html privacy.html research/*.html knowledge/*.html
           git commit -m "Sync navigation and footer across static pages"
           git push
