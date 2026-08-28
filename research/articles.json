@@ -1,33 +1,28 @@
 {
   "categories": {
-    "transatlantic-narrative-transfer": {
-      "label": "Transatlantic Narrative Transfer",
+    "campaigns-political-communication": {
+      "label": "Campaigns & Political Communication",
       "order": 1,
       "show_section_header": true
     },
-    "us-discourse-dynamics": {
-      "label": "U.S. Discourse Dynamics",
+    "media-political-discourse": {
+      "label": "Media & Political Discourse",
       "order": 2,
       "show_section_header": true
     },
-    "polarization-ideological-drift": {
-      "label": "Polarization & Ideological Drift",
+    "political-behavior": {
+      "label": "Political Behavior",
       "order": 3,
       "show_section_header": true
     },
-    "algorithmic-amplification": {
-      "label": "Algorithmic Amplification",
+    "algorithmic-media": {
+      "label": "Algorithmic Media",
       "order": 4,
       "show_section_header": true
     },
-    "presidential-partisan-playbooks": {
-      "label": "Presidential & Partisan Playbooks",
+    "us-germany-comparative": {
+      "label": "U.S.–Germany Comparative Research",
       "order": 5,
-      "show_section_header": true
-    },
-    "media-amplification": {
-      "label": "Media Amplification & Framing",
-      "order": 6,
       "show_section_header": true
     }
   },
@@ -36,7 +31,7 @@
       "title": "Atlantic Pulse",
       "subtitle": "Atlantic Pulse",
       "path": "research/atlantic-pulse.html",
-      "category": "transatlantic-narrative-transfer",
+      "category": "us-germany-comparative",
       "published": "2025-12-01",
       "author": "Alen Vukovic",
       "description": "Atlantic Pulse",
@@ -50,7 +45,7 @@
       "title": "Confidence as Dominant Emotion",
       "subtitle": "Confidence ist die stärkste Emotion in den Trust Social Posts",
       "path": "research/thesis-confidence-ist-die-strkste-emotion-in-den.html",
-      "category": "us-discourse-dynamics",
+      "category": "political-behavior",
       "published": "2026-02-01",
       "author": "Alen Vukovic",
       "description": "Confidence ist die stärkste Emotion in den Trust Social Posts",
@@ -64,7 +59,7 @@
       "title": "The 4× Gap",
       "subtitle": "Trump's Ideology vs. American Journalism",
       "path": "research/the-4x-gap.html",
-      "category": "polarization-ideological-drift",
+      "category": "media-political-discourse",
       "published": "2026-01-15",
       "author": "Alen Vukovic",
       "description": "The 4× Gap: Trump's Ideology vs. American Journalism",
@@ -78,7 +73,7 @@
       "title": "Media Amplification of Trump's Framing",
       "subtitle": "To what extent do journalistic media amplify Donald Trump's personal framing",
       "path": "research/thesis-to-what-extent-do-journalistic-media-ampl.html",
-      "category": "media-amplification",
+      "category": "media-political-discourse",
       "published": "2026-02-24",
       "author": "Alen Vukovic",
       "description": "To what extent do journalistic media amplify Donald Trump's personal framing",
