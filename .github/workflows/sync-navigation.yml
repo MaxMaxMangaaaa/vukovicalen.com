@@ -1,4 +1,4 @@
-name: Sync navigation
+name: Sync navigation and footer
 
 on:
   push:
@@ -21,7 +21,7 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Sync navigation only
+      - name: Sync navigation and footer
         run: |
           python - <<'PY'
           import importlib.util
@@ -35,6 +35,7 @@ jobs:
           config = build.load_json(root / 'research' / 'articles.json')
           articles = config['articles']
           categories = config['categories']
+          footer = (root / '_build' / 'footer_template.html').read_text(encoding='utf-8')
 
           targets = [
               root / 'index.html',
@@ -51,6 +52,7 @@ jobs:
               root_prefix = build.compute_root(path.resolve())
               nav = build.build_nav(articles, categories, root_prefix)
               html = build.replace_block(html, 'nav', nav)
+              html = build.replace_block(html, 'footer', footer)
 
               if path.name == 'about.html':
                   html = html.replace('href="about.html"', 'href="about.html" class="active"', 1)
@@ -61,14 +63,14 @@ jobs:
               print(f'Synced {path}')
           PY
 
-      - name: Commit generated navigation
+      - name: Commit generated navigation and footer
         run: |
           if git diff --quiet; then
-            echo "Navigation already synchronized."
+            echo "Navigation and footer already synchronized."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html about.html framegate.html framegate-deep-dive.html research/*.html
-          git commit -m "Sync navigation across static pages"
+          git commit -m "Sync navigation and footer across static pages"
           git push
