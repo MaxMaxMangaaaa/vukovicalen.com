@@ -174,13 +174,24 @@ nav {
 .logo:visited {
     font-weight: var(--font-semibold);
     font-size: var(--text-lg);
-    color: var(--primary-500) !important;
+    color: #ffffff !important;
     text-decoration: none !important;
     letter-spacing: -0.025em;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
 }
 
-.logo:hover {
-    color: #ffffff;
+.logo::before {
+    content: '';
+    width: 28px;
+    height: 28px;
+    flex: 0 0 28px;
+    background: url('/favicon.ico') center / contain no-repeat;
+}
+
+ .logo:hover {
+    color: var(--primary-500) !important;
     text-decoration: none !important;
 }
 
@@ -193,15 +204,15 @@ nav {
 .nav-links a:link,
 .nav-links a:visited {
     text-decoration: none !important;
-    color: var(--primary-500);
+    color: #ffffff;
     font-size: var(--text-sm);
     font-weight: var(--font-medium);
     transition: color 0.2s ease;
 }
 
-.nav-links a:hover {
+ .nav-links a:hover {
     text-decoration: none !important;
-    color: #ffffff;
+    color: var(--primary-500);
 }
 
 .nav-links a.active,
@@ -226,7 +237,7 @@ nav {
     display: block;
     width: 22px;
     height: 2px;
-    background: var(--primary-500);
+    background: #ffffff;
     margin: 5px 0;
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
@@ -299,7 +310,7 @@ nav {
     justify-content: space-between;
     padding: var(--space-2) var(--space-4);
     font-size: var(--text-sm);
-    color: var(--primary-400);
+    color: #ffffff;
     font-weight: var(--font-medium);
     cursor: pointer;
     transition: background 0.2s ease, color 0.2s ease;
@@ -346,7 +357,7 @@ nav {
 .dropdown-submenu a {
     display: block;
     padding: var(--space-2) var(--space-4);
-    color: var(--primary-400);
+    color: #ffffff;
     font-size: var(--text-sm);
     font-weight: var(--font-medium);
     text-decoration: none;
@@ -376,7 +387,7 @@ nav {
 .dropdown-menu a:link,
 .dropdown-menu a:visited {
     text-decoration: none !important;
-    color: var(--primary-400);
+    color: #ffffff;
 }
 
 .dropdown-menu a:hover {
